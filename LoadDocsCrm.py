@@ -3,8 +3,7 @@ import uuid
 import os
 import shutil
 import ftplib
-import mysql.connector
-
+import pymysql
 # path_scan=D:/SUI-Doc/sui-after-read/
 # path_read_scan=D:/SUI-Doc/sui-txt/
 # path_error_uuid=D:/SUI-Doc/err-uuid/
@@ -29,7 +28,8 @@ if __name__=='__main__':
             'sql_server=': None,
             'sql_login=': None,
             'sql_password=': None,
-            'sql_basename=': None
+            'sql_basename=': None,
+            'sql_port=': None
     }
     with open('load_crm-config.cnf', mode='r') as cfile:
         txt = cfile.read()
@@ -43,21 +43,24 @@ if __name__=='__main__':
             else:
                 allfind = True
                 print(y,p)
-                if not os.path.exists(p):
+                if not os.path.exists(p) and y.find('path_')==0:
                     allfind = False
                     print(f'Папки {p} не существует или к ней нет доступа')
                 else:
-                    print(f'Папка {p} обнаружена')
+                    print(f'Параметр {y} обнаружен {p}')
 
     if not cfile:
         print('Не найден файл load_crm-config.cnf')
     elif allfind:
         i,j,g = 0,0,0
-        cnx = mysql.connector.connect(user=path_config['sql_login='], password=path_config['sql_password='],
-                                      host=path_config['sql_server='],
-                                      database=path_config['sql_basename='])
-        if not cnx:
-            print('Ошибка соединения с сервером sql')
+        # cnx = pymysql.connect(user=path_config['sql_login='], password=path_config['sql_password='],
+        #                               host=path_config['sql_server='],port=3306,  #path_config['sql_port='],
+        #                               database=path_config['sql_basename='],cursorclass=pymysql.cursors.DictCursor)
+        # if not cnx:
+        #     print('Ошибка соединения с сервером sql')
+        ftpfile = ftplib.FTP(path_config['ftp_server='])
+        ftpfile.login(user=path_config['ftp_login='],passwd=path_config['ftp_password='])
+        ftpfile.cwd(path_config['ftp_dir='])
         lst_scan = os.listdir(path_config['path_scan='])
         for gfile in lst_scan:
             if gfile[-4:] in ('.jpg','.pdf','.png') and gfile[0:1]!='==':
