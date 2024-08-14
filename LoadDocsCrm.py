@@ -53,11 +53,13 @@ if __name__=='__main__':
         print('Не найден файл load_crm-config.cnf')
     elif allfind:
         i,j,g = 0,0,0
-        # cnx = pymysql.connect(user=path_config['sql_login='], password=path_config['sql_password='],
-        #                               host=path_config['sql_server='],port=3306,  #path_config['sql_port='],
-        #                               database=path_config['sql_basename='],cursorclass=pymysql.cursors.DictCursor)
-        # if not cnx:
-        #     print('Ошибка соединения с сервером sql')
+        cnx = pymysql.connect(user=path_config['sql_login='], password=path_config['sql_password='],
+                                      host=path_config['sql_server='],port=3306,  #path_config['sql_port='],
+                                      database=path_config['sql_basename='],cursorclass=pymysql.cursors.DictCursor)
+        if not cnx:
+            print('Ошибка соединения с сервером sql')
+        else:
+            cur = cnx.cursor()
         ftpfile = ftplib.FTP(path_config['ftp_server='])
         ftpfile.login(user=path_config['ftp_login='],passwd=path_config['ftp_password='])
         ftpfile.cwd(path_config['ftp_dir='])
@@ -83,7 +85,14 @@ if __name__=='__main__':
                         g += 1
                         if str1[36,38]=='--':
                             pg = str1[38:len(str1)]
-                        uu_id = uuid.uuid4()
+                        cur.execute(f"select id from documents where id='{doc_id1}' limit 1")
+                        id_lst = cur.fetchall()
+                        id_rez=id_lst[0]
+                        if len(id_rez)>0 and id_rez==doc_id1:
+                            uu_id = uuid.uuid4()
+                        else:
+                            shutil.move(path_config['path_scan=']+gfile,path_config['path_error_finddoc=']+gfile)
+                            shutil.move(path_config['path_read_scan=']+file_r,path_config['path_error_finddoc=']+file_r)
                     else:
                         shutil.move(path_config['path_scan=']+gfile,path_config['path_error_uuid=']+gfile)
                         shutil.move(path_config['path_read_scan=']+file_r,path_config['path_error_uuid=']+file_r)
