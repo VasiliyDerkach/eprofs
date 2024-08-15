@@ -14,7 +14,9 @@ def is_valid_uuid(uuid_to_test, version=None):
         uuid_obj = uuid.UUID(uuid_to_test, version=version).urn
     except ValueError:
         return False
-    return uuid_obj.find(uuid_to_test)>0
+    flag = uuid_obj.upper().find(uuid_to_test.upper())>0
+    print(uuid_obj,uuid_to_test)
+    return flag
 if __name__=='__main__':
     path_config = {'path_scan=': None,
             'path_read_scan=': None,
