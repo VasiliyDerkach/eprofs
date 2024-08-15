@@ -36,24 +36,25 @@ if __name__=='__main__':
         allfind = False
         for y,p in path_config.items():
             po = re.search('(?<='+y+').*?(?=\n)', txt)
-            p = po.group(0)
+            pp = po.group(0)
             if not po:
                 allfind = False
                 print(f'Не определен путь к {y}')
             else:
                 allfind = True
-                print(y,p)
+                path_config[y] = pp
+                print(y,pp)
                 if not os.path.exists(p) and y.find('path_')==0:
                     allfind = False
-                    print(f'Папки {p} не существует или к ней нет доступа')
+                    print(f'Папки {pp} не существует или к ней нет доступа')
                 else:
-                    print(f'Параметр {y} обнаружен {p}')
+                    print(f'Параметр {y} обнаружен {pp}')
 
     if not cfile:
         print('Не найден файл load_crm-config.cnf')
     elif allfind:
         i,j,g,nid = 0,0,0,0
-        cnx = pymysql.connect(user=path_config['sql_login='], password=path_config['sql_password='],
+        cnx = pymysql.connect(user='sql_login='path_config[], password=path_config['sql_password='],
                                       host=path_config['sql_server='],port=3306,  #path_config['sql_port='],
                                       database=path_config['sql_basename='],cursorclass=pymysql.cursors.DictCursor)
         if not cnx:
@@ -95,16 +96,14 @@ if __name__=='__main__':
                             old_fname = gfile
                             if exx in ('.jpg', '.pdf', '.png'):
                                 exx0 = exx.replace('.','')
-                                exx1 = 'image/jpeg' if exx=='.jpg'
-                                exx1 = 'image/pdf' if exx == '.pdf'
-                                exx1 = 'image/png' if exx == '.png'
+                                exx1 = 'image/jpeg' if exx=='.jpg' else 'image/pdf' if exx == '.pdf' else 'image/png' if exx == '.png' else exx
                             else:
                                 exx0, exx1 = '',''
                             pg1 = f'стр.{pg}'
                             os.rename(path_config['path_scan=']+gfile,path_config['path_scan=']+uu_id)
                             sql_ins = f'insert into document_revisions(id, date_entered, change_log, document_id, '
                             sql_ins += f'filename, file_ext, file_mime_type, stage)) values('
-                            sql_ins += f"{uu_id},now(),{pg1 if pg!='' },{doc_id1},{old_fname},{exx0},{exx1},'scan in pyth'"
+                            sql_ins += f"{uu_id},now(),{pg1 if pg!='' else ''},{doc_id1},{old_fname},{exx0},{exx1},'scan in pyth'"
                             cur.execute(sql_ins)
                             with open(path_config['path_scan=']+uu_id,'rb') as gfile_n:
                                 ftpfile.storbinary('STOR ' +uu_id,gfile_n)
