@@ -15,7 +15,7 @@ def is_valid_uuid(uuid_to_test, version=None):
     except ValueError:
         return False
     flag = uuid_obj.upper().find(uuid_to_test.upper())>0
-    print(uuid_obj,uuid_to_test)
+    #print(uuid_obj,uuid_to_test)
     return flag
 if __name__=='__main__':
     path_config = {'path_scan=': None,
@@ -107,11 +107,11 @@ if __name__=='__main__':
                     if l>0:
                         g += 1
                         pg= ''
-                        if str1[36,38]=='--':
+                        if str1[36:38]=='--':
                             pg = str1[38:len(str1)]
                         cur.execute(f"select id from documents where id='{doc_id1}' limit 1")
                         id_lst = cur.fetchall()
-                        id_rez=id_lst[0]
+                        id_rez=id_lst[0]['id']
                         if len(id_rez)>0 and id_rez==doc_id1:
                             uu_id = uuid.uuid4()
                             old_fname = gfile
