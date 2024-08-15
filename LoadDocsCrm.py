@@ -112,7 +112,7 @@ if __name__=='__main__':
                         cur.execute(f"select id from documents where id='{doc_id1}' limit 1")
                         id_lst = cur.fetchall()
                         id_rez=id_lst[0]['id']
-                        if len(id_rez)>0 and id_rez==doc_id1:
+                        if len(id_rez)>0 and id_rez.upper()==doc_id1.upper():
                             uu_id = uuid.uuid4()
                             old_fname = gfile
                             if exx in ('.jpg', '.pdf', '.png'):
