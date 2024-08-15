@@ -52,7 +52,7 @@ if __name__=='__main__':
     if not cfile:
         print('Не найден файл load_crm-config.cnf')
     elif allfind:
-        i,j,g = 0,0,0
+        i,j,g,nid = 0,0,0,0
         cnx = pymysql.connect(user=path_config['sql_login='], password=path_config['sql_password='],
                                       host=path_config['sql_server='],port=3306,  #path_config['sql_port='],
                                       database=path_config['sql_basename='],cursorclass=pymysql.cursors.DictCursor)
@@ -65,7 +65,8 @@ if __name__=='__main__':
         ftpfile.cwd(path_config['ftp_dir='])
         lst_scan = os.listdir(path_config['path_scan='])
         for gfile in lst_scan:
-            if gfile[-4:] in ('.jpg','.pdf','.png') and gfile[0:1]!='==':
+            exx = gfile[-4:]
+            if exx in ('.jpg','.pdf','.png') and gfile[0:1]!='==':
                 i += 1
                 file_r = open(path_config['path_read_scan='] + gfile[0:-4]+'.txt',mode='r')
                 if file_r:
@@ -83,6 +84,7 @@ if __name__=='__main__':
                                     str1 = str
                     if l>0:
                         g += 1
+                        pg= ''
                         if str1[36,38]=='--':
                             pg = str1[38:len(str1)]
                         cur.execute(f"select id from documents where id='{doc_id1}' limit 1")
@@ -90,7 +92,21 @@ if __name__=='__main__':
                         id_rez=id_lst[0]
                         if len(id_rez)>0 and id_rez==doc_id1:
                             uu_id = uuid.uuid4()
+                            old_fname = gfile
+                            if exx in ('.jpg', '.pdf', '.png'):
+                                exx0 = exx.replace('.','')
+                                exx1 = 'image/jpeg' if exx=='.jpg'
+                                exx1 = 'image/pdf' if exx == '.pdf'
+                                exx1 = 'image/png' if exx == '.png'
+                            else:
+                                exx0, exx1 = '',''
+                            pg1 = f'стр.{pg}'
+                            os.rename(path_config['path_scan=']+gfile,path_config['path_scan=']+uu_id)
+                            sql_ins = f'insert into document_revisions(id, date_entered, change_log, document_id, '
+                            sql_ins += f'filename, file_ext, file_mime_type, stage)) values('
+                            sql_ins += f"{uu_id},now(),{pg1 if pg!='' },{doc_id1},{old_fname},{exx0},{exx1},'scan in pyth'"
                         else:
+                            nid += 1
                             shutil.move(path_config['path_scan=']+gfile,path_config['path_error_finddoc=']+gfile)
                             shutil.move(path_config['path_read_scan=']+file_r,path_config['path_error_finddoc=']+file_r)
                     else:
@@ -101,8 +117,14 @@ if __name__=='__main__':
                 else:
                     print(f'Для файла {gfile} не найден файл распозонования')
                     os.rename(path_config['path_scan='] + gfile,path_config['path_scan='] + '==' + gfile)
-        print(f'В папке {path_config['path_scan=']} найдено {i} графических файла.\n Из них для {i-j} не найдено файлов распознования')
-        print(f'Для {j-g} файлов не распознан id документа')
+        print(f'В папке {path_config['path_scan=']} найдено {i} графических файла.\n')
+        if i>j:
+              print(f'Из них для {i-j} не найдено файлов распознования')
+        if j>g:
+            print(f'Для {j-g} файлов не распознан id документа')
+        if g>nid:
+            print(f'Для {g-nid} файлов не найден в БД документ с нужным id или такой документ был удален из БД')
+
     # h = 'tytyty.jpg'
     # print(h[0:-4])
     # uuidtest = 'c6f66f3c-eb06-ecda-8d22-66bb47328469--'
@@ -114,32 +136,3 @@ if __name__=='__main__':
     #     print(f,f[-4:])
     # result = re.search('(?<=Path=).*?(?=\n)', 'Path=D:/yand/\n')
     # print(result.group(0) if result else "Текст между маркерами не найден.")
-    # set
-    # exx = right(newname, 4);
-    # insert
-    # into
-    # document_revisions(id, date_entered, change_log, document_id, filename, file_ext, file_mime_type, stage)
-    # values(ids, now(), if (s1 is null or s1='', if (iddocp is null, 'Скан с email', iddocp), concat('стр.',
-    #                                                                                                 s1)), iddocp, fname,
-    # case
-    # exx
-    # when
-    # '.pdf'
-    # then
-    # 'pdf'
-    # when
-    # '.jpg'
-    # then
-    # 'jpg'
-    # end,
-    # case
-    # exx
-    # when
-    # '.pdf'
-    # then
-    # 'image/pdf'
-    # when
-    # '.jpg'
-    # then
-    # 'image/jpeg'
-    # end, 'scaninmail');
