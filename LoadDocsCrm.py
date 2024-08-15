@@ -64,9 +64,23 @@ if __name__=='__main__':
             print(Exsql)
 
         ftpfile = ftplib.FTP()
-        ftpfile.connect(host=path_config['ftp_server='], port=22)
-        ftpfile.login(user=path_config['ftp_login='],passwd=path_config['ftp_password='])
-        ftpfile.cwd(path_config['ftp_dir='])
+        #ftpfile = ftplib.FTP_TLS()
+        print('FTP запущен')
+        #ftpfile.prot_p()
+        on_ftp = False
+        try:
+            ftpfile.connect(path_config['ftp_server='],22,20)
+            print('FTP соединение успешно')
+            ftpfile.login(user=path_config['ftp_login='],passwd=path_config['ftp_password='])
+            print('FTP аутификация пройдена')
+
+            ftpfile.cwd(path_config['ftp_dir='])
+            print('FTP переход в папку')
+            on_ftp = True
+        except Exception as excftp:
+            on_ftp = False
+            ftpfile.quit()
+
         lst_scan = os.listdir(path_config['path_scan='])
         for gfile in lst_scan:
             exx = gfile[-4:]
@@ -108,8 +122,9 @@ if __name__=='__main__':
                             sql_ins += f'filename, file_ext, file_mime_type, stage)) values('
                             sql_ins += f"{uu_id},now(),{pg1 if pg!='' else ''},{doc_id1},{old_fname},{exx0},{exx1},'scan in pyth'"
                             cur.execute(sql_ins)
-                            with open(path_config['path_scan=']+uu_id,'rb') as gfile_n:
-                                ftpfile.storbinary('STOR ' +uu_id,gfile_n)
+                            if on_ftp:
+                                with open(path_config['path_scan=']+uu_id,'rb') as gfile_n:
+                                    ftpfile.storbinary('STOR ' +uu_id,gfile_n)
 
                         else:
                             nid += 1
