@@ -44,7 +44,7 @@ if __name__=='__main__':
                 allfind = True
                 path_config[y] = pp
                 print(y,pp)
-                if not os.path.exists(p) and y.find('path_')==0:
+                if not os.path.exists(pp) and y.find('path_')==0:
                     allfind = False
                     print(f'Папки {pp} не существует или к ней нет доступа')
                 else:
@@ -54,14 +54,17 @@ if __name__=='__main__':
         print('Не найден файл load_crm-config.cnf')
     elif allfind:
         i,j,g,nid = 0,0,0,0
-        cnx = pymysql.connect(user='sql_login='path_config[], password=path_config['sql_password='],
+        try:
+            cnx = pymysql.connect(user=path_config['sql_login='], password=path_config['sql_password='],
                                       host=path_config['sql_server='],port=3306,  #path_config['sql_port='],
                                       database=path_config['sql_basename='],cursorclass=pymysql.cursors.DictCursor)
-        if not cnx:
-            print('Ошибка соединения с сервером sql')
-        else:
+
             cur = cnx.cursor()
-        ftpfile = ftplib.FTP(path_config['ftp_server='])
+        except Exception as Exsql:
+            print(Exsql)
+
+        ftpfile = ftplib.FTP()
+        ftpfile.connect(host=path_config['ftp_server='], port=22)
         ftpfile.login(user=path_config['ftp_login='],passwd=path_config['ftp_password='])
         ftpfile.cwd(path_config['ftp_dir='])
         lst_scan = os.listdir(path_config['path_scan='])
