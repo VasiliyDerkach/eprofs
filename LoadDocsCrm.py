@@ -69,7 +69,7 @@ if __name__=='__main__':
         #ftpfile.prot_p()
         on_ftp = False
         try:
-            ftpfile.connect(path_config['ftp_server='],22,20)
+            ftpfile.connect(path_config['ftp_server='],22,6)
             print('FTP соединение успешно')
             ftpfile.login(user=path_config['ftp_login='],passwd=path_config['ftp_password='])
             print('FTP аутификация пройдена')
@@ -79,7 +79,9 @@ if __name__=='__main__':
             on_ftp = True
         except Exception as excftp:
             on_ftp = False
-            ftpfile.quit()
+            print('FTP нет соединения ',excftp)
+            #ftpfile.quit()
+
 
         lst_scan = os.listdir(path_config['path_scan='])
         for gfile in lst_scan:
@@ -145,7 +147,8 @@ if __name__=='__main__':
             print(f'Для {j-g} файлов не распознан id документа')
         if g>nid:
             print(f'Для {g-nid} файлов не найден в БД документ с нужным id или такой документ был удален из БД')
-        ftpfile.quit()
+        if on_ftp:
+            ftpfile.quit()
         cnx.close()
     # h = 'tytyty.jpg'
     # print(h[0:-4])
