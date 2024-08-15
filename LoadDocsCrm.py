@@ -11,10 +11,10 @@ import pymysql
 # path_after_read=
 def is_valid_uuid(uuid_to_test, version=None):
     try:
-        uuid_obj = uuid.UUID(uuid_to_test, version=version)
+        uuid_obj = uuid.UUID(uuid_to_test, version=version).urn
     except ValueError:
         return False
-    return str(uuid_obj) == uuid_to_test
+    return uuid_obj.find(uuid_to_test)>0
 if __name__=='__main__':
     path_config = {'path_scan=': None,
             'path_read_scan=': None,
