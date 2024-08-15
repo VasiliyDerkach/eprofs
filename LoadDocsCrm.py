@@ -105,6 +105,10 @@ if __name__=='__main__':
                             sql_ins = f'insert into document_revisions(id, date_entered, change_log, document_id, '
                             sql_ins += f'filename, file_ext, file_mime_type, stage)) values('
                             sql_ins += f"{uu_id},now(),{pg1 if pg!='' },{doc_id1},{old_fname},{exx0},{exx1},'scan in pyth'"
+                            cur.execute(sql_ins)
+                            with open(path_config['path_scan=']+uu_id,'rb') as gfile_n:
+                                ftpfile.storbinary('STOR ' +uu_id,gfile_n)
+
                         else:
                             nid += 1
                             shutil.move(path_config['path_scan=']+gfile,path_config['path_error_finddoc=']+gfile)
@@ -112,7 +116,7 @@ if __name__=='__main__':
                     else:
                         shutil.move(path_config['path_scan=']+gfile,path_config['path_error_uuid=']+gfile)
                         shutil.move(path_config['path_read_scan=']+file_r,path_config['path_error_uuid=']+file_r)
-
+                    file_r.close()
 
                 else:
                     print(f'Для файла {gfile} не найден файл распозонования')
@@ -124,7 +128,8 @@ if __name__=='__main__':
             print(f'Для {j-g} файлов не распознан id документа')
         if g>nid:
             print(f'Для {g-nid} файлов не найден в БД документ с нужным id или такой документ был удален из БД')
-
+        ftpfile.quit()
+        cnx.close()
     # h = 'tytyty.jpg'
     # print(h[0:-4])
     # uuidtest = 'c6f66f3c-eb06-ecda-8d22-66bb47328469--'
