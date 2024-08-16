@@ -1,3 +1,4 @@
+import datetime
 import re
 import uuid
 import os
@@ -94,7 +95,11 @@ if __name__=='__main__':
                 i += 1
                 txtfile_name = gfile[0:-4]+'.txt'
                 txtfile_name_path = path_config['path_read_scan='] +txtfile_name
-                file_r = open(txtfile_name_path,mode='r')
+                try:
+                    file_r = open(txtfile_name_path,mode='r')
+                except Exception as exftxt:
+                    print(f'При открытии файла {txtfile_name_path} произогла ошибка {exftxt}')
+                    file_r = None
                 if file_r:
                     j += 1
                     txt_id = file_r.read()
@@ -125,11 +130,10 @@ if __name__=='__main__':
                                 exx1 = 'image/jpeg' if exx=='.jpg' else 'image/pdf' if exx == '.pdf' else 'image/png' if exx == '.png' else exx
                             else:
                                 exx0, exx1 = '',''
-                            pg1 = f'стр.{pg}'
+                            pg1 = f'стр.{pg}' if pg!='' else ''
                             os.rename(path_config['path_scan=']+gfile,path_config['path_scan=']+uu_id)
-                            sql_ins = f"insert into document_revisions(id, date_entered, change_log, document_id, "
-                            sql_ins += f'filename, file_ext, file_mime_type, stage) values('
-                            sql_ins += f"'{uu_id}',now(),'{pg1 if pg!='' else ''}','{doc_id1}','{old_fname}','{exx0}','{exx1}','scan in pyth')"
+                            dnow = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            sql_ins = f"insert into document_revisions(id, date_entered, change_log, document_id, filename, file_ext, file_mime_type, stage) values('{uu_id}','{dnow}','{pg1}','{doc_id1}','{old_fname}','{exx0}','{exx1}','scan in pyth')"
                             cur.execute(sql_ins)
                             if on_ftp:
                                 with open(path_config['path_scan=']+uu_id,'rb') as gfile_n:
@@ -158,10 +162,11 @@ if __name__=='__main__':
               print(f'Из них для {i-j} не найдено файлов распознования')
         if j>g:
             print(f'Для {j-g} файлов не распознан id документа')
-        if g>nid:
-            print(f'Для {g-nid} файлов не найден в БД документ с нужным id или такой документ был удален из БД')
+        if nid>0:
+            print(f'Для {nid} файлов не найден в БД документ с нужным id или такой документ был удален из БД')
         if on_ftp:
             ftpfile.quit()
+        cur.close()
         cnx.close()
     # h = 'tytyty.jpg'
     # print(h[0:-4])
