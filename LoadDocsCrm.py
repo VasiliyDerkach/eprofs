@@ -134,7 +134,11 @@ if __name__=='__main__':
                             os.rename(path_config['path_scan=']+gfile,path_config['path_scan=']+uu_id)
                             dnow = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                             sql_ins = f"insert into document_revisions(id, date_entered, change_log, document_id, filename, file_ext, file_mime_type, stage) values('{uu_id}','{dnow}','{pg1}','{doc_id1}','{old_fname}','{exx0}','{exx1}','scan in pyth')"
-                            cur.execute(sql_ins)
+                            try:
+                                cur.execute(sql_ins)
+                                cnx.commit()
+                            except:
+                                cnx.rollback()
                             if on_ftp:
                                 with open(path_config['path_scan=']+uu_id,'rb') as gfile_n:
                                     ftpfile.storbinary('STOR ' +uu_id,gfile_n)
