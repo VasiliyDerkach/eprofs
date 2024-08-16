@@ -92,7 +92,8 @@ if __name__=='__main__':
             exx = gfile[-4:]
             if exx in ('.jpg','.pdf','.png') and gfile[0:1]!='==':
                 i += 1
-                file_r = open(path_config['path_read_scan='] + gfile[0:-4]+'.txt',mode='r')
+                txtfile_name = path_config['path_read_scan='] + gfile[0:-4]+'.txt'
+                file_r = open(txtfile_name,mode='r')
                 if file_r:
                     j += 1
                     txt_id = file_r.read()
@@ -132,7 +133,7 @@ if __name__=='__main__':
                                 with open(path_config['path_scan=']+uu_id,'rb') as gfile_n:
                                     ftpfile.storbinary('STOR ' +uu_id,gfile_n)
                                 shutil.move(path_config['path_scan=']+uu_id,path_config['path_after_end=']+uu_id)
-                            shutil.move(path_config['path_read_scan=']+file_r,path_config['path_after_end=']+file_r)
+                            shutil.move(file_r.name,path_config['path_after_end=']+txtfile_name)
                             if not on_ftp and  path_config['ftp_bat='] and path_config['ftp_bat=']!='None' :
                                 os.startfile(path_config['ftp_bat='])
                                 print(f'Запущен файл {path_config['ftp_bat=']}')
@@ -141,10 +142,10 @@ if __name__=='__main__':
                         else:
                             nid += 1
                             shutil.move(path_config['path_scan=']+gfile,path_config['path_error_finddoc=']+gfile)
-                            shutil.move(path_config['path_read_scan=']+file_r,path_config['path_error_finddoc=']+file_r)
+                            shutil.move(file_r.name,path_config['path_error_finddoc=']+txtfile_name)
                     else:
                         shutil.move(path_config['path_scan=']+gfile,path_config['path_error_uuid=']+gfile)
-                        shutil.move(path_config['path_read_scan=']+file_r,path_config['path_error_uuid=']+file_r)
+                        shutil.move(file_r.name,path_config['path_error_uuid=']+txtfile_name)
                     file_r.close()
 
                 else:
