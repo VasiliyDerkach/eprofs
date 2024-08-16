@@ -31,7 +31,9 @@ if __name__=='__main__':
             'sql_login=': None,
             'sql_password=': None,
             'sql_basename=': None,
-            'sql_port=': None
+            'sql_port=': None,
+            'ftp_bat=': None,
+            'path_after_end=': None
     }
     with open('load_crm-config.cnf', mode='r') as cfile:
         txt = cfile.read()
@@ -65,7 +67,7 @@ if __name__=='__main__':
         except Exception as Exsql:
             print(Exsql)
 
-        ftpfile = ftplib.FTP()
+        #ftpfile = ftplib.FTP()
         #ftpfile = ftplib.FTP_TLS()
         print('FTP запущен')
         #ftpfile.prot_p()
@@ -113,7 +115,7 @@ if __name__=='__main__':
                         id_lst = cur.fetchall()
                         id_rez=id_lst[0]['id']
                         if len(id_rez)>0 and id_rez.upper()==doc_id1.upper():
-                            uu_id = uuid.uuid4()
+                            uu_id = uuid.uuid4().urn.replace('urn:uuid:','').upper()
                             old_fname = gfile
                             if exx in ('.jpg', '.pdf', '.png'):
                                 exx0 = exx.replace('.','')
@@ -122,13 +124,19 @@ if __name__=='__main__':
                                 exx0, exx1 = '',''
                             pg1 = f'стр.{pg}'
                             os.rename(path_config['path_scan=']+gfile,path_config['path_scan=']+uu_id)
-                            sql_ins = f'insert into document_revisions(id, date_entered, change_log, document_id, '
-                            sql_ins += f'filename, file_ext, file_mime_type, stage)) values('
-                            sql_ins += f"{uu_id},now(),{pg1 if pg!='' else ''},{doc_id1},{old_fname},{exx0},{exx1},'scan in pyth'"
+                            sql_ins = f"insert into document_revisions(id, date_entered, change_log, document_id, "
+                            sql_ins += f'filename, file_ext, file_mime_type, stage) values('
+                            sql_ins += f"'{uu_id}',now(),'{pg1 if pg!='' else ''}','{doc_id1}','{old_fname}','{exx0}','{exx1}','scan in pyth')"
                             cur.execute(sql_ins)
                             if on_ftp:
                                 with open(path_config['path_scan=']+uu_id,'rb') as gfile_n:
                                     ftpfile.storbinary('STOR ' +uu_id,gfile_n)
+                                shutil.move(path_config['path_scan=']+uu_id,path_config['path_after_end=']+uu_id)
+                            shutil.move(path_config['path_read_scan=']+file_r,path_config['path_after_end=']+file_r)
+                            if not on_ftp and  path_config['ftp_bat='] and path_config['ftp_bat=']!='None' :
+                                os.startfile(path_config['ftp_bat='])
+                                print(f'Запущен файл {path_config['ftp_bat=']}')
+                                shutil.move(path_config['path_scan=']+uu_id,path_config['path_after_end=']+uu_id)
 
                         else:
                             nid += 1
