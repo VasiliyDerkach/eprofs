@@ -6,10 +6,11 @@ from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 import time
 from PIL import Image
+#pip install selenium 2captcha-python
 driver = webdriver.Chrome()
 url = "https://chkalovsky--svd.sudrf.ru/modules.php?name=sud_delo&srv_num=1&name_op=sf&delo_id=1540005"
 driver.get(url)
-driver.set_page_load_timeout(2)
+driver.set_page_load_timeout(20)
 try:
     imgResults = driver.find_elements(By.XPATH,'//*[@id="calform"]/table[1]/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/img')
 
