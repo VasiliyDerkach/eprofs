@@ -28,11 +28,14 @@ if __name__=='__main__':
             'ftp_bat=': None,
             'path_after_end=': None,
             'exe_doc_status=': None,
-            'rtf_str_end =': None,
-            'rtf_str_start_num=', None,
-            'rtf_str_start_date=', None,
-            'rtf_str_start_sum=', None,
-
+            'rtf_str_end=': None,
+            'rtf_str_start_num=': None,
+            'rtf_str_start_date=': None,
+            'rtf_str_start_sum=': None,
+            'rtf_nstr_num=': None,
+            'rtf_nstr_date=': None,
+            'rtf_nstr_sum=': None,
+            'path_after_find=': None
     }
     cnf_dict = LoadDocsCrm.load_cnf_file('load_plat_config.cnf',path_config)
     allfind = cnf_dict['allfind']
@@ -77,7 +80,8 @@ if __name__=='__main__':
         lst_scan = os.listdir(path_config['path_scan='])
         for gfile in lst_scan:
             exx = gfile[-4:]
-            if exx in ('.rtf'""",'.pdf'""") and gfile[0:1]!='==':
+            old_fname = gfile
+            if exx in ('.rtf','.pdf') and gfile[0:2]!='==':
                 # для pdf учеть другие теги данных платежким и перенести теги для каждого типа файла в config
                 i += 1
                 txtfile_name = gfile
@@ -99,6 +103,13 @@ if __name__=='__main__':
                 if file_r:
                     j += 1
                     str_end = path_config['rtf_str_end=']
+                    if exx in ('.pdf', '.rtf'):
+                        exx0 = exx.replace('.', '')
+                        exx1 = 'doc/rtf' if exx == '.rtf' else 'image/pdf' if exx == '.pdf' else exx
+                        # doc/rtf посмотреть как в crm
+                    else:
+                        exx0, exx1 = '', ''
+
                     txt_id = file_r.read()
                     file_r.close()
                     #print(txt_id)
@@ -116,9 +127,9 @@ if __name__=='__main__':
                                 id_rez=id_lst[0]['id']
                                 if len(id_rez)>0 and id_rez.upper()==doc_id.upper():
                                     uu_id = uuid.uuid4().urn.replace('urn:uuid:','').upper()
-                                    os.rename(path_config['path_scan=']+gfile,path_config['path_scan=']+uu_id)
+                                    os.rename(path_config['path_scan=']+gfile,path_config['path_after_find=']+uu_id)
                                     dnow = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                                    sql_ins = f"insert into document_revisions(id, date_entered, change_log, document_id, filename, file_ext, file_mime_type, stage) values('{uu_id}','{dnow}','{pg1}','{doc_id1}','{old_fname}','{exx0}','{exx1}','scan in pyth')"
+                                    sql_ins = f"insert into document_revisions(id, date_entered,  document_id, filename, file_ext, file_mime_type, stage) values('{uu_id}','{dnow}','{doc_id}','{old_fname}','{exx0}','{exx1}','scan in pyth')"
                                     try:
                                         cur.execute(sql_ins)
                                         cnx.commit()
@@ -142,7 +153,7 @@ if __name__=='__main__':
                                     print(pnum)
                                     txt119 = txt[nstr_sum].replace('\\','~')
                                     #print(txt19)
-                                    psum = re.search(f'(?<={str_start_dat}).*?(?=={str_end})', txt119)
+                                    psum = re.search(f'(?<={str_start_sum}).*?(?=={str_end})', txt119)
                                     if psum:
                                         psum = psum.group(0)
                                     print(psum)
@@ -152,23 +163,13 @@ if __name__=='__main__':
                                         cnx.commit()
                                     except:
                                         cnx.rollback()
+                                    os.startfile(path_config['ftp_bat='])
+                                    print(f'Запущен файл {path_config['ftp_bat=']}')
+                                    shutil.move(path_config['path_after_find=']+uu_id,path_config['path_after_end=']+uu_id)
+
                                 #print(txt[19])
                                 #print(txt[119])
 
-                        # if on_ftp:
-                        #         with open(path_config['path_scan=']+uu_id,'rb') as gfile_n:
-                        #             ftpfile.storbinary('STOR ' +uu_id,gfile_n)
-                        #         shutil.move(path_config['path_scan=']+uu_id,path_config['path_after_end=']+uu_id)
-                        #shutil.move(txtfile_name_path,path_config['path_after_end=']+txtfile_name)
-                        # if not on_ftp and  path_config['ftp_bat='] and path_config['ftp_bat=']!='None' :
-                        #         os.startfile(path_config['ftp_bat='])
-                        #         print(f'Запущен файл {path_config['ftp_bat=']}')
-                        #         shutil.move(path_config['path_scan=']+uu_id,path_config['path_after_end=']+uu_id)
-                        #
-                        # else:
-                        #     nid += 1
-                        #     shutil.move(path_config['path_scan=']+gfile,path_config['path_error_finddoc=']+gfile)
-                        #     shutil.move(txtfile_name_path,path_config['path_error_finddoc=']+txtfile_name)
                     else:
                         shutil.move(txtfile_name_path,path_config['path_error_uuid=']+txtfile_name)
 
