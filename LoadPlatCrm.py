@@ -26,7 +26,8 @@ if __name__=='__main__':
             'sql_basename=': None,
             'sql_port=': None,
             'ftp_bat=': None,
-            'path_after_end=': None
+            'path_after_end=': None,
+            'exe_doc_status=': None
     }
     cnf_dict = LoadDocsCrm.load_cnf_file('load_plat_config.cnf',path_config)
     allfind = cnf_dict['allfind']
@@ -37,6 +38,7 @@ if __name__=='__main__':
         print('Не найден файл cnf')
     elif allfind:
         i,j,g,nid = 0,0,0,0
+        exestatus = path_config['exe_doc_status=']
         try:
             cnx = pymysql.connect(user=path_config['sql_login='], password=path_config['sql_password='],
                                       host=path_config['sql_server='],port=3306,  #path_config['sql_port='],
@@ -94,7 +96,7 @@ if __name__=='__main__':
                             print('doc_id=', doc_id)
                             if LoadDocsCrm.is_valid_uuid(doc_id):
                                 print(f'Валидный {doc_id}')
-                                cur.execute(f"select id from documents where id='{doc_id}' limit 1")
+                                cur.execute(f"select id,stage,date_sign from documents where id='{doc_id}' limit 1")
                                 id_lst = cur.fetchall()
                                 id_rez=id_lst[0]['id']
                                 if len(id_rez)>0 and id_rez.upper()==doc_id.upper():
@@ -107,7 +109,8 @@ if __name__=='__main__':
                                         cnx.commit()
                                     except:
                                         cnx.rollback()
-
+                                    shutil.move(path_config['path_scan='] + uu_id,
+                                                path_config['path_after_end='] + uu_id)
                                     txt = txt_id.split('\n')
                                     #print(txt[17])
                                     txt17 = txt[17].replace('\\','~')
@@ -127,11 +130,10 @@ if __name__=='__main__':
                                     if psum:
                                         psum = psum.group(0)
                                     print(psum)
+                                    sql_upd = f"update documents set document_number='{pnum}',date_sign='{}', stage='{exestatus}', attachment_number='{psum}' where deleted =0 and (document_as_business_id= '{id_rez}' or id='{id_rez}')"
                                 #print(txt[19])
                                 #print(txt[119])
 
-                    if True:
-                        pass
                         # if on_ftp:
                         #         with open(path_config['path_scan=']+uu_id,'rb') as gfile_n:
                         #             ftpfile.storbinary('STOR ' +uu_id,gfile_n)
