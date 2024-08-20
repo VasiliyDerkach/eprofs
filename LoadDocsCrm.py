@@ -18,6 +18,27 @@ def is_valid_uuid(uuid_to_test, version=None):
     flag = uuid_obj.upper().find(uuid_to_test.upper())>0
     #print(uuid_obj,uuid_to_test)
     return flag
+def load_cnf_file(filename,cnf_list):
+    with open(filename, mode='r') as cfile:
+        txt = cfile.read()
+        allfind = False
+        for y,p in cnf_list.items():
+            po = re.search('(?<='+y+').*?(?=\n)', txt)
+            pp = po.group(0)
+            if not po:
+                allfind = False
+                print(f'Не определен путь к {y}')
+            else:
+                allfind = True
+                cnf_list[y] = pp
+                print(y,pp)
+                if not os.path.exists(pp) and y.find('path_')==0:
+                    allfind = False
+                    print(f'Папки {pp} не существует или к ней нет доступа')
+                else:
+                    print(f'Параметр {y} обнаружен {pp}')
+    return {'file': cfile,'allfind': allfind,'config':cnf_list}
+
 if __name__=='__main__':
     path_config = {'path_scan=': None,
             'path_read_scan=': None,
@@ -36,25 +57,10 @@ if __name__=='__main__':
             'ftp_bat=': None,
             'path_after_end=': None
     }
-    with open('load_crm-config.cnf', mode='r') as cfile:
-        txt = cfile.read()
-        allfind = False
-        for y,p in path_config.items():
-            po = re.search('(?<='+y+').*?(?=\n)', txt)
-            pp = po.group(0)
-            if not po:
-                allfind = False
-                print(f'Не определен путь к {y}')
-            else:
-                allfind = True
-                path_config[y] = pp
-                print(y,pp)
-                if not os.path.exists(pp) and y.find('path_')==0:
-                    allfind = False
-                    print(f'Папки {pp} не существует или к ней нет доступа')
-                else:
-                    print(f'Параметр {y} обнаружен {pp}')
-
+    cnf_dict = load_cnf_file('load_crm-config.cnf',path_config)
+    allfind = cnf_dict['allfind']
+    cfile = cnf_dict['file']
+    path_config = cnf_dict['config']
     if not cfile:
         print('Не найден файл load_crm-config.cnf')
     elif allfind:
