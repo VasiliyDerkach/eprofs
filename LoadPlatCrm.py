@@ -27,7 +27,12 @@ if __name__=='__main__':
             'sql_port=': None,
             'ftp_bat=': None,
             'path_after_end=': None,
-            'exe_doc_status=': None
+            'exe_doc_status=': None,
+            'rtf_str_end =': None,
+            'rtf_str_start_num=', None,
+            'rtf_str_start_date=', None,
+            'rtf_str_start_sum=', None,
+
     }
     cnf_dict = LoadDocsCrm.load_cnf_file('load_plat_config.cnf',path_config)
     allfind = cnf_dict['allfind']
@@ -39,6 +44,7 @@ if __name__=='__main__':
     elif allfind:
         i,j,g,nid = 0,0,0,0
         exestatus = path_config['exe_doc_status=']
+
         try:
             cnx = pymysql.connect(user=path_config['sql_login='], password=path_config['sql_password='],
                                       host=path_config['sql_server='],port=3306,  #path_config['sql_port='],
@@ -76,6 +82,15 @@ if __name__=='__main__':
                 i += 1
                 txtfile_name = gfile
                 txtfile_name_path = path_config['path_scan='] + txtfile_name
+                if exx=='.rtf':
+                    nstr_date = int(path_config['rtf_nstr_date='])
+                    str_start_dat = path_config['rtf_str_start_date=']
+                    nstr_sum = int(path_config['rtf_nstr_sum='])
+                    str_start_sum = path_config['rtf_str_start_sum=']
+                    nstr_num = int(path_config['rtf_nstr_num='])
+                    str_start_num = path_config['rtf_str_start_num=']
+                elif exx=='.pdf':
+                    pass
                 try:
                     file_r = open(txtfile_name_path,mode='r')
                 except Exception as exftxt:
@@ -83,7 +98,7 @@ if __name__=='__main__':
                     file_r = None
                 if file_r:
                     j += 1
-                    str_end = '~plain~par'
+                    str_end = path_config['rtf_str_end=']
                     txt_id = file_r.read()
                     file_r.close()
                     #print(txt_id)
@@ -113,24 +128,30 @@ if __name__=='__main__':
                                                 path_config['path_after_end='] + uu_id)
                                     txt = txt_id.split('\n')
                                     #print(txt[17])
-                                    txt17 = txt[17].replace('\\','~')
-                                    pdata = re.search(f'(?<=~pard ~fi0 ~li0 ~ri0 ~sb0 ~sa0 ~cb1 ~qc~sl240 ~slmult1 ~f0~fs20~cf2 ).*?(?={str_end})', txt17)
+                                    txt17 = txt[nstr_date].replace('\\','~')
+                                    pdata = re.search(f'(?<={str_start_dat}).*?(?={str_end})', txt17)
                                     if pdata:
                                         pdata = pdata.group(0)
                                     print(pdata)
-                                    txt19 = txt[19].replace('\\','~')
+                                    date1 = pdata[-4:]+'-'+pdata[3:5]+'-'+pdata[0:2]
+                                    txt19 = txt[nstr_num].replace('\\','~')
                                     #print(txt19)
-                                    pnum = re.search(f'(?<=~pard ~fi0 ~li0 ~ri0 ~sb0 ~sa0 ~cb1 ~ql~sl240 ~slmult1 ~f0~fs20~cf2 ).*?(?={str_end})', txt19)
+                                    pnum = re.search(f'(?<={str_start_num}).*?(?={str_end})', txt19)
                                     if pnum:
                                         pnum = pnum.group(0)
                                     print(pnum)
-                                    txt119 = txt[119].replace('\\','~')
+                                    txt119 = txt[nstr_sum].replace('\\','~')
                                     #print(txt19)
-                                    psum = re.search(f'(?<=~pard ~fi0 ~li0 ~ri0 ~sb0 ~sa0 ~cb1 ~ql~sl240 ~slmult1 ~f0~fs20~cf2 ).*?(?=={str_end})', txt119)
+                                    psum = re.search(f'(?<={str_start_dat}).*?(?=={str_end})', txt119)
                                     if psum:
                                         psum = psum.group(0)
                                     print(psum)
-                                    sql_upd = f"update documents set document_number='{pnum}',date_sign='{}', stage='{exestatus}', attachment_number='{psum}' where deleted =0 and (document_as_business_id= '{id_rez}' or id='{id_rez}')"
+                                    sql_upd = f"update documents set document_number='{pnum}',date_sign='{date1}', stage='{exestatus}', attachment_number='{psum}' where deleted =0 and (document_as_business_id= '{id_rez}' or id='{id_rez}')"
+                                    try:
+                                        cur.execute(sql_upd)
+                                        cnx.commit()
+                                    except:
+                                        cnx.rollback()
                                 #print(txt[19])
                                 #print(txt[119])
 
