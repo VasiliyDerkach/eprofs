@@ -165,7 +165,7 @@ if __name__=='__main__':
                                         cnx.rollback()
                                     os.startfile(path_config['ftp_bat='])
                                     print(f'Запущен файл {path_config['ftp_bat=']}')
-                                    shutil.move(path_config['path_after_find=']+uu_id,path_config['path_after_end=']+uu_id)
+                                    #shutil.move(path_config['path_after_find=']+uu_id,path_config['path_after_end=']+uu_id)
 
                                 #print(txt[19])
                                 #print(txt[119])
