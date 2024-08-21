@@ -127,7 +127,10 @@ if __name__=='__main__':
                                 id_rez=id_lst[0]['id']
                                 if len(id_rez)>0 and id_rez.upper()==doc_id.upper():
                                     uu_id = uuid.uuid4().urn.replace('urn:uuid:','').upper()
-                                    os.rename(path_config['path_scan=']+gfile,path_config['path_scan=']+uu_id)
+                                    try:
+                                        os.rename(path_config['path_scan=']+gfile,path_config['path_scan=']+uu_id)
+                                    except Exception as ex:
+                                        print(f'При переименовании файла {gfile} возникла ошибка {ex}' )
                                     dnow = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                                     sql_ins = f"insert into document_revisions(id, date_entered,  document_id, filename, file_ext, file_mime_type, stage) values('{uu_id}','{dnow}','{doc_id}','{old_fname}','{exx0}','{exx1}','scan in pyth')"
                                     try:
@@ -135,8 +138,11 @@ if __name__=='__main__':
                                         cnx.commit()
                                     except:
                                         cnx.rollback()
-                                    shutil.move(path_config['path_scan='] + uu_id,
+                                    try:
+                                        shutil.move(path_config['path_scan='] + uu_id,
                                                 path_config['path_after_find='] + uu_id)
+                                    except Exception as ex:
+                                        print(f'При переносе файла {gfile} возникла ошибка {ex}' )
                                     txt = txt_id.split('\n')
                                     #print(txt[17])
                                     txt17 = txt[nstr_date].replace('\\','~')
@@ -144,6 +150,8 @@ if __name__=='__main__':
                                     if pdata:
                                         pdata = pdata.group(0)
                                     print(pdata)
+                                    pdata.replace(' ','')
+                                    pdata = pdata[-10:]
                                     date1 = pdata[-4:]+'-'+pdata[3:5]+'-'+pdata[0:2]
                                     txt19 = txt[nstr_num].replace('\\','~')
                                     #print(txt19)
