@@ -18,7 +18,7 @@ def exe_parsing_scenario(url, vscenario, html_scenario, timeout = 5):
         try:
             for html_elscinario in html_scenario1:
                 if 'type' in html_elscinario.keys():
-                    if 'id' in html_elscinario.keys() and len(html_elscinario['id']>0):
+                    if 'id' in html_elscinario.keys() and len(html_elscinario['id'])>0:
                         ByParam = By.ID
                         Param = html_elscinario['id']
                     elif 'xpath' in html_elscinario.keys() and len(html_elscinario['xpath'])>0:
@@ -30,7 +30,7 @@ def exe_parsing_scenario(url, vscenario, html_scenario, timeout = 5):
                         return f'Для элемента {html_elscinario} не его задан параметр поиска в html'
                     vtype = html_elscinario['type']
                     if vtype=='findtext':
-                        if 'text' in html_elscinario.keys() and len(html_elscinario['text'] > 0):
+                        if 'text' in html_elscinario.keys() and len(html_elscinario['text']) > 0:
                             if html_elscinario['text'] in vscenario.keys() and len(vscenario[html_elscinario['text']])>0:
                                 txt = vscenario[html_elscinario['text']]
                                 elem = driver.find_element(ByParam,Param)
@@ -48,7 +48,7 @@ def exe_parsing_scenario(url, vscenario, html_scenario, timeout = 5):
                             driver.close()
                             return f'Для элемента {html_elscinario} типа {vtype} не задан параметр: текст для поиска'
                     elif vtype=='captcha_send_keys':
-                        if 'xpath_send' in html_elscinario.keys() and len(html_elscinario['xpath_send'] > 0):
+                        if 'xpath_send' in html_elscinario.keys() and len(html_elscinario['xpath_send']) > 0:
                             elem = driver.find_element(ByParam,Param)
                             if elem:
                                 imgResults = elem
@@ -90,14 +90,14 @@ def exe_parsing_scenario(url, vscenario, html_scenario, timeout = 5):
                                             if isinstance(numbers,list) and len(numbers)>0:
                                                 xph = html_elscinario['xpath_elem']
                                                 for i,num in enumerate(numbers):
-                                                    xph = xph.replace('{{elem['+str(i)+']}}',str(num))
+                                                    xph = xph.replace('{elem['+str(i)+']}',str(num))
                                                 el = driver.find_element(By.XPATH,xph)
                                                 if el:
                                                     el.click()
                                                 else:
                                                     driver.close()
                                                     return f'Для элемента {html_elscinario} типа {vtype} не найден html {html_elscinario['xpath_elem']}'
-                                        if 'xpath_send' in html_elscinario.keys() and len(html_elscinario['xpath_send'] > 0):
+                                        if 'xpath_send' in html_elscinario.keys() and len(html_elscinario['xpath_send']) > 0:
                                             ec = driver.find_element(By.XPATH, html_elscinario['xpath_send'])
                                             if ec:
                                                 ec.click()
@@ -163,7 +163,7 @@ if __name__=='__main__':
          'sequence': 2},
         {'type': 'combobox',
          'xpath': "/html/body/div[10]/div[3]/div/div[2]/div[2]/div[2]/form/table[2]/tbody/tr[3]/td[2]/input",
-         'xpath_elem': f"/html/body/div[6]/div[2]/div[1]/ul/li[{{elem[0]}}]/input",
+         'xpath_elem': "/html/body/div[6]/div[2]/div[1]/ul/li[{elem[0]}]/input",
          'xpath_send': "/html/body/div[6]/div[1]/a",
          'text': 'categoryes',
          'sequence': 0},
