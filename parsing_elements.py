@@ -7,10 +7,15 @@ from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 import time
 from PIL import Image
+import parsing_table
 twocaptcha_key = 'a2fd27620a57b390f7f124a98c249a7f'
-def exe_parsing_scenario(url, vscenario, html_scenario, timeout = 5):
+def exe_parsing_scenario(web_driver,url, vscenario, html_scenario, timeout = 5):
 # pip install selenium 2captcha-python
-    driver = webdriver.Chrome()
+    if web_driver and isinstance(web_driver,webdriver.Chrome):
+        driver = web_driver
+    else:
+        driver = webdriver.Chrome()
+        #print(isinstance(driver,webdriver.Chrome))
     driver.get(url)
     driver.set_page_load_timeout(timeout)
     if len(html_scenario)>0:
@@ -49,7 +54,7 @@ def exe_parsing_scenario(url, vscenario, html_scenario, timeout = 5):
                             return f'Для элемента {html_elscinario} типа {vtype} не задан параметр: текст для поиска'
                     elif vtype=='captcha_send_keys':
                         if 'xpath_send' in html_elscinario.keys() and len(html_elscinario['xpath_send']) > 0:
-                            elem = driver.find_element(ByParam,Param)
+                            elem = driver.find_elements(ByParam,Param)
                             if elem:
                                 imgResults = elem
                                 solver = twocaptcha.TwoCaptcha(twocaptcha_key)
@@ -60,6 +65,7 @@ def exe_parsing_scenario(url, vscenario, html_scenario, timeout = 5):
                                 img_captcha.close()
                                 captchafield = driver.find_element(By.XPATH,html_elscinario['xpath_send'])
                                 captchafield.send_keys(result["code"])
+                                time.sleep(7)
                             else:
                                 driver.close()
                                 return f'Для элемента {html_elscinario} типа {vtype} не найден элемент {Param}'
@@ -123,34 +129,16 @@ def exe_parsing_scenario(url, vscenario, html_scenario, timeout = 5):
                             driver.close()
                             return f'Для элемента {html_elscinario} типа {vtype} не задан параметр: текст для поиска'
 
-            imgResults = driver.find_elements(By.XPATH,
-                                              f'//*[@id="calform"]/table[1]/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/img')
 
 
-            # print ("solved: ",result)
-            button_ctegor = driver.find_element(By.XPATH,
-                                                "/html/body/div[10]/div[3]/div/div[2]/div[2]/div[2]/form/table[2]/tbody/tr[3]/td[2]/input")
-            button_ctegor.click()
-            button_work = driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[1]/ul/li[3]/input")
-            #/ html / body / div[6] / div[2] / div / ul / li[4] / input
-            button_work.click()
-            lnk_ctg_close = driver.find_element(By.XPATH, "/html/body/div[6]/div[1]/a")
-            lnk_ctg_close.click()
-            time.sleep(7)
-            # можно + еще категории
-            time.sleep(7)
-            captchafield.send_keys(result["code"])
-            btn_find = driver.find_element(By.XPATH, "/html/body/div[10]/div[3]/div/div[2]/div[2]/div[2]/form/div[5]/input[1]")
-            # кнопка найти дела
-            btn_find.click()
             time.sleep(7)
             btn_next = driver.find_element(By.XPATH,
                                            "/html/body/div[10]/div[3]/div/div[2]/div[2]/div[2]/table[3]/tbody/tr/td/a[3]")
             btn_next.click()
             # xpath след. страница /html/body/div[10]/div[3]/div/div[2]/div[2]/div[2]/table[3]/tbody/tr/td/a[3]
             time.sleep(7)
-
-            driver.quit()
+            return driver
+            #driver.quit()
         except TimeoutException as e:
             return "Page load Timeout Occurred. Quitting !!!"
             driver.quit()
@@ -159,7 +147,7 @@ if __name__=='__main__':
     html_court1 = [
         {'xpath': '//*[@id="calform"]/table[1]/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/img',
          'type': 'captcha_send_keys',
-         'xpath_send': "/html/body/div[10]/div[3]/div/div[2]/div[2]/div[2]/form/div[5]/input[1]",
+         'xpath_send': "/html/body/div[10]/div[3]/div/div[2]/div[2]/div[2]/form/table[1]/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/input[1]",
          'sequence': 2},
         {'type': 'combobox',
          'xpath': "/html/body/div[10]/div[3]/div/div[2]/div[2]/div[2]/form/table[2]/tbody/tr[3]/td[2]/input",
@@ -177,4 +165,4 @@ if __name__=='__main__':
     ]
     scenario = { 'last_name': 'Иванов', 'categoryes': [[3],[4]]}
     url1 = "https://chkalovsky--svd.sudrf.ru/modules.php?name=sud_delo&srv_num=1&name_op=sf&delo_id=1540005"
-    print(exe_parsing_scenario(url1, scenario, html_court1, timeout = 25))
+    print(exe_parsing_scenario(None,url1, scenario, html_court1, timeout = 25))

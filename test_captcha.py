@@ -1,3 +1,4 @@
+#установим несколько зависимостей. Если у вас их еще нет, выполните команду pip install selenium 2captcha-python
 import io
 
 from selenium.webdriver.common.by import By
@@ -12,7 +13,7 @@ url = "https://chkalovsky--svd.sudrf.ru/modules.php?name=sud_delo&srv_num=1&name
 driver.get(url)
 driver.set_page_load_timeout(20)
 try:
-    imgResults = driver.find_elements(By.XPATH,'//*[@id="calform"]/table[1]/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/img')
+    imgResults = driver.find_elements(By.XPATH,f'//*[@id="calform"]/table[1]/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/img')
 
     solver = twocaptcha.TwoCaptcha('a2fd27620a57b390f7f124a98c249a7f')
     # print(imgResults[0].get_attribute("src"))
@@ -27,7 +28,7 @@ try:
     button_work.click()
     lnk_ctg_close = driver.find_element(By.XPATH,"/html/body/div[6]/div[1]/a")
     lnk_ctg_close.click()
-    time.sleep(7)
+    time.sleep(7) 
     # можно + еще категории
     captchafield = driver.find_element(By.XPATH,"/html/body/div[10]/div[3]/div/div[2]/div[2]/div[2]/form/table[1]/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/input[1]")
     time.sleep(7)
@@ -40,6 +41,7 @@ try:
     btn_next.click()
     # xpath след. страница /html/body/div[10]/div[3]/div/div[2]/div[2]/div[2]/table[3]/tbody/tr/td/a[3]
     time.sleep(7)
+    
     driver.quit()
 except TimeoutException as e:
     print("Page load Timeout Occurred. Quitting !!!")
