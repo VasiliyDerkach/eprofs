@@ -1,6 +1,6 @@
 # установим несколько зависимостей. Если у вас их еще нет, выполните команду pip install selenium 2captcha-python
 import io
-
+import re
 from selenium.webdriver.common.by import By
 import twocaptcha
 from selenium import webdriver
@@ -21,7 +21,7 @@ def exe_parsing_scenario(url, vscenario, html_scenario, timeout = 5):
                     if 'id' in html_elscinario.keys() and len(html_elscinario['id']>0):
                         ByParam = By.ID
                         Param = html_elscinario['id']
-                    elif 'xpath' in html_elscinario.keys() and len(html_elscinario['xpath']>0):
+                    elif 'xpath' in html_elscinario.keys() and len(html_elscinario['xpath'])>0:
                         ByParam = By.XPATH
                         Param = html_elscinario['xpath']
                     #+link и другие варианты поиска элемента
@@ -75,7 +75,7 @@ def exe_parsing_scenario(url, vscenario, html_scenario, timeout = 5):
                             driver.close()
                             return f'Для элемента {html_elscinario} типа {vtype} не найден элемент {Param}'
                     elif vtype=='combobox':
-                        if 'text' in html_elscinario.keys() and len(html_elscinario['text'] > 0):
+                        if 'text' in html_elscinario.keys() and len(html_elscinario['text']) > 0:
                             if html_elscinario['text'] in vscenario.keys() and len(vscenario[html_elscinario['text']])>0:
                                 txt = vscenario[html_elscinario['text']]
                                 if isinstance(txt,list):
@@ -86,13 +86,17 @@ def exe_parsing_scenario(url, vscenario, html_scenario, timeout = 5):
                                         driver.close()
                                         return f'Для элемента {html_elscinario} типа {vtype} не найден элемент {Param}'
                                     if 'xpath_elem' in html_elscinario.keys() and len(html_elscinario['xpath_elem'])>0 and html_elscinario['xpath_elem'].find('{')>0:
-                                        for number in txt:
-                                            el = driver.find_element(By.XPATH,html_elscinario['xpath_elem'])
-                                            if el:
-                                                el.click()
-                                            else:
-                                                driver.close()
-                                                return f'Для элемента {html_elscinario} типа {vtype} не найден html {html_elscinario['xpath_elem']}'
+                                        for numbers in txt:
+                                            if isinstance(numbers,list) and len(numbers)>0:
+                                                xph = html_elscinario['xpath_elem']
+                                                for i,num in enumerate(numbers):
+                                                    xph = xph.replace('{{elem['+str(i)+']}}',str(num))
+                                                el = driver.find_element(By.XPATH,xph)
+                                                if el:
+                                                    el.click()
+                                                else:
+                                                    driver.close()
+                                                    return f'Для элемента {html_elscinario} типа {vtype} не найден html {html_elscinario['xpath_elem']}'
                                         if 'xpath_send' in html_elscinario.keys() and len(html_elscinario['xpath_send'] > 0):
                                             ec = driver.find_element(By.XPATH, html_elscinario['xpath_send'])
                                             if ec:
@@ -148,11 +152,10 @@ def exe_parsing_scenario(url, vscenario, html_scenario, timeout = 5):
 
             driver.quit()
         except TimeoutException as e:
-            print("Page load Timeout Occurred. Quitting !!!")
+            return "Page load Timeout Occurred. Quitting !!!"
             driver.quit()
 
 if __name__=='__main__':
-    number = 0
     html_court1 = [
         {'xpath': '//*[@id="calform"]/table[1]/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/img',
          'type': 'captcha_send_keys',
@@ -160,7 +163,7 @@ if __name__=='__main__':
          'sequence': 2},
         {'type': 'combobox',
          'xpath': "/html/body/div[10]/div[3]/div/div[2]/div[2]/div[2]/form/table[2]/tbody/tr[3]/td[2]/input",
-         'xpath_elem': f"/html/body/div[6]/div[2]/div[1]/ul/li[{number}]/input",
+         'xpath_elem': f"/html/body/div[6]/div[2]/div[1]/ul/li[{{elem[0]}}]/input",
          'xpath_send': "/html/body/div[6]/div[1]/a",
          'text': 'categoryes',
          'sequence': 0},
@@ -172,6 +175,6 @@ if __name__=='__main__':
          'xpath':"/html/body/div[10]/div[3]/div/div[2]/div[2]/div[2]/form/div[5]/input[1]",
          'sequence': 3}
     ]
-    scenario = { 'last_name': 'Иванов', 'categoryes': [3,4]}
+    scenario = { 'last_name': 'Иванов', 'categoryes': [[3],[4]]}
     url1 = "https://chkalovsky--svd.sudrf.ru/modules.php?name=sud_delo&srv_num=1&name_op=sf&delo_id=1540005"
     print(exe_parsing_scenario(url1, scenario, html_court1, timeout = 25))
