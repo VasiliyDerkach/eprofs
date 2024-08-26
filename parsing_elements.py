@@ -14,7 +14,7 @@ def exe_parsing_scenario(url, vscenario, html_scenario, timeout = 5):
     driver.get(url)
     driver.set_page_load_timeout(timeout)
     if len(html_scenario)>0:
-        html_scenario1 = sorted(html_scenario,lambda elem: elem['sequence'])
+        html_scenario1 = sorted(html_scenario, key=lambda elem: elem['sequence'])
         try:
             for html_elscinario in html_scenario1:
                 if 'type' in html_elscinario.keys():
@@ -85,8 +85,7 @@ def exe_parsing_scenario(url, vscenario, html_scenario, timeout = 5):
                                     else:
                                         driver.close()
                                         return f'Для элемента {html_elscinario} типа {vtype} не найден элемент {Param}'
-                                    if 'xpath_elem' in html_elscinario.keys() and len(html_elscinario['xpath_elem'])>0
-                                        and html_elscinario['xpath_elem'].find('{')>0:
+                                    if 'xpath_elem' in html_elscinario.keys() and len(html_elscinario['xpath_elem'])>0 and html_elscinario['xpath_elem'].find('{')>0:
                                         for number in txt:
                                             el = driver.find_element(By.XPATH,html_elscinario['xpath_elem'])
                                             if el:
@@ -153,6 +152,7 @@ def exe_parsing_scenario(url, vscenario, html_scenario, timeout = 5):
             driver.quit()
 
 if __name__=='__main__':
+    number = 0
     html_court1 = [
         {'xpath': '//*[@id="calform"]/table[1]/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/img',
          'type': 'captcha_send_keys',
@@ -174,3 +174,4 @@ if __name__=='__main__':
     ]
     scenario = { 'last_name': 'Иванов', 'categoryes': [3,4]}
     url1 = "https://chkalovsky--svd.sudrf.ru/modules.php?name=sud_delo&srv_num=1&name_op=sf&delo_id=1540005"
+    print(exe_parsing_scenario(url1, scenario, html_court1, timeout = 25))
