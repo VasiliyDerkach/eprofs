@@ -2,7 +2,7 @@ from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-def parsing_table_xpath(web_driver,url, html_tab_scenario, timeout = 5):
+def parsing_table_xpath(web_driver,url, html_tab_scenario, start_row = 1, timeout = 5):
 # pip install selenium 2captcha-python
     recr = {}
     if web_driver and isinstance(web_driver,Chrome):
@@ -27,7 +27,7 @@ def parsing_table_xpath(web_driver,url, html_tab_scenario, timeout = 5):
                     flag_el = False
 
             if flag_el:
-                i = 1
+                i = start_row
                 mainlnk = conts[cn]['MainLink']
                 nend_tabl = True
                 while nend_tabl:
@@ -44,6 +44,13 @@ def parsing_table_xpath(web_driver,url, html_tab_scenario, timeout = 5):
                             if fld[2]=='link':
 
                                 txt = txt.replace('Официальный сайт: ','')
+                            elif fld[2] == 'adress':
+                                #txt = txt.replace(' ', '')
+                                txt = txt.replace('Адрес:', '')
+                                spltxt = txt.split(',')
+                                spltxt1 = []
+                                for s in spltxt:
+                                    spltxt1.append(s.strip())
                             elif fld[2]=='e-mail':
                                 txt = txt.replace(' ','')
                                 txt = txt.replace('mailto:','')
@@ -52,12 +59,17 @@ def parsing_table_xpath(web_driver,url, html_tab_scenario, timeout = 5):
                                 txt = txt.replace(' ','')
                                 txt = txt.replace('Телефон:','')
                                 txt = txt.replace('(','')
+                                txt = txt.replace('-','')
                                 txt = txt.replace(')','')
                                 if fld[2]=='phone7':
                                     txt = '7'+txt
-                            rw[fld[0]] = txt
-                    print('N=',i,rw)
-                    recr[cn].append(rw)
+                            if len(spltxt1) > 0:
+                                rw[fld[0]] = spltxt1
+                            else:
+                                rw[fld[0]] = txt
+                    if len(rw)>0:
+                        recr[cn].append(rw)
+                        print('N=', i, rw)
                     i += 1
 
 
@@ -70,11 +82,11 @@ if __name__ == '__main__':
     url = 'http://oblsud.svd.sudrf.ru/modules.php?name=sud'
     conts = {'/html/body/div[10]/div[3]/div/div[2]/div[2]/a[1]':{'MainLink':'/html/body/div[10]/div[3]/div/div[2]/table/tbody/tr[6]/td[2]/table/tbody/tr[{index}]/td[2]',
                      'Fields':[('name','/a','str'),('email','/table/tbody/tr/td/ul/li[3]','e-mail'),
-                               ('legal_street','/table/tbody/tr/td/ul/li[1]','str'),('phone_office','/table/tbody/tr/td/ul/li[2]','phone7'),
+                               ('legal_street','/table/tbody/tr/td/ul/li[1]','adress'),('phone_office','/table/tbody/tr/td/ul/li[2]','phone7'),
                                ('website','/table/tbody/tr/td/ul/li[4]','link')]}
              }
     # ключ conts имя html закладки на сайте на которую надо переходить перед считыванием таблицы, если он None
     # значит страница сайта без закладок
-    dr, tb = parsing_table_xpath(None,url, conts, timeout = 25)
+    dr, tb = parsing_table_xpath(None,url, conts, start_row=1,timeout = 25)
     dr.quit()
     print(tb)
