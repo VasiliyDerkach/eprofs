@@ -37,7 +37,7 @@ def parsing_table(web_driver,url, html_tab_scenario, critery_end,timeout = 5):
 
                 if flag_el:
                     try:
-                        tc = WebDriverWait(driver, 15).until(
+                        tc = WebDriverWait(driver, timeout).until(
                             EC.presence_of_element_located((By.ID, tx[0]))
                         )
                         # предусмотреть чтение заголовков таблиц
