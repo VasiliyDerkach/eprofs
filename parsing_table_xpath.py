@@ -27,7 +27,7 @@ def parsing_table_xpath(web_driver,url, html_tab_scenario, timeout = 5):
                     flag_el = False
 
             if flag_el:
-                i = 0
+                i = 1
                 mainlnk = conts[cn]['MainLink']
                 nend_tabl = True
                 while nend_tabl:
@@ -36,26 +36,29 @@ def parsing_table_xpath(web_driver,url, html_tab_scenario, timeout = 5):
                     for fld in conts[cn]['Fields']:
                         try:
                             el = driver.find_element(By.XPATH,mainlnk_i+fld[1])
-                        except:
+                        except Exception as elfnd:
                             nend_tabl = False
                             break
                         if el:
                             txt = el.text
                             if fld[2]=='link':
-                                txt = el.get_attribute('href')
+
+                                txt = txt.replace('Официальный сайт: ','')
                             elif fld[2]=='e-mail':
                                 txt = txt.replace(' ','')
                                 txt = txt.replace('mailto:','')
-                            elif fld[2].find('phone')>0:
+                                txt = txt.replace('E-mail:', '')
+                            elif fld[2]=='phone' or fld[2]=='phone7':
                                 txt = txt.replace(' ','')
                                 txt = txt.replace('Телефон:','')
                                 txt = txt.replace('(','')
                                 txt = txt.replace(')','')
                                 if fld[2]=='phone7':
-                                    txt += '7'
+                                    txt = '7'+txt
                             rw[fld[0]] = txt
+                    print('N=',i,rw)
                     recr[cn].append(rw)
-                i += 1
+                    i += 1
 
 
     if len(recr)<=0:
