@@ -83,9 +83,11 @@ if __name__ == '__main__':
     url = 'http://oblsud.svd.sudrf.ru/modules.php?name=sud'
     conts = {'/html/body/div[10]/div[3]/div/div[2]/div[2]/a[1]':{'MainLink':'/html/body/div[10]/div[3]/div/div[2]/table/tbody/tr[6]/td[2]/table/tbody/tr[{index}]/td[2]',
                      'Fields':[('name','/a','str'),('email','/table/tbody/tr/td/ul/li[3]','e-mail'),
-                               ('legal_street','/table/tbody/tr/td/ul/li[1]','adress'),('phone_office','/table/tbody/tr/td/ul/li[2]','phone7'),
+                               ('legal_street','/table/tbody/tr/td/ul/li[1]','adress'),
+                               ('phone_office','/table/tbody/tr/td/ul/li[2]','phone7'),
                                ('website','/table/tbody/tr/td/ul/li[4]','link')]}
              }
+    id_up ='69241fc6-28ad-fb9f-9a07-51ea53b16d27'
     # ключ conts имя html закладки на сайте на которую надо переходить перед считыванием таблицы, если он None
     # значит страница сайта без закладок
     dr, tb = parsing_table_xpath(None,url, conts, start_row=1,timeout = 25)

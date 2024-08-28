@@ -5,19 +5,13 @@ import os
 import shutil
 import ftplib
 import pymysql
+import is_valid_uuid fron db_eprof
 # path_scan=D:/SUI-Doc/sui-after-read/
 # path_read_scan=D:/SUI-Doc/sui-txt/
 # path_error_uuid=D:/SUI-Doc/err-uuid/
 # path_error_finddoc=D:/SUI-Doc/err-fnddoc/
 # path_after_read=
-def is_valid_uuid(uuid_to_test, version=None):
-    try:
-        uuid_obj = uuid.UUID(uuid_to_test, version=version).urn
-    except ValueError:
-        return False
-    flag = uuid_obj.upper().find(uuid_to_test.upper())>0
-    #print(uuid_obj,uuid_to_test)
-    return flag
+
 def load_cnf_file(filename,cnf_list):
     with open(filename, mode='r') as cfile:
         txt = cfile.read()
