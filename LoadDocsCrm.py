@@ -5,33 +5,13 @@ import os
 import shutil
 import ftplib
 import pymysql
-import is_valid_uuid fron db_eprof
+import db_eprof
 # path_scan=D:/SUI-Doc/sui-after-read/
 # path_read_scan=D:/SUI-Doc/sui-txt/
 # path_error_uuid=D:/SUI-Doc/err-uuid/
 # path_error_finddoc=D:/SUI-Doc/err-fnddoc/
 # path_after_read=
 
-def load_cnf_file(filename,cnf_list):
-    with open(filename, mode='r') as cfile:
-        txt = cfile.read()
-        allfind = False
-        for y,p in cnf_list.items():
-            po = re.search('(?<='+y+').*?(?=\n)', txt)
-            pp = po.group(0)
-            if not po:
-                allfind = False
-                print(f'Не определен путь к {y}')
-            else:
-                allfind = True
-                cnf_list[y] = pp
-                print(y,pp)
-                if not os.path.exists(pp) and y.find('path_')==0:
-                    allfind = False
-                    print(f'Папки {pp} не существует или к ней нет доступа')
-                else:
-                    print(f'Параметр {y} обнаружен {pp}')
-    return {'file': cfile,'allfind': allfind,'config':cnf_list}
 
 if __name__=='__main__':
     path_config = {'path_scan=': None,
@@ -51,7 +31,7 @@ if __name__=='__main__':
             'ftp_bat=': None,
             'path_after_end=': None
     }
-    cnf_dict = load_cnf_file('load_crm-config.cnf',path_config)
+    cnf_dict = db_eprof.load_cnf_file('load_crm-config.cnf',path_config)
     allfind = cnf_dict['allfind']
     cfile = cnf_dict['file']
     path_config = cnf_dict['config']
@@ -109,7 +89,7 @@ if __name__=='__main__':
                     for str in txt_id:
                         if len(str)>=36:
                             doc_id = str[0:36]
-                            if is_valid_uuid(doc_id):
+                            if db_eprof.is_valid_uuid(doc_id):
                                 if len(str)>l:
                                     l = len(str)
                                     doc_id1= doc_id

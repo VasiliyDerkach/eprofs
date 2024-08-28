@@ -6,7 +6,7 @@ import shutil
 import ftplib
 import pymysql
 import LoadDocsCrm
-
+import db_eprof
 if __name__=='__main__':
     path_config = {'path_scan=': None,
 
@@ -33,7 +33,7 @@ if __name__=='__main__':
             'rtf_nstr_sum=': None,
             'path_after_find=': None
     }
-    cnf_dict = LoadDocsCrm.load_cnf_file('load_plat_config.cnf',path_config)
+    cnf_dict = db_eprof.load_cnf_file('load_plat_config.cnf',path_config)
     allfind = cnf_dict['allfind']
     cfile = cnf_dict['file']
     path_config = cnf_dict['config']
