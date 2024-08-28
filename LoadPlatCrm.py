@@ -6,11 +6,7 @@ import shutil
 import ftplib
 import pymysql
 import LoadDocsCrm
-# path_scan=D:/SUI-Doc/sui-after-read/
-# path_read_scan=D:/SUI-Doc/sui-txt/
-# path_error_uuid=D:/SUI-Doc/err-uuid/
-# path_error_finddoc=D:/SUI-Doc/err-fnddoc/
-# path_after_read=
+
 if __name__=='__main__':
     path_config = {'path_scan=': None,
 

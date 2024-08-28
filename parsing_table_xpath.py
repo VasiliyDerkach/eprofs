@@ -41,6 +41,7 @@ def parsing_table_xpath(web_driver,url, html_tab_scenario, start_row = 1, timeou
                             break
                         if el:
                             txt = el.text
+                            spltxt1 = []
                             if fld[2]=='link':
 
                                 txt = txt.replace('Официальный сайт: ','')
