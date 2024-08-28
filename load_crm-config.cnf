@@ -1,0 +1,16 @@
+path_scan=D:/SUI-Doc/sui-after-read/
+path_read_scan=D:/SUI-Doc/sui-after-read/
+path_error_uuid=D:/SUI-Doc/err-uuid/
+path_error_finddoc=D:/SUI-Doc/err-fnddoc/
+path_after_read=D:/SUI-Doc/sui-txt/
+path_after_end=D:/SUI-Doc/sui-after-pych/
+ftp_server=192.168.0.3
+ftp_login=administrator
+ftp_password=Kd7%cns0B!
+ftp_dir=/var/www/html/profsouz/cache/upload/
+ftp_bat=D:/SUI-Doc/ftpcopy_frscan.bat
+sql_server=192.168.0.3
+sql_port=3306
+sql_login=Vasiliy
+sql_password=Kd7%cns0B!Kd7%cns0B!
+sql_basename=profsouz
