@@ -66,10 +66,8 @@ def get_city_id_in_db(cursor,tablename,cityname,id_reg):
             return lst[0]['id'], lst[0]['parent_id'], llst
         else:
             return None,None,None
-
-
-if __name__=='__main__':
-    path_config = {'path_scan=': None,
+def getnull_db_path_config():
+     return  {'path_scan=': None,
                    'path_read_scan=': None,
                    'path_error_uuid=': None,
                    'path_error_finddoc=': None,
@@ -85,6 +83,9 @@ if __name__=='__main__':
                    'sql_port=': None,
                    'ftp_bat=': None,
                    'path_after_end=': None}
+
+if __name__=='__main__':
+    path_config = getnull_db_path_config()
     cnf_dict = load_cnf_file('load_crm-config.cnf', path_config)
     allfind = cnf_dict['allfind']
     cfile = cnf_dict['file']
@@ -98,6 +99,6 @@ if __name__=='__main__':
         cur = cnx.cursor()
     except Exception as Exsql:
         print(Exsql)
-    if cur:
-        print(get_city_id_in_db(cur,'regions','Свердловская область','1'))
-        print(temp_tabl)
+    # if cur:
+    #     print(get_city_id_in_db(cur,'cities','город Екатеринбург','66'))
+    #     print(temp_tabl)
