@@ -11,7 +11,8 @@ import uuid
 
 if __name__=='__main__':
     url = 'http://oblsud.svd.sudrf.ru/modules.php?name=sud'
-    conts = {'/html/body/div[10]/div[3]/div/div[2]/div[2]/a[1]':{'MainLink':'/html/body/div[10]/div[3]/div/div[2]/table/tbody/tr[6]/td[2]/table/tbody/tr[{index}]/td[2]',
+    xp = '/html/body/div[10]/div[3]/div/div[2]/div[2]/a[1]'
+    conts = {xp:{'MainLink':'/html/body/div[10]/div[3]/div/div[2]/table/tbody/tr[6]/td[2]/table/tbody/tr[{index}]/td[2]',
                      'Fields':[('name','/a','str'),('email','/table/tbody/tr/td/ul/li[3]','e-mail'),
                                ('legal_street','/table/tbody/tr/td/ul/li[1]','adress'),
                                ('phone_office','/table/tbody/tr/td/ul/li[2]','phone7'),
@@ -37,10 +38,12 @@ if __name__=='__main__':
         cur = cnx.cursor()
     except Exception as Exsql:
         print(Exsql)
-    ctabl = tb.items()
-
-    for crt in ctabl[0]:
-        sq = f"select id from accounts where deleted=0 and website='{crt['website']}' and account_as_parent_child_id='{uu_id}' order by desc date_modified"
+    ctabl = tb[xp]
+    for crt in ctabl:
+        wb = crt['website'].replace('http://', '')
+        wb = wb.replace('https://', '')
+        sq = f"select id from accounts where deleted=0 and website='{wb}' and account_as_parent_child_id='{id_up}' order by date_modified desc"
+        print(sq)
         cur.execute(sq)
         lst = cur.fetchall()
         llst = len(lst)
@@ -48,16 +51,20 @@ if __name__=='__main__':
             uu_id = uuid.uuid4().urn.replace('urn:uuid:', '')
             dnow = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             id_reg = db_eprof.get_city_id_in_db(cur,'regions',crt['legal_street'][1],'1')
-            id_cit, id_munic = db_eprof.get_city_id_in_db(cur,'cities',crt['legal_street'][2],id_reg[:2])
+            id_reg = id_reg[0]
+            id_cit  = db_eprof.get_city_id_in_db(cur,'cities',crt['legal_street'][2],id_reg[:2])
+            id_munic = id_cit[1]
+            id_cit = id_cit[0]
+
             sqli = f'insert into accounts (id,date_entered,date_modified,name,legal_entity_name,account_as_parent_child_id,type,phone_office,'
             sqli = sqli + f"industry,assigned_team_id,legal_country_id,actual_country_id,legal_region_id,actual_region_id,legal_municipal_id,"
             sqli = sqli + f"actual_municipal_id,legal_city_id,actual_city_id,legal_street,actual_street,legal_house,actual_house,"
             sqli = sqli + f"legal_postalcode,actual_postalcode,website) values('{uu_id}','{dnow}','{dnow}','{crt['name']}','{crt['name']}',"
             sqli = sqli + f"'{id_up}','court','{crt['phone_office']}','court1','{id_tm}','1','1','{id_reg}','{id_reg}','{id_munic}','{id_munic}',"
             sqli = sqli + f"'{id_cit}',{id_cit}','{crt['legal_street'][3]}','{crt['legal_street'][3]}','{crt['legal_street'][4]}','{crt['legal_street'][4]}',"
-            sqli = sqli + f"'{crt['legal_street'][0]}','{crt['legal_street'][0]}','{crt['website']}'"
+            sqli = sqli + f"'{crt['legal_street'][0]}','{crt['legal_street'][0]}','{wb}'"
             s = f"call SetEmailContact('{uu_id}','{crt['email']}','1')"
             print(sqli)
             print(s)
         else:
-            pass
+            print(f'Найден {crt}')
