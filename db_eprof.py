@@ -5,6 +5,7 @@ import os
 import shutil
 import ftplib
 import pymysql
+temp_tabl = {}
 def is_valid_uuid(uuid_to_test, version=None):
     try:
         uuid_obj = uuid.UUID(uuid_to_test, version=version).urn
@@ -34,9 +35,12 @@ def load_cnf_file(filename,cnf_list):
                     print(f'Параметр {y} обнаружен {pp}')
     return {'file': cfile,'allfind': allfind,'config':cnf_list}
 def get_city_id_in_db(cursor,tablename,cityname,id_reg):
+    if tablename in temp_tabl:
+        if cityname in temp_tabl[tablename]:
+            return temp_tabl[tablename][cityname]['id'],temp_tabl[tablename][cityname]['parent_id'],1
     if cursor and id_reg and len(id_reg)>0:
+        citynm = cityname.split(' ')
         if tablename=='cities':
-            citynm = cityname.split(' ')
             cname = cityname[len(citynm[0]):len(cityname)]+' '+citynm[0][0]
         elif tablename in ('regions','municipals'):
             cname = cityname.replace('.','')
@@ -44,8 +48,22 @@ def get_city_id_in_db(cursor,tablename,cityname,id_reg):
         sq = f"select id,parent_id from {tablename} where locate('{id_reg}',parent_id)=1 and locate(upper('{cname}'),upper(name))=1"
         cursor.execute(sq)
         lst = cursor.fetchall()
-        if len(lst)>0:
-            return lst[0]['id'],lst[0]['parent_id'],len(lst)
+        llst = len(lst)
+        if not llst>0:
+            #citynm.sort(key= lambda cit:(len(cit),cit))
+            for i,ncit in enumerate(citynm):
+                sq = f"select id,parent_id from {tablename} where locate('{id_reg}',parent_id)=1 and locate(upper('{ncit}'),upper(name))=1"
+                cursor.execute(sq)
+                lst = cursor.fetchall()
+                llst = len(lst)
+                if llst==1:
+                    break
+
+        if llst > 0:
+            if llst == 1:
+                rez = {'id': lst[0]['id'], 'parent_id': lst[0]['parent_id']}
+                temp_tabl[tablename] = {cityname: rez}
+            return lst[0]['id'], lst[0]['parent_id'], llst
         else:
             return None,None,None
 
@@ -81,4 +99,5 @@ if __name__=='__main__':
     except Exception as Exsql:
         print(Exsql)
     if cur:
-        print(get_city_id_in_db(cur,'regions','Свердловская обл.','1'))
+        print(get_city_id_in_db(cur,'regions','Свердловская область','1'))
+        print(temp_tabl)
