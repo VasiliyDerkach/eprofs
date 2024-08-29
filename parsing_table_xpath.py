@@ -70,7 +70,7 @@ def parsing_table_xpath(web_driver,url, html_tab_scenario, start_row = 1, timeou
                                 rw[fld[0]] = txt
                     if len(rw)>0:
                         recr[cn].append(rw)
-                        print('N=', i, rw)
+                        #print('N=', i, rw)
                     i += 1
 
 

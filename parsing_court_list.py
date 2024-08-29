@@ -43,8 +43,9 @@ if __name__=='__main__':
         wb = crt['website'].replace('http://', '')
         wb = wb.replace('https://', '')
         #sq = f"select id from accounts where deleted=0 and website='{wb}' and account_as_parent_child_id='{id_up}' order by date_modified desc"
-        sq = f"select id from accounts where deleted=0 and website='{wb}' order by date_modified desc"
-        #print(sq)
+        sq = f"select id from accounts where deleted=0 and website like '%{wb}%' order by date_modified desc"
+        if crt['website']=='http://oktiabrsky.svd.sudrf.ru':
+            print(sq)
         cur.execute(sq)
         lst = cur.fetchall()
         id_reg = db_eprof.get_city_id_in_db(cur, 'regions', crt['legal_street'][1], '1')
@@ -58,8 +59,8 @@ if __name__=='__main__':
             dnow = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
             sqli = f'insert into accounts (id,date_entered,date_modified,name,legal_entity_name,account_as_parent_child_id,type,phone_office,'
-            sqli = sqli + f"industry,assigned_team_id,legal_country_id,actual_country_id,legal_region_id,actual_region_id,legal_municipal_id,"
-            sqli = sqli + f"actual_municipal_id,legal_city_id,actual_city_id,legal_street,actual_street,legal_house,actual_house,"
+            sqli = sqli + f"industry,assigned_team_id,legal_country,actual_country,legal_region,actual_region,legal_municipal,"
+            sqli = sqli + f"actual_municipal,legal_city,actual_city,legal_street,actual_street,legal_house,actual_house,"
             sqli = sqli + f"legal_postalcode,actual_postalcode,website) values('{uu_id}','{dnow}','{dnow}','{crt['name']}','{crt['name']}',"
             sqli = sqli + f"'{id_up}','court','{crt['phone_office']}','court1','{id_tm}','1','1','{id_reg}','{id_reg}','{id_munic}','{id_munic}',"
             sqli = sqli + f"'{id_cit}',{id_cit}','{crt['legal_street'][3]}','{crt['legal_street'][3]}','{crt['legal_street'][4]}','{crt['legal_street'][4]}',"
@@ -69,12 +70,13 @@ if __name__=='__main__':
             # print(s)
         else:
             print(f'Найден {crt}')
-            s1 = f"select name, legal_entity_name,phone_officeassigned_team_id,legal_country_id,actual_country_id,legal_region_id,"
-            s1 = s1 + f"actual_region_id,legal_municipal_id,actual_municipal_id,legal_city_id,actual_city_id,legal_street,actual_street,"
-            s1 = s1 + f"legal_house,actual_house,legal_postalcode,actual_postalcode from accounts where id='{lst[0]['id']}'"
-            cur.execute(sq)
+            # s1 = f"select name, legal_entity_name,phone_office,assigned_team_id,legal_country_id,actual_country_id,legal_region_id,"
+            # s1 = s1 + f"actual_region_id,legal_municipal_id,actual_municipal_id,legal_city_id,actual_city_id,legal_street,actual_street,"
+            # s1 = s1 + f"legal_house,actual_house,legal_postalcode,actual_postalcode from accounts where id='{lst[0]['id']}'"
+            s1 = f"select * from accounts where id='{lst[0]['id']}'"
+            cur.execute(s1)
             lst_f = cur.fetchall()
-            for k,v in lst_f[0]:
-                print(k,v)
+            # for k,v in lst_f[0].items():
+            #     print(k,v)
     cur.close()
     cnx.close()
