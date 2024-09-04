@@ -27,16 +27,18 @@ if ans=='y':
     endlst = True
     while endlst:
         row = 1
-        st = '' if scn == 0 else '[' + scn + ']'
+        s ='[' + str(scn) + ']'
+        st = '' if scn == 0 else s
         while True:
             try:
 
                 #lst1 = driver.find_element(By.XPATH, '/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/div[4]/aside/div/a/div/span[1]')
                 #lst1.click()
-                print(st,row)
-                subs = driver.find_element(By.XPATH, f'/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div/div/div[2]/div/div[1]/section{st}/div[2]/div/div/section/div/div[{row}]/div[1]/div/div/div[1]/div/a')
+                srow= str(row)
+                print(st,srow)
+                subs = driver.find_element(By.XPATH, f'/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div/div/div[2]/div/div[1]/section{st}/div[2]/div/div/section/div/div[{srow}]/div[1]/div/div/div[1]/div/a')
                 print(subs.get_property('href'))
-                subs = driver.find_element(By.XPATH, f'/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div/div/div[2]/div/div[1]/section{st}/div[2]/div/div/section/div/div[{row}]/div[1]/div/div/div[2]/div[1]/div/div[1]/div/a/div')
+                subs = driver.find_element(By.XPATH, f'/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div/div/div[2]/div/div[1]/section{st}/div[2]/div/div/section/div/div[{srow}]/div[1]/div/div/div[2]/div[1]/div/div[1]/div/a/div')
                 print(subs.text)
                 cnt +=1
                 row +=1
