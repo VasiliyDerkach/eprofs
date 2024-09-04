@@ -19,24 +19,36 @@ driver.get("https://vk.com/feed")
 ans = input('После авторизации ВК введите Y ')
 #time.sleep(40)
 
-if ans=='Y':
+if ans=='y':
     driver.get("https://vk.com/search/people?group_id=176956684")
-    try:
+    scn = 0
 
-        #lst1 = driver.find_element(By.XPATH, '/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/div[4]/aside/div/a/div/span[1]')
-        #lst1.click()
-        subs = driver.find_element(By.XPATH, '/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div/div/div[2]/div/div[1]/section[2]/div[2]/div/div/section/div/div[5]/div[1]/div/div/div[1]/div/a')
-        print(subs.get_property('href'))
-        subs = driver.find_element(By.XPATH, '/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div/div/div[2]/div/div[1]/section[2]/div[2]/div/div/section/div/div[5]/div[1]/div/div/div[2]/div[1]/div/div[1]/div/a/div')
-        print(subs.text)
+    cnt =0
+    endlst = True
+    while endlst:
+        row = 1
+        st = '' if scn == 0 else '[' + scn + ']'
+        while True:
+            try:
 
-        # for i,t in enumerate(subs):
-        #     print(i,t.text)
+                #lst1 = driver.find_element(By.XPATH, '/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/div[4]/aside/div/a/div/span[1]')
+                #lst1.click()
+                print(st,row)
+                subs = driver.find_element(By.XPATH, f'/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div/div/div[2]/div/div[1]/section{st}/div[2]/div/div/section/div/div[{row}]/div[1]/div/div/div[1]/div/a')
+                print(subs.get_property('href'))
+                subs = driver.find_element(By.XPATH, f'/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div/div/div[2]/div/div[1]/section{st}/div[2]/div/div/section/div/div[{row}]/div[1]/div/div/div[2]/div[1]/div/div[1]/div/a/div')
+                print(subs.text)
+                cnt +=1
+                row +=1
 
-    except Exception as e:
-        print(e)
-        flag_el = False
-    pass
+            except Exception as e:
+                scn +=1
+                if row==1:
+                    endlst = False
+                break
+                print(e)
+            pass
+    print(cnt)
 #driver1.close()
 driver.close()
 #driver.maximize_window()
