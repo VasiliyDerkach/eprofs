@@ -8,8 +8,10 @@ options.add_argument('--profile-directory=Profile 1')
 options.add_argument('--user-data-dir=C:/1/AppData/Local/Google/Chrome/User Data')
 # options.add_argument('profile-directory=C:/1/AppData/Local/Google/Chrome/User Data/Profile 1')
 options.add_argument("user-agent=" + 'Chrome')
-login = 'profsadokate@mail.ru'
-psw = 'Htpbcnfyc!cJghjnbdktybt2'
+# login = 'profsadokate@mail.ru'
+# psw = 'Htpbcnfyc!cJghjnbdktybt2'
+login = 'v_derkach@inbox.ru'
+psw = 'Betelgeize#70betelgeize'
 #driver = Chrome(options=options)
 driver = Chrome()
 
@@ -32,39 +34,67 @@ ans = input('После ввода разового ключа ВК введит
 
 login_psw = driver.find_element(By.XPATH,'/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[1]/div[3]/div/div/input')
 login_psw.send_keys(psw)
-time.sleep(40)
+login_psw1 = driver.find_element(By.XPATH,'/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/button/span')
+login_psw1.click()
+
+time.sleep(15)
 if ans=='y':
-    driver.get("https://vk.com/search/people?group_id=176956684")
-    scn = 1
-
-    cnt =0
-    endlst = True
-    while endlst:
-        row = 1
-        s ='[' + str(scn) + ']'
-        st = '' if scn == 1 else s
-        while True:
-            try:
-
-                #lst1 = driver.find_element(By.XPATH, '/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/div[4]/aside/div/a/div/span[1]')
-                #lst1.click()
-                srow= str(row)
-                print(st,srow)
-                subs = driver.find_element(By.XPATH, f'/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div/div/div[2]/div/div[1]/section{st}/div[2]/div/div/section/div/div[{srow}]/div[1]/div/div/div[1]/div/a')
-                print(subs.get_property('href'))
-                subs = driver.find_element(By.XPATH, f'/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div/div/div[2]/div/div[1]/section{st}/div[2]/div/div/section/div/div[{srow}]/div[1]/div/div/div[2]/div[1]/div/div[1]/div/a/div')
-                print(subs.text)
-                cnt +=1
-                row +=1
-
-            except Exception as e:
-                scn +=1
-                if row==1:
-                    endlst = False
-                break
-                print(e)
+    # driver.get("https://vk.com/search/people?group_id=176956684")
+    ans = input('После загрузки страницы нажмите y')
+    driver.get("https://vk.com/id876652489")
+    if ans == 'y':
+        ph = '/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div[2]/div/div/div/div/div/div[2]/div[2]/div[2]/div/div[2]/div/div/div/div[2]/a/span/span/svg'
+        subs = driver.find_element(By.XPATH, ph)
+        subs.click()
+        ans = input('После загрузки страницы нажмите y')
+        if ans == 'y':
             pass
-    print(cnt)
+
+    # driver.get("https://vk.com/search/people?group_id=176956684")
+    # ans = input('После загрузки страницы группы нажмите y')
+    # if ans == 'y':
+    #     ph = '/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div/div/div[2]/div/div[1]/section[2]/div[2]/div/div/section[2]'
+    #
+    #     subs = driver.find_elements(By.XPATH, ph)
+    #     for t in subs:
+    #         print(t.text,t.get_property('href'))
+        # scn = 1
+        #
+        # cnt =0
+        # endlst = True
+        # while endlst:
+        #     row = 1
+        #     s ='[' + str(scn) + ']'
+        #     st = '' if scn == 1 else s
+        #     while True:
+        #         try:
+        #
+        #             srow= str(row)
+        #             print(st,srow)
+        #             ph = f'/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div/div/div[2]/div/div[1]/section[2]/div[2]/div/div/section{st}/div/div[{srow}]/div[1]/div/div/div[1]/div/a'
+        #             print(ph)
+        #             subs = driver.find_element(By.XPATH, ph)
+        #             print(subs.get_property('href'))
+        #             ph1 = f'/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div/div/div[2]/div/div[1]/section[2]/div[2]/div/div/section{st}/div/div[{srow}]/div[1]/div/div/div[2]/div[1]/div/div[1]/div/a/div'
+        #
+        #             print(ph1)
+        #             cnt += 1
+        #             row += 1
+        #             subs = driver.find_element(By.XPATH, ph1)
+        #             print(subs.text)
+        #
+        #
+        #
+        #         except Exception as e:
+        #             scn +=1
+        #             if row==1:
+        #                 endlst = False
+        #             #print(e)
+        #
+        #             break
+        #
+        #         pass
+        # print(cnt)
 #driver1.close()
 driver.close()
 #driver.maximize_window()
