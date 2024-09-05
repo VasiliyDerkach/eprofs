@@ -8,27 +8,41 @@ options.add_argument('--profile-directory=Profile 1')
 options.add_argument('--user-data-dir=C:/1/AppData/Local/Google/Chrome/User Data')
 # options.add_argument('profile-directory=C:/1/AppData/Local/Google/Chrome/User Data/Profile 1')
 options.add_argument("user-agent=" + 'Chrome')
+login = 'profsadokate@mail.ru'
+psw = 'Htpbcnfyc!cJghjnbdktybt2'
 #driver = Chrome(options=options)
 driver = Chrome()
 
 #time.sleep(10)
 driver.get("https://vk.com/feed")
+login_inp = driver.find_element(By.XPATH,'/html/body/div[3]/div/div/div[2]/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/form/input[1]')
+login_inp.send_keys(login)
+login_ent = driver.find_element(By.XPATH,'/html/body/div[3]/div/div/div[2]/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/form/button/span/span')
+login_ent.click()
+#/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[3]/button[2]/span/span/span
+
+# login_oth = driver.find_element(By.XPATH,'/html/body/div[1]/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div[1]/div/div/div[2]/div[3]/svg')
+# login_oth.click()
 # driver1 = Chrome()
 # driver1.get("https://vk.com/feed")
-#login    /html/body/div[3]/div/div/div[2]/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/form/input[1]
-ans = input('После авторизации ВК введите Y ')
-#time.sleep(40)
+#login
+# 1code /html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/input
+# другой способ подтверждения
+ans = input('После ввода разового ключа ВК введите y ')
 
+login_psw = driver.find_element(By.XPATH,'/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[1]/div[3]/div/div/input')
+login_psw.send_keys(psw)
+time.sleep(40)
 if ans=='y':
     driver.get("https://vk.com/search/people?group_id=176956684")
-    scn = 0
+    scn = 1
 
     cnt =0
     endlst = True
     while endlst:
         row = 1
         s ='[' + str(scn) + ']'
-        st = '' if scn == 0 else s
+        st = '' if scn == 1 else s
         while True:
             try:
 
