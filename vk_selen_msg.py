@@ -22,13 +22,24 @@ driver = Chrome()
 
 #time.sleep(10)
 driver.get("https://vk.com/im?sel=258101897")
+ph = '/html/body/div[3]/div/div/div[2]/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/form/input[1]'
+tc = WebDriverWait(driver, timeout).until(EC.presence_of_element_located((By.XPATH,ph)))
 try:
-    login_inp = driver.find_element(By.XPATH,'/html/body/div[3]/div/div/div[2]/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/form/input[1]')
+    login_inp = driver.find_element(By.XPATH,ph)
     login_inp.send_keys(login)
     login_ent = driver.find_element(By.XPATH,'/html/body/div[3]/div/div/div[2]/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/form/button/span/span')
     login_ent.click()
 except:
     pass
+ph = '/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[3]/button[2]/span'
+tc = WebDriverWait(driver, timeout).until(EC.presence_of_element_located((By.XPATH,ph)))
+ins = driver.find_element(By.XPATH,ph)
+ins.click()
+ph = '/html/body/div[1]/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div[1]/div/div/div[2]/div[2]'
+tc = WebDriverWait(driver, timeout).until(EC.presence_of_element_located((By.XPATH,ph)))
+ins = driver.find_element(By.XPATH,ph)
+ins.click()
+
 ans = input('После ввода разового ключа ВК введите любой символ ')
 try:
     login_psw = driver.find_element(By.XPATH,'/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[1]/div[3]/div/div/input')
