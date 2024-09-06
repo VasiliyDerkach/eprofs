@@ -39,8 +39,14 @@ ph = '/html/body/div[1]/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]
 tc = WebDriverWait(driver, timeout).until(EC.presence_of_element_located((By.XPATH,ph)))
 ins = driver.find_element(By.XPATH,ph)
 ins.click()
-
-ans = input('После ввода разового ключа ВК введите любой символ ')
+ph = '/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[1]/div/div/input'
+tc = WebDriverWait(driver, timeout).until(EC.presence_of_element_located((By.XPATH,ph)))
+#/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[4]/div/div/input
+ans = input('Введите разовый ключ ВК ')
+for l,a in enumerate(ans):
+    ph = f'/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[{l+1}]/div/div/input'
+    chr = driver.find_element(By.XPATH,ph)
+    chr.send_keys(a)
 try:
     login_psw = driver.find_element(By.XPATH,'/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[1]/div[3]/div/div/input')
     login_psw.send_keys(psw)
