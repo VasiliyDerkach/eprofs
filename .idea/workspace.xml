@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="090924">
+    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="090924+">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vk_selen_msg.py" beforeDir="false" afterPath="$PROJECT_DIR$/vk_selen_msg.py" afterDir="false" />
     </list>
@@ -197,14 +197,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1723613633798</updated>
-    </task>
-    <task id="LOCAL-00021" summary="первая прошедшая полный тест">
-      <option name="closed" value="true" />
-      <created>1723799292954</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1723799292955</updated>
     </task>
     <task id="LOCAL-00022" summary="captcha">
       <option name="closed" value="true" />
@@ -590,7 +582,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725864442101</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="090924+">
+      <option name="closed" value="true" />
+      <created>1725870967465</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1725870967465</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -617,7 +617,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="27-08-2024++" />
     <MESSAGE value="28-08-2024" />
     <MESSAGE value="28-08-2024+" />
     <MESSAGE value="28-08-2024 1" />
@@ -642,7 +641,8 @@
     <MESSAGE value="0609+1" />
     <MESSAGE value="0609f" />
     <MESSAGE value="090924" />
-    <option name="LAST_COMMIT_MESSAGE" value="090924" />
+    <MESSAGE value="090924+" />
+    <option name="LAST_COMMIT_MESSAGE" value="090924+" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

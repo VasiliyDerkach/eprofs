@@ -20,14 +20,15 @@ cod_email_str0 = 'на том устройстве, где авторизует�
 cod_email_str1 = 'Если вы не запрашивали код, '
 cod_email_subject ='Код для авторизации ВКонтакте'
 cod_email_servicename = 'PyMail'
-login = 'profsadokate@mail.ru'
-psw = 'Htpbcnfyc!cJghjnbdktybt2'
+
 psw_mail = 'BpKrex5kd9pv82aai5FW'
 
 timeout = 15
 mtimeout = 7
-# login = 'v_derkach@inbox.ru'
-# psw = 'Betelgeize#70betelgeize'
+login = 'v_derkach@inbox.ru'
+psw = 'Betelgeize#70betelgeize'
+# login = 'profsadokate@mail.ru'
+# psw = 'Htpbcnfyc!cJghjnbdktybt2'
 #driver = Chrome(options=options)
 driver = Chrome()
 driver.implicitly_wait(10)
@@ -47,47 +48,84 @@ except:
 ph = []
 ph.append('/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[3]/button[2]/span')
 ph.append('/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[3]/button/span')
-     #/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[3]/button[2]/span/span
+ph.append('/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[3]/button/span')
+#p = input('*')
+ph1 = None
 for phh in ph:
-    tc = WebDriverWait(driver, mtimeout).until(EC.presence_of_element_located((By.XPATH,phh)))
-    if tc:
-        ph1 = phh
-        break
+    try:
+        tc = WebDriverWait(driver, mtimeout).until(EC.presence_of_element_located((By.XPATH,phh)))
+        if tc:
+            ph1 = phh
+            break
+    except:
+        pass
+if not ph1:
+    while True:
+        pph = input('Введите XPATH элемента ДРУГОЙ СПОСБ..')
+        try:
+            tc = WebDriverWait(driver, timeout).until(EC.presence_of_element_located((By.XPATH,pph)))
+            if tc:
+                print(pph)
+                ph1=pph
+                break
+        except Exception as exs:
+            print(exs)
+
+
+
 ins = driver.find_element(By.XPATH,ph1)
 ins.click()
 ph = []
 ph.append('/html/body/div[1]/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div[1]/div/div/div[2]/div[2]')
 ph.append('/html/body/div[1]/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div[1]/div/div/div[4]/div[2]')
+ph.append('/html/body/div[1]/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div[1]/div/div/div[4]/div[3]')
 for phh in ph:
-    tc = WebDriverWait(driver, mtimeout).until(EC.presence_of_element_located((By.XPATH,phh)))
-    if tc:
-        ph1 = phh
-        break
+    try:
+        tc = WebDriverWait(driver, mtimeout).until(EC.presence_of_element_located((By.XPATH,phh)))
+        if tc:
+            ph1 = phh
+            break
+    except:
+        pass
 ins = driver.find_element(By.XPATH,ph1)
 ins.click()
 ph = []
 ph.append( '/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[1]/div/div/input')
 ph.append( '/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[4]/div/div/input')
+
 for phh in ph:
-    tc = WebDriverWait(driver, mtimeout).until(EC.presence_of_element_located((By.XPATH,phh)))
-    if tc:
-        ph1 = phh
-        break
+    try:
+        tc = WebDriverWait(driver, mtimeout).until(EC.presence_of_element_located((By.XPATH,phh)))
+        if tc:
+            ph1 = phh
+            break
+    except:
+        pass
 ans = input('Введите разовый ключ ВК ')
 for l,a in enumerate(ans):
     ph = f'/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[{l+1}]/div/div/input'
     chr = driver.find_element(By.XPATH,ph)
     chr.send_keys(a)
-ph = '/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[1]/div[3]/div/div/input'
-tc = WebDriverWait(driver, timeout).until(EC.presence_of_element_located((By.XPATH,ph)))
+ph = []
+ph.append('/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[1]/div[3]/div/div/input')
+ph.append('/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[1]/div[3]/div/div/input')
+for phh in ph:
+    try:
+        tc = WebDriverWait(driver, mtimeout).until(EC.presence_of_element_located((By.XPATH,phh)))
+        if tc:
+            ph1 = phh
+            break
+    except:
+        pass
 try:
-    login_psw = driver.find_element(By.XPATH,ph)
+    login_psw = driver.find_element(By.XPATH,ph1)
     login_psw.send_keys(psw)
     login_psw1 = driver.find_element(By.XPATH,'/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/button/span')
     login_psw1.click()
 except:
     pass
-
+ph = '/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/div[1]/div/div[2]/div[3]/div/span[1]/span/a'
+tc = WebDriverWait(driver, timeout).until(EC.presence_of_element_located((By.XPATH,ph)))
 # u = input('Проверка ')
 phbl = []
 phbl.append('/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[10]')
@@ -95,18 +133,36 @@ phbl.append('/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div/div[3]/d
 phbl.append('/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[9]')
 phbl.append('/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]')
 
-for phh in phbl:
-    tc = WebDriverWait(driver, mtimeout).until(EC.presence_of_element_located((By.XPATH,phh)))
-    if tc:
-        phbl1 = phh
-        print(phbl1)
-        break
-act_mouse = ActionChains(driver)
-exs = driver.find_element(By.XPATH,phbl1)
-act_mouse.move_to_element(exs).perform()
+for i,phh in enumerate(phbl):
+    print(i)
+    try:
+        tc = WebDriverWait(driver, mtimeout).until(EC.presence_of_element_located((By.XPATH,phh)))
+        if tc:
+            phbl1 = phh
+            print(phbl1)
+            act_mouse = ActionChains(driver)
+            exs = driver.find_element(By.XPATH, phbl1)
+            act_mouse.move_to_element(exs).perform()
+            break
+    except:
+        pass
+while True:
+    pph = input('Введите XPATH элемента блокировки пользователя')
+    try:
+        tc = WebDriverWait(driver, timeout).until(EC.presence_of_element_located((By.XPATH,pph)))
+        if tc:
+            print(pph)
+            phbl1=pph
+            act_mouse = ActionChains(driver)
+            exs = driver.find_element(By.XPATH, phbl1)
+            act_mouse.move_to_element(exs).perform()
+            print('1', exs, exs.text)
+            break
+    except Exception as exs:
+        print(exs)
 
-print('1',exs,exs.text)
-p = input('Пауза для просмотра. Введите потом любой символ ')
+
+
 if exs.text==' Разблокировать':
     exs.click()
 #/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/div[4]/div[4]/div[1]/span
@@ -118,7 +174,7 @@ if tc:
     time.sleep(5)
     msg.send_keys(Keys.RETURN)
     time.sleep(5)
-    tc = WebDriverWait(driver, timeout).until(EC.presence_of_element_located((By.XPATH, phbl)))
+    tc = WebDriverWait(driver, timeout).until(EC.presence_of_element_located((By.XPATH, phbl1)))
 
     exs = driver.find_element(By.XPATH, phbl)
     print(exs.text)
