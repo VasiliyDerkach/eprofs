@@ -5,6 +5,8 @@ import time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver import ActionChains
+
 options = ChromeOptions()
 options.add_argument('--allow-profiles-outside-user-dir')
 options.add_argument('--enable-profile-shortcut-manager')
@@ -12,14 +14,22 @@ options.add_argument('--profile-directory=Profile 1')
 options.add_argument('--user-data-dir=C:/1/AppData/Local/Google/Chrome/User Data')
 # options.add_argument('profile-directory=C:/1/AppData/Local/Google/Chrome/User Data/Profile 1')
 options.add_argument("user-agent=" + 'Chrome')
-# login = 'profsadokate@mail.ru'
-# psw = 'Htpbcnfyc!cJghjnbdktybt2'
+cod_email = 'admin@notify.vk.com'
+cod_email_name = 'Tradeunion'
+cod_email_str0 = 'на том устройстве, где авторизуетесь.'
+cod_email_str1 = 'Если вы не запрашивали код, '
+cod_email_subject ='Код для авторизации ВКонтакте'
+
+login = 'profsadokate@mail.ru'
+psw = 'Htpbcnfyc!cJghjnbdktybt2'
+psw_mail = 'Htpbcnfyc!cJghjnbdktybt2'
+
 timeout = 15
-login = 'v_derkach@inbox.ru'
-psw = 'Betelgeize#70betelgeize'
+# login = 'v_derkach@inbox.ru'
+# psw = 'Betelgeize#70betelgeize'
 #driver = Chrome(options=options)
 driver = Chrome()
-
+driver.implicitly_wait(10)
 #time.sleep(10)
 driver.get("https://vk.com/im?sel=876652489")
 ph = '/html/body/div[3]/div/div/div[2]/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/form/input[1]'
@@ -73,8 +83,12 @@ except:
 #phbl = '/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[10]'
 phbl = '/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[9]'
 tc = WebDriverWait(driver, timeout).until(EC.presence_of_element_located((By.XPATH,phbl)))
+act_mouse = ActionChains(driver)
 exs = driver.find_element(By.XPATH,phbl)
+act_mouse.move_to_element(exs).perform()
+
 print('1',exs,exs.text)
+p = input('Пауза для просмотра. Введите потом любой символ ')
 if exs.text==' Разблокировать':
     exs.click()
 #/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/div[4]/div[4]/div[1]/span
@@ -87,6 +101,7 @@ if tc:
     msg.send_keys(Keys.RETURN)
     time.sleep(5)
     tc = WebDriverWait(driver, timeout).until(EC.presence_of_element_located((By.XPATH, phbl)))
+
     exs = driver.find_element(By.XPATH, phbl)
     print(exs.text)
     if exs.text == ' Заблокировать':
