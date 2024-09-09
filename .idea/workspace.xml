@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="0609f">
+    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="090924">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vk_selen_msg.py" beforeDir="false" afterPath="$PROJECT_DIR$/vk_selen_msg.py" afterDir="false" />
     </list>
@@ -61,7 +61,7 @@
       <recent name="C:\Users\1\PycharmProjects\eprof" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.db_eprof">
+  <component name="RunManager" selected="Python.vk_selen_msg">
     <configuration name="LoadPlatCrm" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="eprof" />
       <option name="ENV_FILES" value="" />
@@ -98,28 +98,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/db_eprof.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="parsing_elements" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="eprof" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/parsing_elements.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -172,13 +150,35 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="vk_selen_msg" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="eprof" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/vk_selen_msg.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.vk_selen_msg" />
         <item itemvalue="Python.db_eprof" />
         <item itemvalue="Python.vk_selen" />
         <item itemvalue="Python.LoadPlatCrm" />
         <item itemvalue="Python.parsing_table_xpath" />
-        <item itemvalue="Python.parsing_elements" />
       </list>
     </recent_temporary>
   </component>
@@ -197,14 +197,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1723613633798</updated>
-    </task>
-    <task id="LOCAL-00020" summary="bat1">
-      <option name="closed" value="true" />
-      <created>1723789955998</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1723789955998</updated>
     </task>
     <task id="LOCAL-00021" summary="первая прошедшая полный тест">
       <option name="closed" value="true" />
@@ -590,7 +582,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725620341340</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="090924">
+      <option name="closed" value="true" />
+      <created>1725864442100</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1725864442101</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -617,7 +617,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="27-08-2024+" />
     <MESSAGE value="27-08-2024++" />
     <MESSAGE value="28-08-2024" />
     <MESSAGE value="28-08-2024+" />
@@ -642,7 +641,8 @@
     <MESSAGE value="0609+" />
     <MESSAGE value="0609+1" />
     <MESSAGE value="0609f" />
-    <option name="LAST_COMMIT_MESSAGE" value="0609f" />
+    <MESSAGE value="090924" />
+    <option name="LAST_COMMIT_MESSAGE" value="090924" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
