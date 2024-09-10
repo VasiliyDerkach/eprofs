@@ -1,0 +1,50 @@
+{ "timeout": 15,
+  "minitimeout":  7,
+  "cod_email_name": "Tradeunion",
+  "cod_email_str0": "на том устройстве, где авторизуетесь.",
+  "cod_email_str1": "Если вы не запрашивали код, ",
+  "cod_email_subject": "Код для авторизации ВКонтакте",
+  "scenario": [
+    { "description": "login_input",
+      "wait": "WebDriverWait",
+      "stage": "login",
+      "xpaths": [
+        "/html/body/div[3]/div/div/div[2]/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/form/input[1]"
+      ],
+      "action": "set_key",
+      "values": "|login|"
+    },
+    { "description": "login_return",
+      "wait": "",
+      "stage": "login",
+      "xpaths": [
+        "/html/body/div[3]/div/div/div[2]/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/form/button/span/span"
+      ],
+      "action": "click",
+      "values": ""
+    },
+    { "description": "other_auth",
+      "wait": "WebDriverWait",
+      "stage": "login",
+      "xpaths": [
+        "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[3]/button[2]/span",
+        "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[3]/button/span",
+        "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[3]/button/span"
+      ],
+      "action": "click",
+      "values": ""
+    },
+    { "description": "email_auth",
+      "wait": "WebDriverWait",
+      "stage": "login",
+      "xpaths": [
+        "/html/body/div[1]/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div[1]/div/div/div[2]/div[2]",
+        "/html/body/div[1]/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div[1]/div/div/div[4]/div[2]",
+        "/html/body/div[1]/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div[1]/div/div/div[4]/div[3]"
+      ],
+      "action": "click",
+      "values": ""
+    }
+  ]
+}
+
