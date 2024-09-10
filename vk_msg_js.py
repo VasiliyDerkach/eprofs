@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import ActionChains
 
-def manual_find_xpath_element(vdriver,element_config,timeout):
+def manual_find_xpath_element(vdriver,element_config,timeout,**kwargs):
     tc = None
     pth = None
     #for xpth in element_config['xpaths']:
@@ -58,12 +58,22 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
         except Exception as exs:
             print(exs)
     if not tc:
-        tc = manual_find_xpath_element(vdriver,element_config,timeout)
+        tc = manual_find_xpath_element(vdriver,element_config,timeout,**kwargs)
     elif tc:
         if element_config['action']=='set_key':
-            tc.send_keys(kwargs[element_config['values'].replace('|','')])
+            try:
+                tc.send_keys(kwargs[element_config['values'].replace('|','')])
+            except Exception as e:
+                print(e)
+                print(f'Проблема с sen_key в {element_config['description']}')
+                tc = manual_find_xpath_element(vdriver,element_config,timeout,**kwargs)
         elif element_config['action'] == 'click':
-            tc.click()
+            try:
+                tc.click()
+            except Exception as e:
+                print(e)
+                print(f'Проблема с click в {element_config['description']}')
+                tc = manual_find_xpath_element(vdriver,element_config,timeout,**kwargs)
         elif element_config['action'] == 'mouse_move':
             act_mouse = ActionChains(vdriver)
             act_mouse.move_to_element(tc).perform()
@@ -74,7 +84,7 @@ def pars_webelements_stage_byscn(vdriver,pars_config,stage,**kwargs):
             pars_webelement_byscn(vdriver, stp, timeout, **kwargs)
 
 
-def login_with_emailcode(vdriver,web,login, password, email,email_key, parsing_config):
+def login_with_emailcode(vdriver,login, password, email,email_key, parsing_config):
     cod_email = email
     cod_email_name = parsing_config['cod_email_name']
     cod_email_str0 = parsing_config['cod_email_str0']
@@ -86,11 +96,16 @@ def login_with_emailcode(vdriver,web,login, password, email,email_key, parsing_c
     mtimeout = parsing_config['minitimeout']
     pars_webelements_stage_byscn(vdriver, parsing_config, 'login', login=login)
 
-
-with open("vkont_msg.json", "r") as rvkfile:
-    site_ifo = json.load(rvkfile)
-print(site_ifo)
-print(site_ifo['scenario'][0]['xpaths'][0])
-driver = Chrome()
-driver.implicitly_wait(10)
-driver.get("https://vk.com/im?sel=876652489")
+if __name__=='__main__':
+    with open("vkont_msg.json", "r") as rvkfile:
+        site_ifo = json.load(rvkfile)
+    print(site_ifo)
+    print(site_ifo['scenario'][0]['xpaths'][0])
+    driver = Chrome()
+    driver.implicitly_wait(10)
+    driver.get("https://vk.com/im?sel=876652489")
+    driver.maximize_window()
+    e_mail = 'profsadokate@mail.ru'
+    login_with_emailcode(driver,e_mail, 'Htpbcnfyc!cJghjnbdktybt2', e_mail,'BpKrex5kd9pv82aai5FW', site_ifo)
+    p = input('*')
+    driver.quit()
