@@ -1,10 +1,14 @@
-{ "timeout": 15,
-  "minitimeout":  7,
+{ "timeout": 25,
+  "minitimeout":  10,
   "cod_email_name": "Tradeunion",
   "cod_email_str0": "авторизуетесь.<br><br><b><b>",
   "cod_email_str1": "</b></b><br><br><b>Если",
   "cod_email_subject": "Код для авторизации ВКонтакте",
   "cod_email_servicename": "PyMail",
+  "now_timezone": 5,
+  "imap_server": "imap.mail.ru",
+  "priod_sec_for_email": 600,
+  "count_return_email": 100
   "scenario": [
     { "description": "login_input",
       "wait": "WebDriverWait",
@@ -30,8 +34,8 @@
       "xpaths": [
         "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[3]/button[2]",
         "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[3]/button",
-        "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[3]/button"
-
+        "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[3]/button",
+        "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[3]/button[2]"
       ],
       "action": "click",
       "values": ""

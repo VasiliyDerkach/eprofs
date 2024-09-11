@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="1109">
+    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="1109+">
+      <change afterPath="$PROJECT_DIR$/get_in_email_code.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/textdeltatime.py" beforeDir="false" afterPath="$PROJECT_DIR$/textdeltatime.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/textdeltatime.py" beforeDir="false" afterPath="$PROJECT_DIR$/deltatime_in_email.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vk_msg_js.py" beforeDir="false" afterPath="$PROJECT_DIR$/vk_msg_js.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vkont_msg.json" beforeDir="false" afterPath="$PROJECT_DIR$/vkont_msg.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +45,7 @@
     "Python.LoadDocsCrm.executor": "Run",
     "Python.LoadPlatCrm.executor": "Run",
     "Python.db_eprof.executor": "Run",
+    "Python.deltatime_in_email.executor": "Run",
     "Python.emailtest.executor": "Run",
     "Python.parsing_court_list.executor": "Run",
     "Python.parsing_elements.executor": "Run",
@@ -200,14 +204,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1723613633798</updated>
-    </task>
-    <task id="LOCAL-00029" summary="20-08-24+">
-      <option name="closed" value="true" />
-      <created>1724125760443</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1724125760443</updated>
     </task>
     <task id="LOCAL-00030" summary="20-08-24+пп">
       <option name="closed" value="true" />
@@ -593,7 +589,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726031757401</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="1109+">
+      <option name="closed" value="true" />
+      <created>1726043286914</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1726043286914</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -620,7 +624,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="28-08-2024 fin" />
     <MESSAGE value="29-08-2024" />
     <MESSAGE value="29-08-2024-1" />
     <MESSAGE value="29-08-2024 work" />
@@ -645,7 +648,8 @@
     <MESSAGE value="1009" />
     <MESSAGE value="1009+" />
     <MESSAGE value="1109" />
-    <option name="LAST_COMMIT_MESSAGE" value="1109" />
+    <MESSAGE value="1109+" />
+    <option name="LAST_COMMIT_MESSAGE" value="1109+" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
