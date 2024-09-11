@@ -1,8 +1,8 @@
 { "timeout": 15,
   "minitimeout":  7,
   "cod_email_name": "Tradeunion",
-  "cod_email_str0": "на том устройстве, где авторизуетесь.",
-  "cod_email_str1": "Если вы не запрашивали код, ",
+  "cod_email_str0": "авторизуетесь.<br><br><b><b>",
+  "cod_email_str1": "</b></b><br><br><b>Если",
   "cod_email_subject": "Код для авторизации ВКонтакте",
   "cod_email_servicename": "PyMail",
   "scenario": [

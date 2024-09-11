@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="1009+">
+    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="1109">
+      <change afterPath="$PROJECT_DIR$/textdeltatime.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/emailtest.py" beforeDir="false" afterPath="$PROJECT_DIR$/emailtest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vkont_msg.json" beforeDir="false" afterPath="$PROJECT_DIR$/vkont_msg.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,27 +39,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.LoadDocsCrm.executor&quot;: &quot;Run&quot;,
-    &quot;Python.LoadPlatCrm.executor&quot;: &quot;Run&quot;,
-    &quot;Python.db_eprof.executor&quot;: &quot;Run&quot;,
-    &quot;Python.emailtest.executor&quot;: &quot;Run&quot;,
-    &quot;Python.parsing_court_list.executor&quot;: &quot;Run&quot;,
-    &quot;Python.parsing_elements.executor&quot;: &quot;Run&quot;,
-    &quot;Python.parsing_table_xpath.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_captcha.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.tst.executor&quot;: &quot;Run&quot;,
-    &quot;Python.vk_msg_js.executor&quot;: &quot;Run&quot;,
-    &quot;Python.vk_selen.executor&quot;: &quot;Run&quot;,
-    &quot;Python.vk_selen_msg.executor&quot;: &quot;Run&quot;,
-    &quot;Python.vk_selenium_gr.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/1/PycharmProjects/eprof&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.LoadDocsCrm.executor": "Run",
+    "Python.LoadPlatCrm.executor": "Run",
+    "Python.db_eprof.executor": "Run",
+    "Python.emailtest.executor": "Run",
+    "Python.parsing_court_list.executor": "Run",
+    "Python.parsing_elements.executor": "Run",
+    "Python.parsing_table_xpath.executor": "Run",
+    "Python.test_captcha.executor": "Debug",
+    "Python.textdeltatime.executor": "Run",
+    "Python.tst.executor": "Run",
+    "Python.vk_msg_js.executor": "Run",
+    "Python.vk_selen.executor": "Run",
+    "Python.vk_selen_msg.executor": "Run",
+    "Python.vk_selenium_gr.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/1/PycharmProjects/eprof",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\1\PycharmProjects\eprof" />
@@ -199,14 +202,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1723613633798</updated>
-    </task>
-    <task id="LOCAL-00026" summary="captcha2+clickall">
-      <option name="closed" value="true" />
-      <created>1724066445675</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1724066445675</updated>
     </task>
     <task id="LOCAL-00027" summary="captcha2+clickall">
       <option name="closed" value="true" />
@@ -592,7 +587,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725970401535</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="1109">
+      <option name="closed" value="true" />
+      <created>1726027420801</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1726027420801</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -619,7 +622,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="28-08-2024 1" />
     <MESSAGE value="28-08-2024 fin" />
     <MESSAGE value="29-08-2024" />
     <MESSAGE value="29-08-2024-1" />
@@ -644,7 +646,8 @@
     <MESSAGE value="090924+" />
     <MESSAGE value="1009" />
     <MESSAGE value="1009+" />
-    <option name="LAST_COMMIT_MESSAGE" value="1009+" />
+    <MESSAGE value="1109" />
+    <option name="LAST_COMMIT_MESSAGE" value="1109" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

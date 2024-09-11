@@ -1,5 +1,6 @@
 import imaplib
 import email
+import re
 
 # Параметры для подключения к IMAP-серверу
 imap_server = "imap.mail.ru"
@@ -37,16 +38,18 @@ for msg_num in unread_msg_nums:
         payload = msg.get_payload(None)
 
     txt = payload.split()
-    print(txt)
+    #print('txt=\n',txt.decode('utf-8'))
     content_type = msg.get_content_type()
     print('content_type ',content_type)
     for t in txt:
-        print(t.decode('utf-8'))
+        po = re.search('(?<=' + 'авторизуетесь.<br><br><b><b>' + ').*?(?=</b></b><br><br><b>Если)', t.decode('utf-8'))
+        if po:
+            print(po.group(0))
     # for msg in pop3.list()[1]:
     #     for line in pop3.retr(msg.split()[0])[1]:
     #         print
     #         unicode(line, 'koi8-r').encode('cp1251')
     # print('text-\n',payload)
-    print(msg)
+    #print(msg)
 
 mail.logout()
