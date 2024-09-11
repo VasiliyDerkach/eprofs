@@ -29,7 +29,8 @@ now_date = datetime.datetime.now()
 print(now_date)
 
 some_date = datetime.datetime(int(y), int(m), int(d),int(cl),int(mn),int(sc))
-#+ timedelta(hours=3)
 print(some_date)
+some_date= some_date-datetime.timedelta(hours=int(z)/100)
+print('z',some_date)
 a = some_date - now_date
 print(a.seconds)
