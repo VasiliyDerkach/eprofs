@@ -21,13 +21,15 @@ mn = p.group(0)
 s=s+mn+':'
 p = re.search('(?<=' + s + ').*?(?= )', zd)
 sc = p.group(0)
-print(d,m,y,cl,mn,sc)
+z = zd.split(' ')[5]
+print(d,m,y,cl,mn,sc,z)
 
 now_date = datetime.datetime.now()
 #print(datetime.datetime.astimezone())
 print(now_date)
 
 some_date = datetime.datetime(int(y), int(m), int(d),int(cl),int(mn),int(sc))
+#+ timedelta(hours=3)
 print(some_date)
 a = some_date - now_date
 print(a.seconds)
