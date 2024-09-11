@@ -30,12 +30,23 @@ for msg_num in unread_msg_nums:
     if msg.is_multipart():
         print("Multipart: Yes")
         for part in msg.walk():
-            payload = part.get_payload(None)
+            payload = part.get_payload(decode=True)#.decode()
 
     else:
         print("Multipart: No")
         payload = msg.get_payload(None)
-    print('text-\n',payload.encode('utf-8'))
+
+    txt = payload.split()
+    print(txt)
+    content_type = msg.get_content_type()
+    print('content_type ',content_type)
+    for t in txt:
+        print(t.decode('utf-8'))
+    # for msg in pop3.list()[1]:
+    #     for line in pop3.retr(msg.split()[0])[1]:
+    #         print
+    #         unicode(line, 'koi8-r').encode('cp1251')
+    # print('text-\n',payload)
     print(msg)
 
 mail.logout()
