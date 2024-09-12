@@ -20,7 +20,11 @@ def get_in_email_code(imap_server,username,in_mail_name,password,priod_sec,now_t
         if deltatm>priod_sec:
             continue
         subject = email.header.decode_header(msg["Subject"])[0][0].decode('utf-8')
-        emailfrom = email.header.decode_header(msg["From"])[1][0].decode('utf-8')
+        fr = email.header.decode_header(msg["From"])
+        if fr:
+            emailfrom = fr[1][0].decode('utf-8') #периодическая ошибка поиска
+        else:
+            print(msg)
         # print(f"Непрочитанное сообщение с темой: {subject}")
         # print(f"от: {emailfrom} {emaildate}")
         if msg.is_multipart():

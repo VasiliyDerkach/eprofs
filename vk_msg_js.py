@@ -110,7 +110,8 @@ def pars_webelements_stage_byscn(vdriver,pars_config,stage,**kwargs):
     rez =False
     for stp in pars_config['scenario']:
         if stp['stage']==stage:
-            rez = rez and pars_webelement_byscn(vdriver, stp, timeout, **kwargs)
+            aa = pars_webelement_byscn(vdriver, stp, timeout, **kwargs)
+            rez = rez and aa
     return rez
 
 
@@ -129,7 +130,9 @@ def login_with_emailcode(vdriver,login, password, email,email_key, parsing_confi
     psw_mail = email_key
     timeout = parsing_config['timeout']
     mtimeout = parsing_config['minitimeout']
+    eml = get_in_email_code.get_in_email_code(imap_server, email, in_mail_name, psw_mail, priod_sec, now_timezone)
     flaglogin = pars_webelements_stage_byscn(vdriver, parsing_config, 'login', login=login)
+    print(f'Этап login {flaglogin}')
     eml = []
     j = 0
     ocode = None
@@ -143,8 +146,12 @@ def login_with_emailcode(vdriver,login, password, email,email_key, parsing_confi
             break
     if ocode:
         print(ocode)
-        flaglogin = flaglogin and pars_webelements_stage_byscn(vdriver, parsing_config, 'after_login', onecode=ocode, password= password)
-        flaglogin = flaglogin and pars_webelements_stage_byscn(vdriver, parsing_config, 'after_authentific')
+        aa = pars_webelements_stage_byscn(vdriver, parsing_config, 'after_login', onecode=ocode, password= password)
+        flaglogin = flaglogin and aa
+        print(f'Этап after_login {aa}')
+        aa = pars_webelements_stage_byscn(vdriver, parsing_config, 'after_authentific')
+        flaglogin = flaglogin and aa
+        print(f'Этап after_authentific {aa}')
         return flaglogin
     else:
         return False
