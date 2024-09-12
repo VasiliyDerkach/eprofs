@@ -56,6 +56,13 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                 tc = WebDriverWait(vdriver, timeout).until(EC.presence_of_element_located((By.XPATH, xpth)))
             elif element_config['wait'] == '':
                 tc = vdriver.find_element(By.XPATH,xpth)
+            elif element_config['wait']=='Wait_to_be_clickable':
+                try:
+                    tc = WebDriverWait(driver, timeout).until(EC.element_to_be_clickable((By.XPATH, xpth )))
+                except Exception as e:
+                    print(e)
+                    print(f'Проблема с кликабельностью или наличием элемента в {element_config['description']}')
+                    tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
             if tc:
                 pth = xpth
                 break
@@ -81,6 +88,22 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
         elif element_config['action'] == 'mouse_move':
             act_mouse = ActionChains(vdriver)
             act_mouse.move_to_element(tc).perform()
+        elif element_config['action']=='set_key_iter':
+            #ans = input('Введите разовый ключ ВК ')
+            ans = kwargs['onecode']
+            itr_xpath = element_config['xpath_iter']
+            for l, a in enumerate(ans):
+                ph = itr_xpath.replace('|number|',str(l+1))
+                #ph = f'/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[|number|]/div/div/input'
+                try:
+                    chr = driver.find_element(By.XPATH, ph)
+                    chr.send_keys(a)
+                except Exception as e:
+                    print(e)
+                    print(f'Проблема с итеррационным set_key в {element_config['description']}')
+                    tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
+
+
 def pars_webelements_stage_byscn(vdriver,pars_config,stage,**kwargs):
     timeout = pars_config['minitimeout']
 
@@ -107,8 +130,9 @@ def login_with_emailcode(vdriver,login, password, email,email_key, parsing_confi
     pars_webelements_stage_byscn(vdriver, parsing_config, 'login', login=login)
     eml = []
     j = 0
+    ocode = None
     while True:
-        eml = get_in_email_code(imap_server, email, in_mail_name, psw_mail, priod_sec, now_timezone)
+        eml = get_in_email_code.get_in_email_code(imap_server, email, in_mail_name, psw_mail, priod_sec, now_timezone)
         j += 1
         if eml:
             ocode = eml[3]
@@ -117,6 +141,12 @@ def login_with_emailcode(vdriver,login, password, email,email_key, parsing_confi
             break
     if ocode:
         print(ocode)
+        pars_webelements_stage_byscn(vdriver, parsing_config, 'after_login', onecode=ocode)
+
+#wait.until(EC.element_to_be_clickable((By.ID, "text"))) проверка готовности страницы после входа, закрытие окон оповещения
+# /html/body/div[4]/div/div/div[1]/div/header/ul/li[2]/div/div/div/div[1]/div/div/div[1]/input
+# /html/body/div[4]/div/div/div[1]/div/header/ul/li[2]/div/div/div/div[1]/div/div/div[1]/input
+# кликабельный поиск ВК в верхней строке
 if __name__=='__main__':
     with open("vkont_msg.json", "r") as rvkfile:
         site_ifo = json.load(rvkfile)
@@ -124,7 +154,7 @@ if __name__=='__main__':
     print(site_ifo['scenario'][0]['xpaths'][0])
     driver = Chrome()
     driver.implicitly_wait(10)
-    driver.get("https://vk.com/im?sel=876652489")
+    driver.get("https://vk.com/im?sel=258101897")
     driver.maximize_window()
     e_mail = 'profsadokate@mail.ru'
     login_with_emailcode(driver,e_mail, 'Htpbcnfyc!cJghjnbdktybt2', e_mail,'BpKrex5kd9pv82aai5FW', site_ifo)

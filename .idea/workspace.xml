@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="1109+">
-      <change afterPath="$PROJECT_DIR$/get_in_email_code.py" afterDir="false" />
+    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="1109++">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/textdeltatime.py" beforeDir="false" afterPath="$PROJECT_DIR$/deltatime_in_email.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/get_in_email_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_in_email_code.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vk_msg_js.py" beforeDir="false" afterPath="$PROJECT_DIR$/vk_msg_js.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vk_selen_msg.py" beforeDir="false" afterPath="$PROJECT_DIR$/vk_selen_msg.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vkont_msg.json" beforeDir="false" afterPath="$PROJECT_DIR$/vkont_msg.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,6 +47,7 @@
     "Python.db_eprof.executor": "Run",
     "Python.deltatime_in_email.executor": "Run",
     "Python.emailtest.executor": "Run",
+    "Python.get_in_email_code.executor": "Run",
     "Python.parsing_court_list.executor": "Run",
     "Python.parsing_elements.executor": "Run",
     "Python.parsing_table_xpath.executor": "Run",
@@ -204,14 +205,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1723613633798</updated>
-    </task>
-    <task id="LOCAL-00030" summary="20-08-24+пп">
-      <option name="closed" value="true" />
-      <created>1724132505508</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1724132505508</updated>
     </task>
     <task id="LOCAL-00031" summary="20-08-24+пп1">
       <option name="closed" value="true" />
@@ -597,7 +590,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726043286914</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="1109++">
+      <option name="closed" value="true" />
+      <created>1726056894016</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1726056894016</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -624,7 +625,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="29-08-2024" />
     <MESSAGE value="29-08-2024-1" />
     <MESSAGE value="29-08-2024 work" />
     <MESSAGE value="29-08-2024 work+upd" />
@@ -649,7 +649,8 @@
     <MESSAGE value="1009+" />
     <MESSAGE value="1109" />
     <MESSAGE value="1109+" />
-    <option name="LAST_COMMIT_MESSAGE" value="1109+" />
+    <MESSAGE value="1109++" />
+    <option name="LAST_COMMIT_MESSAGE" value="1109++" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -678,6 +679,11 @@
           <url>file://$PROJECT_DIR$/LoadPlatCrm.py</url>
           <line>148</line>
           <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/get_in_email_code.py</url>
+          <line>18</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

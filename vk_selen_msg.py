@@ -104,10 +104,12 @@ for phh in ph:
 ans = input('Введите разовый ключ ВК ')
 for l,a in enumerate(ans):
     ph = f'/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[{l+1}]/div/div/input'
+          #/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[4    ]/div/div/input
     chr = driver.find_element(By.XPATH,ph)
     chr.send_keys(a)
 ph = []
 ph.append('/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[1]/div[3]/div/div/input')
+
 ph.append('/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[1]/div[3]/div/div/input')
 for phh in ph:
     try:

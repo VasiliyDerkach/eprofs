@@ -16,7 +16,8 @@ def get_in_email_code(imap_server,username,in_mail_name,password,priod_sec,now_t
         _, msg_data = mail.fetch(msg_num, "(RFC822)")
         msg = email.message_from_bytes(msg_data[0][1])
         emaildate = email.header.decode_header(msg["Date"])[0][0]#.decode('utf-8')
-        if deltatime_in_email(emaildate,now_timezone)>priod_sec:
+        deltatm = deltatime_in_email.deltatime_in_email(emaildate,now_timezone)
+        if deltatm>priod_sec:
             continue
         subject = email.header.decode_header(msg["Subject"])[0][0].decode('utf-8')
         emailfrom = email.header.decode_header(msg["From"])[1][0].decode('utf-8')
@@ -40,10 +41,14 @@ def get_in_email_code(imap_server,username,in_mail_name,password,priod_sec,now_t
         pk = None
         for t in txt:
 
-            pk = t.decode('utf-8').find(', '+in_mail_name + '!')
+            pk = t.decode('utf-8').find(in_mail_name + '&#33;<br><br>')
+            print(t.decode('utf-8'))
             if pk>0:
                 pk1 = pk
+                print(f'Найден {in_mail_name}')
             po = re.search('(?<=' + 'авторизуетесь.<br><br><b><b>' + ').*?(?=</b></b><br><br><b>Если)', t.decode('utf-8'))
+            if po:
+                print(f'найден код {po.group(0)}')
             if po and pk1:
                 return emailfrom,subject,emaildate,po.group(0)
         if not po:
@@ -51,6 +56,7 @@ def get_in_email_code(imap_server,username,in_mail_name,password,priod_sec,now_t
 
     mail.logout()
 if __name__=='__main__':
-    a,b,c,d = get_in_email_code(imap_server = "imap.mail.ru",username = "profsadokate@mail.ru",password = "BpKrex5kd9pv82aai5FW",
-                                priod_sec=600, now_timezone=5)
-    print(a,b,c,d)
+    a= get_in_email_code(imap_server = "imap.mail.ru",username = "profsadokate@mail.ru",
+                                in_mail_name='Tradeunion', password = "BpKrex5kd9pv82aai5FW",
+                                priod_sec=6000, now_timezone=5)
+    print(a)
