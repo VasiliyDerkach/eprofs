@@ -144,7 +144,8 @@ def login_with_emailcode(vdriver,login, password, email,email_key, parsing_confi
     if ocode:
         print(ocode)
         flaglogin = flaglogin and pars_webelements_stage_byscn(vdriver, parsing_config, 'after_login', onecode=ocode, password= password)
-        return flaglogin and pars_webelements_stage_byscn(vdriver, parsing_config, 'after_authentific')
+        flaglogin = flaglogin and pars_webelements_stage_byscn(vdriver, parsing_config, 'after_authentific')
+        return flaglogin
     else:
         return False
 
