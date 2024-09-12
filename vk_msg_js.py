@@ -65,13 +65,13 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                     tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
             if tc:
                 pth = xpth
-                return True
+
                 break
         except Exception as exs:
             print(exs)
     if not tc:
         tc = manual_find_xpath_element(vdriver,element_config,timeout,**kwargs)
-    elif tc:
+    if tc:
         if element_config['action']=='set_key':
             try:
                 tc.send_keys(kwargs[element_config['values'].replace('|','')])
@@ -103,7 +103,7 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                     print(e)
                     print(f'Проблема с итеррационным set_key в {element_config['description']}')
                     tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
-
+        return True
 
 def pars_webelements_stage_byscn(vdriver,pars_config,stage,**kwargs):
     timeout = pars_config['minitimeout']
@@ -111,6 +111,7 @@ def pars_webelements_stage_byscn(vdriver,pars_config,stage,**kwargs):
     for stp in pars_config['scenario']:
         if stp['stage']==stage:
             rez = rez and pars_webelement_byscn(vdriver, stp, timeout, **kwargs)
+    return rez
 
 
 def login_with_emailcode(vdriver,login, password, email,email_key, parsing_config):
@@ -142,8 +143,8 @@ def login_with_emailcode(vdriver,login, password, email,email_key, parsing_confi
             break
     if ocode:
         print(ocode)
-        flaglogin = flaglogin  and pars_webelements_stage_byscn(vdriver, parsing_config, 'after_login', onecode=ocode, password= password)
-        return flaglogin  and pars_webelements_stage_byscn(vdriver, parsing_config, 'after_authentific')
+        flaglogin = flaglogin and pars_webelements_stage_byscn(vdriver, parsing_config, 'after_login', onecode=ocode, password= password)
+        return flaglogin and pars_webelements_stage_byscn(vdriver, parsing_config, 'after_authentific')
     else:
         return False
 
