@@ -39,17 +39,21 @@ def get_in_email_code(imap_server,username,in_mail_name,password,priod_sec,now_t
         po = None
         pk1 = None
         pk = None
-        for t in txt:
+        for i,t in enumerate(txt):
+            tx = t.decode('utf-8')
+            pk = tx.find(in_mail_name + '&#33;<br><br>')
 
-            pk = t.decode('utf-8').find(in_mail_name + '&#33;<br><br>')
-            print(t.decode('utf-8'))
-            if pk>0:
+            # pk = tx.find(in_mail_name )
+            # print(i,tx)
+            # if i==71:
+            #     print(pk)
+            if pk==0:
                 pk1 = pk
                 print(f'Найден {in_mail_name}')
             po = re.search('(?<=' + 'авторизуетесь.<br><br><b><b>' + ').*?(?=</b></b><br><br><b>Если)', t.decode('utf-8'))
             if po:
                 print(f'найден код {po.group(0)}')
-            if po and pk1:
+            if po and pk1==0:
                 return emailfrom,subject,emaildate,po.group(0)
         if not po:
             return None

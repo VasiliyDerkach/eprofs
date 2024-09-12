@@ -32,10 +32,10 @@
       "wait": "WebDriverWait",
       "stage": "login",
       "xpaths": [
+        "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[3]/button[2]",
         "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[3]/button[2]",
         "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[3]/button",
-        "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[3]/button",
-        "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[3]/button[2]"
+        "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[3]/button"
 
       ],
       "action": "click",
@@ -63,10 +63,29 @@
       "xpath_iter": "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[|number|]/div/div/input",
       "values": ""
     },
+    {"description": "input_password",
+          "wait": "WebDriverWait",
+          "stage": "after_login",
+          "xpaths": [
+                "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[1]/div[3]/div/div/input",
+                "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[1]/div[3]/div/div/input"
+            ],
+          "action": "set_key",
+          "values": "|password|"
+    },
+    {"description": "send_password",
+              "wait": "WebDriverWait",
+              "stage": "after_login",
+              "xpaths": [
+                    "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/button/span"
+                ],
+              "action": "click",
+              "values": ""
+    },
 
     {"description": "end_of_authentific",
       "wait": "Wait_to_be_clickable",
-      "stage": "after_login",
+      "stage": "after_authentific",
       "xpaths": [
               "/html/body/div[4]/div/div/div[1]/div/header/ul/li[2]/div/div/div/div[1]/div/div/div[1]/input"
       ],

@@ -65,6 +65,7 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                     tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
             if tc:
                 pth = xpth
+                return True
                 break
         except Exception as exs:
             print(exs)
@@ -106,10 +107,10 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
 
 def pars_webelements_stage_byscn(vdriver,pars_config,stage,**kwargs):
     timeout = pars_config['minitimeout']
-
+    rez =False
     for stp in pars_config['scenario']:
         if stp['stage']==stage:
-            pars_webelement_byscn(vdriver, stp, timeout, **kwargs)
+            rez = rez and pars_webelement_byscn(vdriver, stp, timeout, **kwargs)
 
 
 def login_with_emailcode(vdriver,login, password, email,email_key, parsing_config):
@@ -127,7 +128,7 @@ def login_with_emailcode(vdriver,login, password, email,email_key, parsing_confi
     psw_mail = email_key
     timeout = parsing_config['timeout']
     mtimeout = parsing_config['minitimeout']
-    pars_webelements_stage_byscn(vdriver, parsing_config, 'login', login=login)
+    flaglogin = pars_webelements_stage_byscn(vdriver, parsing_config, 'login', login=login)
     eml = []
     j = 0
     ocode = None
@@ -141,12 +142,11 @@ def login_with_emailcode(vdriver,login, password, email,email_key, parsing_confi
             break
     if ocode:
         print(ocode)
-        pars_webelements_stage_byscn(vdriver, parsing_config, 'after_login', onecode=ocode)
+        flaglogin = flaglogin  and pars_webelements_stage_byscn(vdriver, parsing_config, 'after_login', onecode=ocode, password= password)
+        return flaglogin  and pars_webelements_stage_byscn(vdriver, parsing_config, 'after_authentific')
+    else:
+        return False
 
-#wait.until(EC.element_to_be_clickable((By.ID, "text"))) проверка готовности страницы после входа, закрытие окон оповещения
-# /html/body/div[4]/div/div/div[1]/div/header/ul/li[2]/div/div/div/div[1]/div/div/div[1]/input
-# /html/body/div[4]/div/div/div[1]/div/header/ul/li[2]/div/div/div/div[1]/div/div/div[1]/input
-# кликабельный поиск ВК в верхней строке
 if __name__=='__main__':
     with open("vkont_msg.json", "r") as rvkfile:
         site_ifo = json.load(rvkfile)
@@ -157,6 +157,8 @@ if __name__=='__main__':
     driver.get("https://vk.com/im?sel=258101897")
     driver.maximize_window()
     e_mail = 'profsadokate@mail.ru'
-    login_with_emailcode(driver,e_mail, 'Htpbcnfyc!cJghjnbdktybt2', e_mail,'BpKrex5kd9pv82aai5FW', site_ifo)
+    g = login_with_emailcode(driver,e_mail, 'Htpbcnfyc!cJghjnbdktybt2', e_mail,'BpKrex5kd9pv82aai5FW', site_ifo)
+    if g:
+        print('Страница кликабельна')
     p = input('*')
     driver.quit()
