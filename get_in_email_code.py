@@ -22,11 +22,15 @@ def get_in_email_code(imap_server,username,in_mail_name,password,priod_sec,now_t
         subject = email.header.decode_header(msg["Subject"])[0][0].decode('utf-8')
         fr = email.header.decode_header(msg["From"])
         if fr:
+            print(fr)
             try:
                 emailfrom = fr[1][0].decode('utf-8') #периодическая ошибка поиска
             except:
                 print('В письме с кодом не найден From [1][0]')
-                print(fr)
+                print('fr[0]=',fr[0])
+                emailfrom = fr[0][0]#.decode('utf-8')
+                print('emailfrom=',emailfrom)
+
         else:
             print(msg)
         # print(f"Непрочитанное сообщение с темой: {subject}")
@@ -72,3 +76,5 @@ if __name__=='__main__':
                                 in_mail_name='Tradeunion', password = "BpKrex5kd9pv82aai5FW",
                                 priod_sec=6000, now_timezone=5)
     print(a)
+# [('VK <admin@notify.vk.com>', None)] при ошибке from
+# [(b'\xd0\x92\xd0\x9a\xd0\xbe\xd0\xbd\xd1\x82\xd0\xb0\xd0\xba\xd1\x82\xd0\xb5', 'utf-8'), (b' <admin@notify.vk.com>', None)]

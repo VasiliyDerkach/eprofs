@@ -9,6 +9,8 @@
   "imap_server": "imap.mail.ru",
   "priod_sec_for_email": 6000,
   "count_return_email": 20,
+  "messager_url": "https://vk.com/im?sel=",
+  "notify_email": "VK <admin@notify.vk.com>",
   "scenario": [
     { "description": "login_input",
       "wait": "WebDriverWait",
@@ -93,7 +95,17 @@
       ],
       "action": "",
       "values": ""
+    },
+   {"description": "is_user_block",
+    "wait": "",
+    "stage": "is_user_block",
+    "xpaths": [
+            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/div[4]/div[4]/div[1]/span"
+    ],
+    "action": "print",
+    "values": "this user is block"
     }
+
 
   ]
 }
