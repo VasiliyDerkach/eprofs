@@ -22,7 +22,11 @@ def get_in_email_code(imap_server,username,in_mail_name,password,priod_sec,now_t
         subject = email.header.decode_header(msg["Subject"])[0][0].decode('utf-8')
         fr = email.header.decode_header(msg["From"])
         if fr:
-            emailfrom = fr[1][0].decode('utf-8') #периодическая ошибка поиска
+            try:
+                emailfrom = fr[1][0].decode('utf-8') #периодическая ошибка поиска
+            except:
+                print('В письме с кодом не найден From [1][0]')
+                print(fr)
         else:
             print(msg)
         # print(f"Непрочитанное сообщение с темой: {subject}")

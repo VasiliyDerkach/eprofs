@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="1209+">
+    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="1209f">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/get_in_email_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_in_email_code.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vk_msg_js.py" beforeDir="false" afterPath="$PROJECT_DIR$/vk_msg_js.py" afterDir="false" />
@@ -53,7 +53,7 @@
     "Python.test_captcha.executor": "Debug",
     "Python.textdeltatime.executor": "Run",
     "Python.tst.executor": "Run",
-    "Python.vk_msg_js.executor": "Run",
+    "Python.vk_msg_js.executor": "Debug",
     "Python.vk_selen.executor": "Run",
     "Python.vk_selen_msg.executor": "Run",
     "Python.vk_selenium_gr.executor": "Run",
@@ -204,14 +204,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1723613633798</updated>
-    </task>
-    <task id="LOCAL-00035" summary="21-08-24">
-      <option name="closed" value="true" />
-      <created>1724213399302</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1724213399302</updated>
     </task>
     <task id="LOCAL-00036" summary="21-08-24+">
       <option name="closed" value="true" />
@@ -597,7 +589,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726141071812</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="1209f">
+      <option name="closed" value="true" />
+      <created>1726142951459</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1726142951459</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -624,7 +624,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="29-08-2024 work+upd" />
     <MESSAGE value="29-08-2024 work+upd1" />
     <MESSAGE value="30-08-2024" />
     <MESSAGE value="03-09-24" />
@@ -649,7 +648,8 @@
     <MESSAGE value="1109++" />
     <MESSAGE value="1209" />
     <MESSAGE value="1209+" />
-    <option name="LAST_COMMIT_MESSAGE" value="1209+" />
+    <MESSAGE value="1209f" />
+    <option name="LAST_COMMIT_MESSAGE" value="1209f" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -681,8 +681,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/get_in_email_code.py</url>
-          <line>52</line>
+          <line>56</line>
           <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/vk_msg_js.py</url>
+          <line>152</line>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

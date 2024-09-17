@@ -88,7 +88,8 @@
       "wait": "Wait_to_be_clickable",
       "stage": "after_authentific",
       "xpaths": [
-              "/html/body/div[4]/div/div/div[1]/div/header/ul/li[2]/div/div/div/div[1]/div/div/div[1]/input"
+              "/html/body/div[4]/div/div/div[1]/div/header/ul/li[2]/div/div/div/div[1]/div/div/div[1]/input",
+              "/html/body/div[4]/div/div/div[1]/div/header/ul/li[2]/div/div/div/div/div/div/div[1]/input"
       ],
       "action": "",
       "values": ""
