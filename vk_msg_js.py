@@ -177,6 +177,8 @@ if __name__=='__main__':
     driver.get("https://vk.com/")
     driver.maximize_window()
     e_mail = 'profsadokate@mail.ru'
+    #profsadokate1@mail.ru
+    # AT5wRMu4jWEk79jTumuH
     g = login_with_emailcode(driver,e_mail, 'Htpbcnfyc!cJghjnbdktybt2', e_mail,'BpKrex5kd9pv82aai5FW', site_ifo)
     #driver.get("https://vk.com/im?sel=258101897")
     if g:
