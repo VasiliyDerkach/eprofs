@@ -50,15 +50,22 @@ def manual_find_xpath_element(vdriver,element_config,timeout,**kwargs):
 def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
     tc = None
     pth = None
+    ByFind = By.XPATH
+    if 'class_name' in element_config:
+        ByFind = By.CLASS_NAME
     for xpth in element_config['xpaths']:
         try:
+            # if element_config['description']=='email_onecode':
+            #     print('email_onecode')
             if element_config['wait'] == 'WebDriverWait':
-                tc = WebDriverWait(vdriver, timeout).until(EC.presence_of_element_located((By.XPATH, xpth)))
+                tc = WebDriverWait(vdriver, timeout).until(EC.presence_of_element_located((ByFind, xpth)))
+            if element_config['wait'] == 'VisibleWait':
+                tc = WebDriverWait(vdriver, timeout).until(EC.visibility_of_element_located((ByFind, xpth)))
             elif element_config['wait'] == '':
-                tc = vdriver.find_element(By.XPATH,xpth)
+                tc = vdriver.find_element(ByFind,xpth)
             elif element_config['wait']=='Wait_to_be_clickable':
                 try:
-                    tc = WebDriverWait(driver, timeout).until(EC.element_to_be_clickable((By.XPATH, xpth )))
+                    tc = WebDriverWait(driver, timeout).until(EC.element_to_be_clickable((ByFind, xpth )))
                 except Exception as e:
                     print(e)
                     print(f'Проблема с кликабельностью или наличием элемента в {element_config['description']}')
@@ -69,6 +76,7 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                 if element_config['action'] == 'set_key':
                     try:
                         tc.send_keys(kwargs[element_config['values'].replace('|', '')])
+                        break
                     except Exception as e:
                         print(e)
                         print(f'Проблема с sen_key в {element_config['description']}')
@@ -76,10 +84,11 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                 elif element_config['action'] == 'click':
                     try:
                         tc.click()
+                        break
                     except Exception as e:
                         print(e)
                         print(f'Проблема с click в {element_config['description']}')
-                        alt = vdriver.find_element(By.XPATH, element_config['alert'])
+                        alt = vdriver.find_element(ByFind, element_config['alert'])
                         if alt:# and alt.is_displayed():
                             print(f'В {element_config['description']} есть alert')
                             print(alt.get_property())
@@ -89,10 +98,13 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                 elif element_config['action'] == 'mouse_move':
                     act_mouse = ActionChains(vdriver)
                     act_mouse.move_to_element(tc).perform()
-                elif element_config['action'] == 'print':
+                    break
+                elif element_config['action'] == 'return':
                     if tc.is_displayed():
-                        print(element_config['values'], tc.get_property('text_length'), tc.get_property('name'))
-
+                        return element_config['values'], tc.text
+                    else:
+                        return 'blocked_unvisible'
+                    break
                 elif element_config['action'] == 'set_key_iter':
                     # ans = input('Введите разовый ключ ВК ')
                     ans = kwargs['onecode']
@@ -101,7 +113,7 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                         ph = itr_xpath.replace('|number|', str(l + 1))
                         # ph = f'/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[|number|]/div/div/input'
                         try:
-                            chr = driver.find_element(By.XPATH, ph)
+                            chr = driver.find_element(ByFind, ph)
                             chr.send_keys(a)
                             if chr:
                                 print('++', ph, '=', a)
@@ -109,16 +121,19 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                             print(e)
                             print(f'Проблема с итеррационным set_key в {element_config['description']}')
                             tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
+                    break
+                else:
+                    break
+            if not tc:
+                tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
+            if tc:
+                return True
+            else:
+                return False
 
-                break
         except Exception as exs:
             print(exs)
-    if not tc:
-        tc = manual_find_xpath_element(vdriver,element_config,timeout,**kwargs)
-    if tc:
-        return True
-    else:
-        return False
+
 
 def pars_webelements_stage_byscn(vdriver,pars_config,stage,**kwargs):
     timeout = pars_config['minitimeout']
@@ -153,9 +168,10 @@ def login_with_emailcode(vdriver,login, password, email,email_key, parsing_confi
     ocode = None
     while True:
         eml = get_in_email_code.get_in_email_code(imap_server, email, in_mail_name, psw_mail, priod_sec, now_timezone)
+        print(eml)
         j += 1
         if eml:
-            if eml[0]==parsing_config['notify_email']:
+            if parsing_config['notify_email'] in eml[0]:
                 ocode = eml[3]
                 break
         if j>count_return:
@@ -168,13 +184,17 @@ def login_with_emailcode(vdriver,login, password, email,email_key, parsing_confi
         aa = pars_webelements_stage_byscn(vdriver, parsing_config, 'after_authentific')
         flaglogin = flaglogin and aa
         print(f'Этап after_authentific {aa}')
+
         return flaglogin
     else:
         return False
 def send_vk_message_xpath(vdriver, parsing_config,user_vk_id,text_message):
     messager_url = parsing_config['messager_url']
     driver.get(messager_url+user_vk_id)
-    flaglogin = pars_webelements_stage_byscn(vdriver, parsing_config, 'is_user_block')
+    blc = pars_webelements_stage_byscn(vdriver, parsing_config, 'is_user_block')
+    print(blc)
+    if blc[0]=='this user is block' and 'из вашего чёрного списка.' in blc[1]:
+        pars_webelements_stage_byscn(vdriver, parsing_config, 'is_user_unblock')
 
 if __name__=='__main__':
     with open("vkont_msg.json", "r") as rvkfile:
@@ -195,7 +215,7 @@ if __name__=='__main__':
     g = login_with_emailcode(driver, 'profsadokate3@mail.ru', '0Htpbcnfyc!cJghjnbdktybt28', 'profsadokate3@mail.ru',
                          'jvWWN1FsSm9xvekWCVAg', site_ifo)
 
-    l = input('*')
+    # l = input('*')
     #driver.get("https://vk.com/im?sel=258101897")
     if g:
         print('Страница кликабельна')
@@ -210,3 +230,5 @@ if __name__=='__main__':
     #profsadokate3@mail.ru
     #jvWWN1FsSm9xvekWCVAg
     #vk 0Htpbcnfyc!cJghjnbdktybt28
+
+    # разблокировка пользов //ui_actions_menu_item im-action im-action_unblacklist _im_action

@@ -62,6 +62,8 @@ def get_in_email_code(imap_server,username,in_mail_name,password,priod_sec,now_t
             if pk==0:
                 pk1 = pk
                 print(f'Найден {in_mail_name}')
+            else:
+                print(f'Не найден {in_mail_name}')
             po = re.search('(?<=' + 'авторизуетесь.<br><br><b><b>' + ').*?(?=</b></b><br><br><b>Если)', t.decode('utf-8'))
             if po:
                 print(f'найден код {po.group(0)}')

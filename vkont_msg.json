@@ -1,6 +1,6 @@
 { "timeout": 25,
   "minitimeout":  10,
-  "cod_email_name": "Tradeunion",
+  "cod_email_name": "Tradeuniond",
   "cod_email_str0": "авторизуетесь.<br><br><b><b>",
   "cod_email_str1": "</b></b><br><br><b>Если",
   "cod_email_subject": "Код для авторизации ВКонтакте",
@@ -10,7 +10,7 @@
   "priod_sec_for_email": 6000,
   "count_return_email": 20,
   "messager_url": "https://vk.com/im?sel=",
-  "notify_email": "VK <admin@notify.vk.com>",
+  "notify_email": "<admin@notify.vk.com>",
   "scenario": [
     { "description": "login_input",
       "wait": "WebDriverWait",
@@ -99,16 +99,30 @@
       "values": ""
     },
    {"description": "is_user_block",
-    "wait": "",
+    "wait": "VisibleWait",
     "stage": "is_user_block",
+    "class_name": "+",
     "xpaths": [
-            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/div[4]/div[4]/div[1]/span"
+            "_im_chat_input_error",
+            "ComposerBlocked__message"
+
     ],
-    "action": "print",
+    "action": "return",
     "values": "this user is block"
+    },
+   {"description": "is_user_unblock...",
+    "wait": "VisibleWait",
+    "stage": "is_user_unblock",
+    "class_name": "+",
+    "xpaths": [
+            "ui_actions_menu_icons"
+    ],
+    "action": "mouse_move",
+    "values": ""
     }
 
 
   ]
 }
+
 
