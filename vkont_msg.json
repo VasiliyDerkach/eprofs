@@ -1,6 +1,6 @@
 { "timeout": 25,
   "minitimeout":  10,
-  "cod_email_name": "Tradeuniond",
+  "cod_email_name": "Tradeunion",
   "cod_email_str0": "авторизуетесь.<br><br><b><b>",
   "cod_email_str1": "</b></b><br><br><b>Если",
   "cod_email_subject": "Код для авторизации ВКонтакте",

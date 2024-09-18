@@ -76,6 +76,7 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                 if element_config['action'] == 'set_key':
                     try:
                         tc.send_keys(kwargs[element_config['values'].replace('|', '')])
+                        return True
                         break
                     except Exception as e:
                         print(e)
@@ -84,6 +85,7 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                 elif element_config['action'] == 'click':
                     try:
                         tc.click()
+                        return True
                         break
                     except Exception as e:
                         print(e)
@@ -98,9 +100,12 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                 elif element_config['action'] == 'mouse_move':
                     act_mouse = ActionChains(vdriver)
                     act_mouse.move_to_element(tc).perform()
+                    print(tc.text)
+                    return True
                     break
                 elif element_config['action'] == 'return':
                     if tc.is_displayed():
+                        print(element_config['values'], tc.text)
                         return element_config['values'], tc.text
                     else:
                         return 'blocked_unvisible'
@@ -121,15 +126,17 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                             print(e)
                             print(f'Проблема с итеррационным set_key в {element_config['description']}')
                             tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
+                    return True
                     break
                 else:
+                    return True
                     break
             if not tc:
                 tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
-            if tc:
-                return True
-            else:
-                return False
+            # if tc:
+            #     return True
+            # else:
+            #     return False
 
         except Exception as exs:
             print(exs)
@@ -137,11 +144,14 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
 
 def pars_webelements_stage_byscn(vdriver,pars_config,stage,**kwargs):
     timeout = pars_config['minitimeout']
-    rez =False
+    rez =True
     for stp in pars_config['scenario']:
         if stp['stage']==stage:
             aa = pars_webelement_byscn(vdriver, stp, timeout, **kwargs)
-            rez = rez and aa
+            if isinstance(aa,bool) and isinstance(rez,bool):
+                rez = rez and aa
+            else:
+                rez = aa
     return rez
 
 
@@ -212,8 +222,10 @@ if __name__=='__main__':
     # g = login_with_emailcode(driver, e_mail, 'Htpbcnfyc!cJghjnbdktybt2', e_mail, 'BpKrex5kd9pv82aai5FW', site_ifo)
     # g = login_with_emailcode(driver, 'profsadokate2@mail.ru', '0Htpbcnfyc!cJghjnbdktybt2', 'profsadokate2@mail.ru',
     #                          'b0eMHbPTGsUfYxFPjCYh', site_ifo)
-    g = login_with_emailcode(driver, 'profsadokate3@mail.ru', '0Htpbcnfyc!cJghjnbdktybt28', 'profsadokate3@mail.ru',
-                         'jvWWN1FsSm9xvekWCVAg', site_ifo)
+    # g = login_with_emailcode(driver, 'profsadokate3@mail.ru', '0Htpbcnfyc!cJghjnbdktybt28', 'profsadokate3@mail.ru',
+    #                      'jvWWN1FsSm9xvekWCVAg', site_ifo)
+    g = login_with_emailcode(driver, 'profsadokate4@mail.ru', '0Htpbcnfyc!cJghjnbdktybt28', 'profsadokate4@mail.ru',
+                             'imX4VAJUR2k5Cngp4hqf', site_ifo)
 
     # l = input('*')
     #driver.get("https://vk.com/im?sel=258101897")
@@ -229,6 +241,10 @@ if __name__=='__main__':
 
     #profsadokate3@mail.ru
     #jvWWN1FsSm9xvekWCVAg
+    #vk 0Htpbcnfyc!cJghjnbdktybt28
+
+    #profsadokate4@mail.ru
+    #imX4VAJUR2k5Cngp4hqf
     #vk 0Htpbcnfyc!cJghjnbdktybt28
 
     # разблокировка пользов //ui_actions_menu_item im-action im-action_unblacklist _im_action
