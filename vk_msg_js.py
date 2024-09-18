@@ -17,7 +17,7 @@ def manual_find_xpath_element(vdriver,element_config,timeout,**kwargs):
     while flagnonstop:
         flagx = True
         while flagx:
-            xpth = input(f'Элемент {element_config['description']} не найден. Введите c - чтобы пропустить поиск или введите XPATH ')
+            xpth = input(f"Элемент {element_config['description']} не найден. Введите c - чтобы пропустить поиск или введите XPATH ")
             if xpth=='c':
                 flagx =False
             else:
@@ -46,7 +46,7 @@ def manual_find_xpath_element(vdriver,element_config,timeout,**kwargs):
                     flagnonstop = False
 
             else:
-                print(f'Элемент {element_config['description']} по указанному xpath не найден')
+                print(f"Элемент {element_config['description']} по указанному xpath не найден")
 def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
     tc = None
     pth = None
@@ -68,7 +68,7 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                     tc = WebDriverWait(driver, timeout).until(EC.element_to_be_clickable((ByFind, xpth )))
                 except Exception as e:
                     print(e)
-                    print(f'Проблема с кликабельностью или наличием элемента в {element_config['description']}')
+                    print(f"Проблема с кликабельностью или наличием элемента в {element_config['description']}")
                     tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
             if tc:
                 pth = xpth
@@ -80,7 +80,7 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                         break
                     except Exception as e:
                         print(e)
-                        print(f'Проблема с sen_key в {element_config['description']}')
+                        print(f"Проблема с sen_key в {element_config['description']}")
                         tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
                 elif element_config['action'] == 'click':
                     try:
@@ -89,10 +89,10 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                         break
                     except Exception as e:
                         print(e)
-                        print(f'Проблема с click в {element_config['description']}')
+                        print(f"Проблема с click в {element_config['description']}")
                         alt = vdriver.find_element(ByFind, element_config['alert'])
                         if alt:# and alt.is_displayed():
-                            print(f'В {element_config['description']} есть alert')
+                            print(f"В {element_config['description']} есть alert")
                             print(alt.get_property())
                         ys = input('Введите y чтобы поискать вручную ')
                         if ys=='y':
@@ -124,7 +124,7 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                                 print('++', ph, '=', a)
                         except Exception as e:
                             print(e)
-                            print(f'Проблема с итеррационным set_key в {element_config['description']}')
+                            print(f"Проблема с итеррационным set_key в {element_config['description']}")
                             tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
                     return True
                     break

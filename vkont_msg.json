@@ -111,12 +111,23 @@
     "values": "this user is block"
     },
    {"description": "is_user_unblock...",
+    "wait": "WebDriverWait",
+    "stage": "is_user_unblock",
+        "xpaths": [
+
+            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div"
+    ],
+    "action": "mouse_move",
+    "values": ""
+    },
+   {"description": "click_user_unblock",
     "wait": "VisibleWait",
     "stage": "is_user_unblock",
         "xpaths": [
-            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]"
+
+            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[2]"
     ],
-    "action": "mouse_move",
+    "action": "click",
     "values": ""
     }
 
