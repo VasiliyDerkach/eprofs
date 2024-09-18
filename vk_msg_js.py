@@ -65,6 +65,50 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                     tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
             if tc:
                 pth = xpth
+                print('+',element_config['description'],'->',xpth)
+                if element_config['action'] == 'set_key':
+                    try:
+                        tc.send_keys(kwargs[element_config['values'].replace('|', '')])
+                    except Exception as e:
+                        print(e)
+                        print(f'Проблема с sen_key в {element_config['description']}')
+                        tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
+                elif element_config['action'] == 'click':
+                    try:
+                        tc.click()
+                    except Exception as e:
+                        print(e)
+                        print(f'Проблема с click в {element_config['description']}')
+                        alt = vdriver.find_element(By.XPATH, element_config['alert'])
+                        if alt:# and alt.is_displayed():
+                            print(f'В {element_config['description']} есть alert')
+                            print(alt.get_property())
+                        ys = input('Введите y чтобы поискать вручную ')
+                        if ys=='y':
+                            tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
+                elif element_config['action'] == 'mouse_move':
+                    act_mouse = ActionChains(vdriver)
+                    act_mouse.move_to_element(tc).perform()
+                elif element_config['action'] == 'print':
+                    if tc.is_displayed():
+                        print(element_config['values'], tc.get_property('text_length'), tc.get_property('name'))
+
+                elif element_config['action'] == 'set_key_iter':
+                    # ans = input('Введите разовый ключ ВК ')
+                    ans = kwargs['onecode']
+                    itr_xpath = element_config['xpath_iter']
+                    for l, a in enumerate(ans):
+                        ph = itr_xpath.replace('|number|', str(l + 1))
+                        # ph = f'/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[|number|]/div/div/input'
+                        try:
+                            chr = driver.find_element(By.XPATH, ph)
+                            chr.send_keys(a)
+                            if chr:
+                                print('++', ph, '=', a)
+                        except Exception as e:
+                            print(e)
+                            print(f'Проблема с итеррационным set_key в {element_config['description']}')
+                            tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
 
                 break
         except Exception as exs:
@@ -72,41 +116,6 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
     if not tc:
         tc = manual_find_xpath_element(vdriver,element_config,timeout,**kwargs)
     if tc:
-        if element_config['action']=='set_key':
-            try:
-                tc.send_keys(kwargs[element_config['values'].replace('|','')])
-            except Exception as e:
-                print(e)
-                print(f'Проблема с sen_key в {element_config['description']}')
-                tc = manual_find_xpath_element(vdriver,element_config,timeout,**kwargs)
-        elif element_config['action'] == 'click':
-            try:
-                tc.click()
-            except Exception as e:
-                print(e)
-                print(f'Проблема с click в {element_config['description']}')
-                tc = manual_find_xpath_element(vdriver,element_config,timeout,**kwargs)
-        elif element_config['action'] == 'mouse_move':
-            act_mouse = ActionChains(vdriver)
-            act_mouse.move_to_element(tc).perform()
-        elif element_config['action'] == 'print':
-            if tc.is_displayed():
-                print(element_config['values'], tc.get_property('text_length'), tc.get_property('name'))
-
-        elif element_config['action']=='set_key_iter':
-            #ans = input('Введите разовый ключ ВК ')
-            ans = kwargs['onecode']
-            itr_xpath = element_config['xpath_iter']
-            for l, a in enumerate(ans):
-                ph = itr_xpath.replace('|number|',str(l+1))
-                #ph = f'/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[|number|]/div/div/input'
-                try:
-                    chr = driver.find_element(By.XPATH, ph)
-                    chr.send_keys(a)
-                except Exception as e:
-                    print(e)
-                    print(f'Проблема с итеррационным set_key в {element_config['description']}')
-                    tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
         return True
     else:
         return False
@@ -177,12 +186,27 @@ if __name__=='__main__':
     driver.get("https://vk.com/")
     driver.maximize_window()
     e_mail = 'profsadokate@mail.ru'
-    #profsadokate1@mail.ru
-    # AT5wRMu4jWEk79jTumuH
-    g = login_with_emailcode(driver,e_mail, 'Htpbcnfyc!cJghjnbdktybt2', e_mail,'BpKrex5kd9pv82aai5FW', site_ifo)
+
+
+
+    # g = login_with_emailcode(driver, e_mail, 'Htpbcnfyc!cJghjnbdktybt2', e_mail, 'BpKrex5kd9pv82aai5FW', site_ifo)
+    # g = login_with_emailcode(driver, 'profsadokate2@mail.ru', '0Htpbcnfyc!cJghjnbdktybt2', 'profsadokate2@mail.ru',
+    #                          'b0eMHbPTGsUfYxFPjCYh', site_ifo)
+    g = login_with_emailcode(driver, 'profsadokate3@mail.ru', '0Htpbcnfyc!cJghjnbdktybt28', 'profsadokate3@mail.ru',
+                         'jvWWN1FsSm9xvekWCVAg', site_ifo)
+
+    l = input('*')
     #driver.get("https://vk.com/im?sel=258101897")
     if g:
         print('Страница кликабельна')
     g = send_vk_message_xpath(driver, site_ifo,'258101897','text_message')
     p = input('*')
     driver.quit()
+
+    # profsadokate2@mail.ru
+    # b0eMHbPTGsUfYxFPjCYh
+    # vk 0Htpbcnfyc!cJghjnbdktybt2
+
+    #profsadokate3@mail.ru
+    #jvWWN1FsSm9xvekWCVAg
+    #vk 0Htpbcnfyc!cJghjnbdktybt28

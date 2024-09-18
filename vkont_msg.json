@@ -31,21 +31,21 @@
       "values": ""
     },
     { "description": "other_auth",
-      "wait": "Wait_to_be_clickable",
+      "wait": "WebDriverWait",
       "stage": "login",
       "xpaths": [
         "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[3]/button[2]",
-
         "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[3]/button[2]",
         "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[3]/button",
         "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[3]/button"
 
       ],
       "action": "click",
-      "values": ""
+      "values": "",
+      "alert": "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[2]/div/div"
     },
     { "description": "email_auth",
-      "wait": "WebDriverWait",
+      "wait": "Wait_to_be_clickable",
       "stage": "login",
       "xpaths": [
         "/html/body/div[1]/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div[1]/div/div/div[2]/div[2]",
@@ -59,11 +59,13 @@
       "wait": "WebDriverWait",
       "stage": "after_login",
       "xpaths": [
-              "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[1]/div/div/input",
-              "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[4]/div/div/input"
+              "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[2]/div/div[1]/div/div/input",
+              "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[4]/div/div/input",
+              "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[1]/div/div/input"
+
       ],
       "action": "set_key_iter",
-      "xpath_iter": "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[|number|]/div/div/input",
+      "xpath_iter": "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[2]/div/div[|number|]/div/div/input",
       "values": ""
     },
     {"description": "input_password",
