@@ -76,7 +76,8 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                 if element_config['action'] == 'set_key':
                     try:
                         tc.send_keys(kwargs[element_config['values'].replace('|', '')])
-                        return True
+                        rez['execute']= True
+                        return rez
                         break
                     except Exception as e:
                         print(e)
@@ -85,7 +86,8 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                 elif element_config['action'] == 'click':
                     try:
                         tc.click()
-                        return True
+                        rez['execute'] = True
+                        return rez
                         break
                     except Exception as e:
                         print(e)
@@ -101,14 +103,20 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                     act_mouse = ActionChains(vdriver)
                     act_mouse.move_to_element(tc).perform()
                     print(tc.text)
-                    return True
+                    rez['execute'] = True
+                    return rez
                     break
                 elif element_config['action'] == 'return':
                     if tc.is_displayed():
                         print(element_config['values'], tc.text)
-                        return element_config['values'], tc.text
+                        rez['execute'] = True
+                        rez['is_blocked'] = element_config['values']
+                        rez['mark'] = tc.text
+                        return rez
                     else:
-                        return 'blocked_unvisible'
+                        rez['execute'] = True
+                        rez['is_blocked'] = 'blocked_unvisible'
+                        return rez
                     break
                 elif element_config['action'] == 'set_key_iter':
                     # ans = input('Введите разовый ключ ВК ')
@@ -126,13 +134,18 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                             print(e)
                             print(f"Проблема с итеррационным set_key в {element_config['description']}")
                             tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
-                    return True
+                    rez['execute'] = True
+                    return rez
                     break
                 else:
-                    return True
+                    rez['execute'] = True
+                    return rez
                     break
             if not tc:
                 tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
+            if not tc:
+                rez['execute'] = False
+                return rez
             # if tc:
             #     return True
             # else:
@@ -144,14 +157,16 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
 
 def pars_webelements_stage_byscn(vdriver,pars_config,stage,**kwargs):
     timeout = pars_config['minitimeout']
-    rez =True
+    rez = []
     for stp in pars_config['scenario']:
         if stp['stage']==stage:
             aa = pars_webelement_byscn(vdriver, stp, timeout, **kwargs)
-            if isinstance(aa,bool) and isinstance(rez,bool):
-                rez = rez and aa
-            else:
-                rez = aa
+            # if isinstance(aa,bool) and isinstance(rez,bool):
+            rez = rez and aa['execute']
+            for k,h in aa.items():
+                if k!='execute':
+                    rez[k] = h
+
     return rez
 
 
@@ -172,7 +187,8 @@ def login_with_emailcode(vdriver,login, password, email,email_key, parsing_confi
     mtimeout = parsing_config['minitimeout']
     eml = get_in_email_code.get_in_email_code(imap_server, email, in_mail_name, psw_mail, priod_sec, now_timezone)
     flaglogin = pars_webelements_stage_byscn(vdriver, parsing_config, 'login', login=login)
-    print(f'Этап login {flaglogin}')
+    print(f"Этап login {flaglogin['execute']}")
+    flagdef = flaglogin['execute']
     eml = []
     j = 0
     ocode = None
@@ -189,13 +205,14 @@ def login_with_emailcode(vdriver,login, password, email,email_key, parsing_confi
     if ocode:
         print(ocode)
         aa = pars_webelements_stage_byscn(vdriver, parsing_config, 'after_login', onecode=ocode, password= password)
-        flaglogin = flaglogin and aa
-        print(f'Этап after_login {aa}')
+        flagdef = flagdef and aa['execute']
+        print(f'Этап after_login {aa['execute']}')
         aa = pars_webelements_stage_byscn(vdriver, parsing_config, 'after_authentific')
-        flaglogin = flaglogin and aa
-        print(f'Этап after_authentific {aa}')
 
-        return flaglogin
+        flagdef = flagdef and aa['execute']
+        print(f'Этап after_authentific {aa['execute']}')
+
+        return flagdef
     else:
         return False
 def send_vk_message_xpath(vdriver, parsing_config,user_vk_id,text_message):
@@ -203,7 +220,9 @@ def send_vk_message_xpath(vdriver, parsing_config,user_vk_id,text_message):
     driver.get(messager_url+user_vk_id)
     blc = pars_webelements_stage_byscn(vdriver, parsing_config, 'is_user_block')
     print(blc)
-    if blc[0]=='this user is block' and 'из вашего чёрного списка.' in blc[1]:
+    if (blc['execute'] and 'is_blocked' in blc and blc['is_blocked']=='this user is block'
+            and 'mark' in blc and 'из вашего чёрного списка.' in blc['mark']):
+        # строки перенести в настройки, сделать blc словарем
         pars_webelements_stage_byscn(vdriver, parsing_config, 'is_user_unblock')
 
 if __name__=='__main__':
