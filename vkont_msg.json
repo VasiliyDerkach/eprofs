@@ -139,9 +139,10 @@
     "wait": "Wait_to_be_clickable",
     "stage": "send_vk_message",
         "xpaths": [
-            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[4]/div[4]/div[4]/div[1]/div[5]"
+
+            "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[1]/div[2]/div/div/div/div[1]/div[2]/div[2]/div/div/div[2]/div/span"
     ],
-    "action": "click",
+    "action": "set_key",
     "values": "|message|"
     }
   ]
