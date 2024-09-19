@@ -176,7 +176,7 @@ def pars_webelements_stage_byscn(vdriver,pars_config,stage,**kwargs):
     return rez
 
 
-def login_with_emailcode(vdriver,login, password, email,email_key, parsing_config):
+def login_with_emailcode(vdriver,login, password, email,email_key, parsing_config,in_mail_name):
 
     cod_email_name = parsing_config['cod_email_name']
     cod_email_str0 = parsing_config['cod_email_str0']
@@ -185,7 +185,7 @@ def login_with_emailcode(vdriver,login, password, email,email_key, parsing_confi
     cod_email_servicename = parsing_config['cod_email_servicename']
     now_timezone = parsing_config['now_timezone']
     imap_server = parsing_config['imap_server']
-    in_mail_name = parsing_config['cod_email_name']
+    # in_mail_name = parsing_config['cod_email_name']
     priod_sec = parsing_config['priod_sec_for_email']
     count_return = parsing_config['count_return_email']
     psw_mail = email_key
@@ -223,16 +223,24 @@ def login_with_emailcode(vdriver,login, password, email,email_key, parsing_confi
         return False
 def send_vk_message_xpath(vdriver, parsing_config,user_vk_id,text_message):
     messager_url = parsing_config['messager_url']
+    alert_my_blacklist = parsing_config['alert_my_blacklist']
+    alert_out_blacklist = parsing_config['alert_out_blacklist']
+     # которые могут присылать ему сообщения
     driver.get(messager_url+user_vk_id)
     blc = pars_webelements_stage_byscn(vdriver, parsing_config, 'is_user_block')
     print(blc)
     if (blc['execute'] and 'is_blocked' in blc and blc['is_blocked']=='this user is block'
-            and 'mark' in blc and 'из вашего чёрного списка.' in blc['mark']):
+            and 'mark' in blc ):
+        if alert_my_blacklist in blc['mark']:
         # строки перенести в настройки, сделать blc словарем
-        pars_webelements_stage_byscn(vdriver, parsing_config, 'is_user_unblock')
+            r = pars_webelements_stage_byscn(vdriver, parsing_config, 'is_user_unblock')
+        if alert_out_blacklist in blc['mark']:
+            return 'us_is_ban'
+        r1 = pars_webelements_stage_byscn(vdriver, parsing_config, 'send_vk_message',message=text_message)
+
 
 if __name__=='__main__':
-    with open("vkont_msg.json", "r") as rvkfile:
+    with open("vkont_msg.json", "r",encoding='utf-8') as rvkfile:
         site_ifo = json.load(rvkfile)
     print(site_ifo)
     print(site_ifo['scenario'][0]['xpaths'][0])
@@ -250,13 +258,13 @@ if __name__=='__main__':
     # g = login_with_emailcode(driver, 'profsadokate3@mail.ru', '0Htpbcnfyc!cJghjnbdktybt28', 'profsadokate3@mail.ru',
     #                      'jvWWN1FsSm9xvekWCVAg', site_ifo)
     g = login_with_emailcode(driver, 'profsadokate4@mail.ru', '0Htpbcnfyc!cJghjnbdktybt28', 'profsadokate4@mail.ru',
-                             'imX4VAJUR2k5Cngp4hqf', site_ifo)
+                             'imX4VAJUR2k5Cngp4hqf', site_ifo,'Tradeunion')
 
     # l = input('*')
     #driver.get("https://vk.com/im?sel=258101897")
     if g:
         print('Страница кликабельна')
-    g = send_vk_message_xpath(driver, site_ifo,'258101897','text_message')
+    g = send_vk_message_xpath(driver, site_ifo,'258101897','text_message222')
     p = input('*')
     driver.quit()
 

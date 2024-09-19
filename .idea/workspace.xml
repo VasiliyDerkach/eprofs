@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="1809++">
+    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="1809-1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/get_in_email_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_in_email_code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vk_msg_js.py" beforeDir="false" afterPath="$PROJECT_DIR$/vk_msg_js.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vkont_msg.json" beforeDir="false" afterPath="$PROJECT_DIR$/vkont_msg.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -203,14 +204,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1723613633798</updated>
-    </task>
-    <task id="LOCAL-00046" summary="28-08-2024">
-      <option name="closed" value="true" />
-      <created>1724820348327</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1724820348327</updated>
     </task>
     <task id="LOCAL-00047" summary="28-08-2024+">
       <option name="closed" value="true" />
@@ -596,7 +589,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726741373421</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="1809-1">
+      <option name="closed" value="true" />
+      <created>1726742186186</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1726742186186</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -623,7 +624,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0509" />
     <MESSAGE value="05091" />
     <MESSAGE value="06092" />
     <MESSAGE value="0509f" />
@@ -648,7 +648,8 @@
     <MESSAGE value="1809+" />
     <MESSAGE value="1809+f" />
     <MESSAGE value="1809++" />
-    <option name="LAST_COMMIT_MESSAGE" value="1809++" />
+    <MESSAGE value="1809-1" />
+    <option name="LAST_COMMIT_MESSAGE" value="1809-1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -677,6 +678,11 @@
           <url>file://$PROJECT_DIR$/LoadPlatCrm.py</url>
           <line>148</line>
           <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/get_in_email_code.py</url>
+          <line>29</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

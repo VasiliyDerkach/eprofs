@@ -4,7 +4,7 @@ import re
 import deltatime_in_email
 import json
 
-with open("vkont_msg.json", "r") as rvkfile:
+with open("vkont_msg.json", "r",encoding='utf-8') as rvkfile:
     site_ifo = json.load(rvkfile)
 cod_email_str0 = site_ifo['cod_email_str0']
 cod_email_str1 = site_ifo['cod_email_str1']

@@ -1,10 +1,11 @@
-{ "timeout": 25,
+{ "timeout": 35,
   "minitimeout":  10,
   "cod_email_name": "Tradeunion",
   "cod_email_str0": "авторизуетесь.<br><br><b><b>",
   "cod_email_str1": ").*?(?=</b></b><br><br><b>Если)",
   "cod_email_subject": "Код для авторизации ВКонтакте",
   "cod_email_str_after_username": "&#33;<br><br>",
+  "alert_out_blacklist": "которые могут присылать ему сообщения",
   "cod_email_servicename": "PyMail",
   "now_timezone": 5,
   "imap_server": "imap.mail.ru",
@@ -12,6 +13,7 @@
   "count_return_email": 20,
   "messager_url": "https://vk.com/im?sel=",
   "notify_email": "<admin@notify.vk.com>",
+  "alert_my_blacklist": "из вашего чёрного списка.",
   "scenario": [
     { "description": "login_input",
       "wait": "WebDriverWait",
@@ -117,7 +119,8 @@
     "stage": "is_user_unblock",
         "xpaths": [
 
-            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div"
+            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div",
+            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]"
     ],
     "action": "mouse_move",
     "values": ""
@@ -126,14 +129,21 @@
     "wait": "VisibleWait",
     "stage": "is_user_unblock",
         "xpaths": [
-
+            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[8]",
             "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[2]"
     ],
     "action": "click",
     "values": ""
+    },
+   {"description": "send_vk_message",
+    "wait": "Wait_to_be_clickable",
+    "stage": "send_vk_message",
+        "xpaths": [
+            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[4]/div[4]/div[4]/div[1]/div[5]"
+    ],
+    "action": "click",
+    "values": "|message|"
     }
-
-
   ]
 }
 
