@@ -50,6 +50,7 @@ def manual_find_xpath_element(vdriver,element_config,timeout,**kwargs):
 def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
     tc = None
     pth = None
+    rez = {}
     ByFind = By.XPATH
     if 'class_name' in element_config:
         ByFind = By.CLASS_NAME
@@ -77,18 +78,16 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                     try:
                         tc.send_keys(kwargs[element_config['values'].replace('|', '')])
                         rez['execute']= True
-                        return rez
-                        break
                     except Exception as e:
                         print(e)
                         print(f"Проблема с sen_key в {element_config['description']}")
                         tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
+                    return rez
+                    break
                 elif element_config['action'] == 'click':
                     try:
                         tc.click()
                         rez['execute'] = True
-                        return rez
-                        break
                     except Exception as e:
                         print(e)
                         print(f"Проблема с click в {element_config['description']}")
@@ -99,6 +98,9 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                         ys = input('Введите y чтобы поискать вручную ')
                         if ys=='y':
                             tc = manual_find_xpath_element(vdriver, element_config, timeout, **kwargs)
+                    return rez
+                    break
+
                 elif element_config['action'] == 'mouse_move':
                     act_mouse = ActionChains(vdriver)
                     act_mouse.move_to_element(tc).perform()
@@ -157,15 +159,19 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
 
 def pars_webelements_stage_byscn(vdriver,pars_config,stage,**kwargs):
     timeout = pars_config['minitimeout']
-    rez = []
+    rez = {}
+    rez['execute'] = True
     for stp in pars_config['scenario']:
         if stp['stage']==stage:
             aa = pars_webelement_byscn(vdriver, stp, timeout, **kwargs)
             # if isinstance(aa,bool) and isinstance(rez,bool):
-            rez = rez and aa['execute']
-            for k,h in aa.items():
-                if k!='execute':
-                    rez[k] = h
+            # rez = rez and aa['execute']
+            if aa:
+                for k,h in aa.items():
+                    if k!='execute':
+                        rez[k] = h
+                    else:
+                        rez[k] = rez[k] and aa['execute']
 
     return rez
 
