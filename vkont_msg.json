@@ -139,15 +139,32 @@
     "wait": "Wait_to_be_clickable",
     "stage": "send_vk_message",
         "xpaths": [
-
             "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[1]/div[2]/div/div/div/div[1]/div[2]/div[2]/div/div/div[2]/div/span"
     ],
     "action": "set_key",
     "values": "|message|"
+    },
+
+   {"description": "is_user_unblock...",
+    "wait": "WebDriverWait",
+    "stage": "after_vk_message",
+        "xpaths": [
+
+            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div",
+            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]"
+    ],
+    "action": "mouse_move",
+    "values": ""
+    },
+   {"description": "click_vk_blockuser",
+    "wait": "VisibleWait",
+    "stage": "after_vk_message",
+        "xpaths": [
+            "/html/body/div[4]/div[1]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[9]"
+        ],
+    "action": "click",
+    "values": ""
     }
-    //кнопка отправки сообщения
-    ///html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[4]/div[4]/div[4]/div[1]/button/span[2]
-    ///html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[4]/div[4]/div[4]/div[1]/button
   ]
 }
 

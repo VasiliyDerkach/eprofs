@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="1809-2">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vk_msg_js.py" beforeDir="false" afterPath="$PROJECT_DIR$/vk_msg_js.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vkont_msg.json" beforeDir="false" afterPath="$PROJECT_DIR$/vkont_msg.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -677,9 +679,14 @@
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/get_in_email_code.py</url>
-          <line>29</line>
-          <option name="timeStamp" value="14" />
+          <url>file://$PROJECT_DIR$/vk_msg_js.py</url>
+          <line>232</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/vk_msg_js.py</url>
+          <line>165</line>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

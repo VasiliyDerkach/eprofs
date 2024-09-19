@@ -212,11 +212,11 @@ def login_with_emailcode(vdriver,login, password, email,email_key, parsing_confi
         print(ocode)
         aa = pars_webelements_stage_byscn(vdriver, parsing_config, 'after_login', onecode=ocode, password= password)
         flagdef = flagdef and aa['execute']
-        print(f'Этап after_login {aa['execute']}')
+        print(f"Этап after_login {aa['execute']}")
         aa = pars_webelements_stage_byscn(vdriver, parsing_config, 'after_authentific')
 
         flagdef = flagdef and aa['execute']
-        print(f'Этап after_authentific {aa['execute']}')
+        print(f"Этап after_authentific {aa['execute']}")
 
         return flagdef
     else:
@@ -237,8 +237,10 @@ def send_vk_message_xpath(vdriver, parsing_config,user_vk_id,text_message):
                 r = pars_webelements_stage_byscn(vdriver, parsing_config, 'is_user_unblock')
             if alert_out_blacklist in blc['mark']:
                 return 'us_is_ban'
-        r1 = pars_webelements_stage_byscn(vdriver, parsing_config, 'send_vk_message',message=text_message)
-
+        r1 = pars_webelements_stage_byscn(vdriver, parsing_config, 'send_vk_message',message=text_message+'\n')
+        print('r1=',r1)
+        r2 = pars_webelements_stage_byscn(vdriver, parsing_config, 'after_vk_message')
+        print('r2=', r2)
 
 if __name__=='__main__':
     with open("vkont_msg.json", "r",encoding='utf-8') as rvkfile:
