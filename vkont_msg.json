@@ -165,11 +165,10 @@
 
    {"description": "is_user_block_aftersend...",
     "wait": "Wait_to_be_clickable",
+     "link": "+",
     "stage": "after_vk_message",
         "xpaths": [
-            "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[1]/div[2]/div/div/div/header/div/div/div/button",
-            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]",
-            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/span"
+            "Действия"
 
     ],
     "action": "mouse_move",
@@ -187,12 +186,12 @@
     "values": ""
     },
    {"description": "click_user_unblock",
-    "wait": "VisibleWait",
-     "alert_accept": "+",
+    "wait": "Wait_to_be_clickable",
+
     "stage": "after_vk_message",
-        "xpaths": [
+        "xpaths": [ "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div[2]/div/div/div[2]/article/footer/div/button[2]"
                 ],
-    "action": "",
+    "action": "click",
     "values": ""
     }
   ]

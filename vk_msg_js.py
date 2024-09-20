@@ -59,8 +59,20 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
     if 'link' in element_config:
         ByFind = By.LINK_TEXT
     if 'alert_accept' in element_config:
-        vdriver.switch_to().alert().accept()
-        return 'alert_accept_execute'
+        h = 0
+        while h<200:
+            h += 1
+            try:
+                alrt = vdriver.switch_to.alert
+                if alrt:
+                    alrt.accept()
+                    rez['execute'] = True
+
+                else:
+                    rez['execute'] = False
+                    return rez
+            except:
+                pass
     for xpth in element_config['xpaths']:
         try:
             # if element_config['description']=='email_onecode':
