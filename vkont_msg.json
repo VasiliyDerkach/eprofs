@@ -118,7 +118,9 @@
     "wait": "VisibleWait",
     "stage": "is_user_unblock",
 
+
         "xpaths": [
+
             "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[1]/div[2]/div/div/div/header/div/div/div/button",
             "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]",
             "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/span"
@@ -133,6 +135,7 @@
         "xpaths": [
             "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[8]",
           "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div/div/div[2]/div/div/button[8]",
+
             "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[8]",
             "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[2]"
 
@@ -140,6 +143,16 @@
     "action": "click",
     "values": ""
     },
+   {"description": "alert_user_unblock",
+    "wait": "VisibleWait",
+     "alert_accept": "+",
+    "stage": "is_user_unblock",
+        "xpaths": [
+                ],
+    "action": "",
+    "values": ""
+    },
+
    {"description": "send_vk_message",
     "wait": "Wait_to_be_clickable",
     "stage": "send_vk_message",
@@ -155,8 +168,9 @@
     "stage": "after_vk_message",
         "xpaths": [
             "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[1]/div[2]/div/div/div/header/div/div/div/button",
-            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div",
-            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]"
+            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]",
+            "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/span"
+
     ],
     "action": "mouse_move",
     "values": ""
@@ -166,9 +180,19 @@
     "stage": "after_vk_message",
         "xpaths": [
             "/html/body/div[4]/div[1]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[9]",
-            "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div/div/div[2]/div/div/button[9]"
+            "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div/div/div[2]/div/div/button[9]",
+            "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div[2]/div/div/button[9]"
         ],
     "action": "click",
+    "values": ""
+    },
+   {"description": "click_user_unblock",
+    "wait": "VisibleWait",
+     "alert_accept": "+",
+    "stage": "after_vk_message",
+        "xpaths": [
+                ],
+    "action": "",
     "values": ""
     }
   ]

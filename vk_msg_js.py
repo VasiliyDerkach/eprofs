@@ -56,6 +56,11 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
         ByFind = By.CLASS_NAME
     if 'id_element' in element_config:
         ByFind = By.ID
+    if 'link' in element_config:
+        ByFind = By.LINK_TEXT
+    if 'alert_accept' in element_config:
+        vdriver.switch_to().alert().accept()
+        return 'alert_accept_execute'
     for xpth in element_config['xpaths']:
         try:
             # if element_config['description']=='email_onecode':
@@ -236,6 +241,7 @@ def send_vk_message_xpath(vdriver, parsing_config,user_vk_id,text_message):
         if ('is_blocked' in blc and blc['is_blocked']=='this user is block'
             and 'mark' in blc ):
             if alert_my_blacklist in blc['mark']:
+                print('Запуск is_user_unblock')
             # строки перенести в настройки, сделать blc словарем
                 r = pars_webelements_stage_byscn(vdriver, parsing_config, 'is_user_unblock')
             if alert_out_blacklist in blc['mark']:
@@ -259,10 +265,10 @@ if __name__=='__main__':
 
 
     # g = login_with_emailcode(driver, e_mail, 'Htpbcnfyc!cJghjnbdktybt2', e_mail, 'BpKrex5kd9pv82aai5FW', site_ifo,'Tradeunion')
-    g = login_with_emailcode(driver, 'profsadokate2@mail.ru', '0Htpbcnfyc!cJghjnbdktybt2', 'profsadokate2@mail.ru',
-                             'b0eMHbPTGsUfYxFPjCYh', site_ifo,'Tradeunionc')
-    # g = login_with_emailcode(driver, 'profsadokate3@mail.ru', '0Htpbcnfyc!cJghjnbdktybt28', 'profsadokate3@mail.ru',
-    #                      'jvWWN1FsSm9xvekWCVAg', site_ifo)
+    # g = login_with_emailcode(driver, 'profsadokate2@mail.ru', '0Htpbcnfyc!cJghjnbdktybt2', 'profsadokate2@mail.ru',
+    #                          'b0eMHbPTGsUfYxFPjCYh', site_ifo,'Tradeunionc')
+    g = login_with_emailcode(driver, 'profsadokate3@mail.ru', '0Htpbcnfyc!cJghjnbdktybt28', 'profsadokate3@mail.ru',
+                         'jvWWN1FsSm9xvekWCVAg', site_ifo,'Tradeuniond')
     # g = login_with_emailcode(driver, 'profsadokate4@mail.ru', '0Htpbcnfyc!cJghjnbdktybt28', 'profsadokate4@mail.ru',
     #                          'imX4VAJUR2k5Cngp4hqf', site_ifo,'Tradeunion')
 
