@@ -54,6 +54,8 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
     ByFind = By.XPATH
     if 'class_name' in element_config:
         ByFind = By.CLASS_NAME
+    if 'id_element' in element_config:
+        ByFind = By.ID
     for xpth in element_config['xpaths']:
         try:
             # if element_config['description']=='email_onecode':
@@ -154,7 +156,8 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
             #     return False
 
         except Exception as exs:
-            print(exs)
+            # print(exs)
+            print('not find ', element_config['description'], '->', xpth)
 
 
 def pars_webelements_stage_byscn(vdriver,pars_config,stage,**kwargs):
@@ -255,9 +258,9 @@ if __name__=='__main__':
 
 
 
-    g = login_with_emailcode(driver, e_mail, 'Htpbcnfyc!cJghjnbdktybt2', e_mail, 'BpKrex5kd9pv82aai5FW', site_ifo,'Tradeunion')
-    # g = login_with_emailcode(driver, 'profsadokate2@mail.ru', '0Htpbcnfyc!cJghjnbdktybt2', 'profsadokate2@mail.ru',
-    #                          'b0eMHbPTGsUfYxFPjCYh', site_ifo)
+    # g = login_with_emailcode(driver, e_mail, 'Htpbcnfyc!cJghjnbdktybt2', e_mail, 'BpKrex5kd9pv82aai5FW', site_ifo,'Tradeunion')
+    g = login_with_emailcode(driver, 'profsadokate2@mail.ru', '0Htpbcnfyc!cJghjnbdktybt2', 'profsadokate2@mail.ru',
+                             'b0eMHbPTGsUfYxFPjCYh', site_ifo,'Tradeunionc')
     # g = login_with_emailcode(driver, 'profsadokate3@mail.ru', '0Htpbcnfyc!cJghjnbdktybt28', 'profsadokate3@mail.ru',
     #                      'jvWWN1FsSm9xvekWCVAg', site_ifo)
     # g = login_with_emailcode(driver, 'profsadokate4@mail.ru', '0Htpbcnfyc!cJghjnbdktybt28', 'profsadokate4@mail.ru',
