@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="2309full action">
+    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="2309 new findelem">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vk_msg_js.py" beforeDir="false" afterPath="$PROJECT_DIR$/vk_msg_js.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vkont_msg.json" beforeDir="false" afterPath="$PROJECT_DIR$/vkont_msg.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,14 +202,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1723613633798</updated>
-    </task>
-    <task id="LOCAL-00054" summary="29-08-2024 work+upd1">
-      <option name="closed" value="true" />
-      <created>1724933865516</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1724933865516</updated>
     </task>
     <task id="LOCAL-00055" summary="30-08-2024">
       <option name="closed" value="true" />
@@ -596,7 +587,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727071511859</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="2309 new findelem">
+      <option name="closed" value="true" />
+      <created>1727083166998</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1727083166999</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -623,7 +622,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0609+1" />
     <MESSAGE value="0609f" />
     <MESSAGE value="090924" />
     <MESSAGE value="090924+" />
@@ -648,7 +646,8 @@
     <MESSAGE value="2009+alert" />
     <MESSAGE value="2309" />
     <MESSAGE value="2309full action" />
-    <option name="LAST_COMMIT_MESSAGE" value="2309full action" />
+    <MESSAGE value="2309 new findelem" />
+    <option name="LAST_COMMIT_MESSAGE" value="2309 new findelem" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -680,12 +679,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/vk_msg_js.py</url>
-          <line>267</line>
+          <line>280</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/vk_msg_js.py</url>
-          <line>195</line>
+          <line>199</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>

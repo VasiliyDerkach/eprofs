@@ -191,17 +191,30 @@ def pars_webelements_stage_byscn(vdriver,pars_config,stage,**kwargs):
     timeout = pars_config['minitimeout']
     rez = {}
     rez['execute'] = True
+    nexflag = False
     for stp in pars_config['scenario']:
-        if stp['stage']==stage:
-            aa = pars_webelement_byscn(vdriver, stp, timeout, **kwargs)
-            # if isinstance(aa,bool) and isinstance(rez,bool):
-            # rez = rez and aa['execute']
-            if aa:
-                for k,h in aa.items():
-                    if k!='execute':
-                        rez[k] = h
-                    else:
-                        rez[k] = rez[k] and aa['execute']
+        if not 'repeat_step' in kwargs or ('repeat_step' in kwargs and
+                                           (kwargs['repeat_step']==stp['description'] or nexflag)):
+            nexflag = True
+            if stp['stage']==stage:
+                aa = pars_webelement_byscn(vdriver, stp, timeout, **kwargs)
+                # if isinstance(aa,bool) and isinstance(rez,bool):
+                # rez = rez and aa['execute']
+                if aa:
+                    for k,h in aa.items():
+                        if k!='execute':
+                            rez[k] = h
+                        else:
+                            rez[k] = rez[k] and aa['execute']
+                else:
+                    if 'if_not_find' in stp:
+                        exc = stp['if_not_find']
+                        if 'goto_stage' in exc and 'goto_step' in exc:
+                            if exc['goto_stage']==stage:
+
+                                return pars_webelements_stage_byscn(vdriver,pars_config,stage, repeat_step=exc['goto_step'])
+                            else:
+                                return exc
 
     return rez
 
