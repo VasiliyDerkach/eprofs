@@ -51,13 +51,13 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
     tc = None
     pth = None
     rez = {}
-    ByFind = By.XPATH
-    if 'class_name' in element_config:
-        ByFind = By.CLASS_NAME
-    if 'id_element' in element_config:
-        ByFind = By.ID
-    if 'link' in element_config:
-        ByFind = By.LINK_TEXT
+    # ByFind = By.XPATH
+    # if 'class_name' in element_config:
+    #     ByFind = By.CLASS_NAME
+    # if 'id_element' in element_config:
+    #     ByFind = By.ID
+    # if 'link' in element_config:
+    #     ByFind = By.LINK_TEXT
     if 'alert_accept' in element_config:
         h = 0
         while h<200:
@@ -73,19 +73,29 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                     return rez
             except:
                 pass
-    for xpth in element_config['xpaths']:
+    for xpth in element_config['paths']:
         try:
             # if element_config['description']=='email_onecode':
             #     print('email_onecode')
+            if 'xpath' in xpth:
+                ByFind = By.XPATH
+                pth = xpth['xpath']
+            if 'class_name' in xpth:
+                ByFind = By.CLASS_NAME
+            if 'id_element' in xpth:
+                ByFind = By.ID
+            if 'link' in xpth:
+                ByFind = By.LINK_TEXT
+
             if element_config['wait'] == 'WebDriverWait':
-                tc = WebDriverWait(vdriver, timeout).until(EC.presence_of_element_located((ByFind, xpth)))
+                tc = WebDriverWait(vdriver, timeout).until(EC.presence_of_element_located((ByFind, pth)))
             if element_config['wait'] == 'VisibleWait':
-                tc = WebDriverWait(vdriver, timeout).until(EC.visibility_of_element_located((ByFind, xpth)))
+                tc = WebDriverWait(vdriver, timeout).until(EC.visibility_of_element_located((ByFind, pth)))
             elif element_config['wait'] == '':
                 tc = vdriver.find_element(ByFind,xpth)
             elif element_config['wait']=='Wait_to_be_clickable':
                 try:
-                    tc = WebDriverWait(driver, timeout).until(EC.element_to_be_clickable((ByFind, xpth )))
+                    tc = WebDriverWait(driver, timeout).until(EC.element_to_be_clickable((ByFind, pth )))
                 except Exception as e:
                     print(e)
                     print(f"Проблема с кликабельностью или наличием элемента в {element_config['description']}")
@@ -147,7 +157,7 @@ def pars_webelement_byscn(vdriver,element_config,timeout,**kwargs):
                         ph = itr_xpath.replace('|number|', str(l + 1))
                         # ph = f'/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[|number|]/div/div/input'
                         try:
-                            chr = driver.find_element(ByFind, ph)
+                            chr = driver.find_element(By.XPATH, ph)
                             chr.send_keys(a)
                             if chr:
                                 print('++', ph, '=', a)

@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="2309">
+    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="2309full action">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vk_msg_js.py" beforeDir="false" afterPath="$PROJECT_DIR$/vk_msg_js.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vkont_msg.json" beforeDir="false" afterPath="$PROJECT_DIR$/vkont_msg.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +67,7 @@
       <recent name="C:\Users\1\PycharmProjects\eprof" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.db_eprof">
     <configuration name="LoadPlatCrm" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="eprof" />
       <option name="ENV_FILES" value="" />
@@ -202,14 +203,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1723613633798</updated>
-    </task>
-    <task id="LOCAL-00053" summary="29-08-2024 work+upd">
-      <option name="closed" value="true" />
-      <created>1724932528649</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1724932528650</updated>
     </task>
     <task id="LOCAL-00054" summary="29-08-2024 work+upd1">
       <option name="closed" value="true" />
@@ -595,7 +588,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727066704912</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="2309full action">
+      <option name="closed" value="true" />
+      <created>1727071511859</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1727071511859</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -622,7 +623,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0609+" />
     <MESSAGE value="0609+1" />
     <MESSAGE value="0609f" />
     <MESSAGE value="090924" />
@@ -647,7 +647,8 @@
     <MESSAGE value="2009" />
     <MESSAGE value="2009+alert" />
     <MESSAGE value="2309" />
-    <option name="LAST_COMMIT_MESSAGE" value="2309" />
+    <MESSAGE value="2309full action" />
+    <option name="LAST_COMMIT_MESSAGE" value="2309full action" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -679,12 +680,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/vk_msg_js.py</url>
-          <line>257</line>
+          <line>267</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/vk_msg_js.py</url>
-          <line>185</line>
+          <line>195</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>

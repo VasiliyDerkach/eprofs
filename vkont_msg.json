@@ -22,6 +22,9 @@
         "/html/body/div[3]/div/div/div[2]/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/form/input[1]"
 
       ],
+      "paths": {
+        "xpath": "/html/body/div[3]/div/div/div[2]/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/form/input[1]"
+      },
       "action": "set_key",
       "values": "|login|"
     },
@@ -31,6 +34,9 @@
       "xpaths": [
         "/html/body/div[3]/div/div/div[2]/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/form/button/span/span"
       ],
+      "paths": {
+        "xpath": "/html/body/div[3]/div/div/div[2]/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/form/button/span/span"
+      },
       "action": "click",
       "values": ""
     },
@@ -44,6 +50,12 @@
         "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[3]/button"
 
       ],
+       "paths": {
+         "xpath": "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[3]/button[2]",
+         "xpath": "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[3]/button[2]",
+         "xpath": "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[3]/button",
+         "xpath": "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[3]/button"
+       },
       "action": "click",
       "values": "",
       "alert": "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[2]/div/div"
@@ -56,6 +68,11 @@
         "/html/body/div[1]/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div[1]/div/div/div[4]/div[2]",
         "/html/body/div[1]/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div[1]/div/div/div[4]/div[3]"
       ],
+      "paths": {
+        "xpath": "/html/body/div[1]/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div[1]/div/div/div[2]/div[2]",
+        "xpath": "/html/body/div[1]/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div[1]/div/div/div[4]/div[2]",
+        "xpath": "/html/body/div[1]/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div[1]/div/div/div[4]/div[3]"
+      },
       "action": "click",
       "values": ""
     },
@@ -68,6 +85,11 @@
               "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[1]/div/div/input"
 
       ],
+        "paths": {
+          "xpath": "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[2]/div/div[1]/div/div/input",
+          "xpath": "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[4]/div/div/input",
+          "xpath": "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/div/div[1]/div/div/input"
+        },
       "action": "set_key_iter",
       "xpath_iter": "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[2]/div/div[|number|]/div/div/input",
       "values": ""
@@ -79,6 +101,10 @@
                 "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[1]/div[3]/div/div/input",
                 "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[1]/div[3]/div/div/input"
             ],
+          "paths": {
+            "xpath": "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[1]/div[3]/div/div/input",
+            "xpath": "/html/body/div[1]/div/div/div/div/div[1]/div[1]/div/div/div/div/form/div[1]/div[3]/div/div/input"
+          },
           "action": "set_key",
           "values": "|password|"
     },
@@ -88,6 +114,9 @@
               "xpaths": [
                     "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/button/span"
                 ],
+              "paths": {
+                "xpath": "/html/body/div[1]/div/div/div/div/div[1]/div/div/div/div/div/form/div[2]/button/span"
+              },
               "action": "click",
               "values": ""
     },
@@ -99,6 +128,10 @@
               "/html/body/div[4]/div/div/div[1]/div/header/ul/li[2]/div/div/div/div[1]/div/div/div[1]/input",
               "/html/body/div[4]/div/div/div[1]/div/header/ul/li[2]/div/div/div/div/div/div/div[1]/input"
       ],
+      "paths": {
+        "xpath": "/html/body/div[4]/div/div/div[1]/div/header/ul/li[2]/div/div/div/div[1]/div/div/div[1]/input",
+        "xpath": "/html/body/div[4]/div/div/div[1]/div/header/ul/li[2]/div/div/div/div/div/div/div[1]/input"
+      },
       "action": "",
       "values": ""
     },
@@ -109,46 +142,57 @@
     "xpaths": [
             "_im_chat_input_error",
             "ComposerBlocked__message"
-
     ],
+    "paths": {
+      "class_name": "_im_chat_input_error",
+      "class_name": "ComposerBlocked__message"
+    },
     "action": "return",
     "values": "this user is block"
     },
    {"description": "is_user_unblock...",
     "wait": "VisibleWait",
     "stage": "is_user_unblock",
-
-
-        "xpaths": [
+    "xpaths": [
 
             "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[1]/div[2]/div/div/div/header/div/div/div/button",
             "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]",
             "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/span"
-
     ],
+    "paths": {
+      "xpath": "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[1]/div[2]/div/div/div/header/div/div/div/button",
+      "xpath": "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]",
+      "xpath": "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/span"
+    },
     "action": "mouse_move",
     "values": ""
     },
    {"description": "click_user_unblock",
     "wait": "VisibleWait",
     "stage": "is_user_unblock",
-        "xpaths": [
+    "xpaths": [
             "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[8]",
-          "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div/div/div[2]/div/div/button[8]",
-
+            "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div/div/div[2]/div/div/button[8]",
             "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[8]",
             "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[2]"
-
     ],
+    "paths": {
+      "xpath": "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[8]",
+      "xpath": "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div/div/div[2]/div/div/button[8]",
+      "xpath": "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[8]",
+      "xpath": "/html/body/div[4]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[2]"
+    },
     "action": "click",
     "values": ""
     },
    {"description": "alert_user_unblock",
     "wait": "Wait_to_be_clickable",
-
     "stage": "is_user_unblock",
-        "xpaths": [ "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div[2]/div/div/div[2]/article/footer/div/button[2]"
+    "xpaths": [ "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div[2]/div/div/div[2]/article/footer/div/button[2]"
                 ],
+    "paths": {
+      "xpath": "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div[2]/div/div/div[2]/article/footer/div/button[2]"
+    },
     "action": "click",
     "values": ""
     },
@@ -156,9 +200,12 @@
    {"description": "send_vk_message",
     "wait": "Wait_to_be_clickable",
     "stage": "send_vk_message",
-        "xpaths": [
+     "xpaths": [
             "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[1]/div[2]/div/div/div/div[1]/div[2]/div[2]/div/div/div[2]/div/span"
     ],
+     "paths": {
+       "xpath": "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[1]/div[2]/div/div/div/div[1]/div[2]/div[2]/div/div/div[2]/div/span"
+     },
     "action": "set_key",
     "values": "|message|"
     },
@@ -167,24 +214,30 @@
     "wait": "Wait_to_be_clickable",
 
     "stage": "after_vk_message",
-        "xpaths": [
+    "xpaths": [
           "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[1]/div[2]/div/div/div/header/div/div[2]",
           "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[1]/div[2]/div/div/div/header/div/div[2]/div/button"
-
-
-
     ],
+    "paths": {
+      "xpath": "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[1]/div[2]/div/div/div/header/div/div[2]",
+      "xpath": "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[1]/div[2]/div/div/div/header/div/div[2]/div/button"
+    },
     "action": "mouse_move",
     "values": ""
     },
    {"description": "click_vk_blockuser",
     "wait": "VisibleWait",
     "stage": "after_vk_message",
-        "xpaths": [
+     "xpaths": [
             "/html/body/div[4]/div[1]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[9]",
             "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div/div/div[2]/div/div/button[9]",
             "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div[2]/div/div/button[9]"
         ],
+     "paths": {
+       "xpath": "/html/body/div[4]/div[1]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/a[9]",
+       "xpath": "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div/div/div[2]/div/div/button[9]",
+       "xpath": "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div[2]/div/div/button[9]"
+     },
     "action": "click",
     "values": ""
     },
@@ -192,8 +245,11 @@
     "wait": "Wait_to_be_clickable",
 
     "stage": "after_vk_message",
-        "xpaths": [ "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div[2]/div/div/div[2]/article/footer/div/button[2]"
+     "xpaths": [ "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div[2]/div/div/div[2]/article/footer/div/button[2]"
                 ],
+     "paths": {
+       "xpath": "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div[2]/div/div/div[2]/article/footer/div/button[2]"
+     },
     "action": "click",
     "values": ""
     }
