@@ -144,12 +144,12 @@
     "values": ""
     },
    {"description": "alert_user_unblock",
-    "wait": "VisibleWait",
-     "alert_accept": "+",
+    "wait": "Wait_to_be_clickable",
+
     "stage": "is_user_unblock",
-        "xpaths": [
+        "xpaths": [ "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div[2]/div/div/div[2]/article/footer/div/button[2]"
                 ],
-    "action": "",
+    "action": "click",
     "values": ""
     },
 
