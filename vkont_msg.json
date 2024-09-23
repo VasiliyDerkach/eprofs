@@ -165,10 +165,13 @@
 
    {"description": "is_user_block_aftersend...",
     "wait": "Wait_to_be_clickable",
-     "link": "+",
+
     "stage": "after_vk_message",
         "xpaths": [
-            "Действия"
+          "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[1]/div[2]/div/div/div/header/div/div[2]",
+          "/html/body/div[4]/div/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[1]/div[2]/div/div/div/header/div/div[2]/div/button"
+
+
 
     ],
     "action": "mouse_move",
