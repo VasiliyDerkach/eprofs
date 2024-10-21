@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="2309 new findelem">
+    <list default="true" id="54013744-8ebf-4100-9dfb-ab5d57e95888" name="Changes" comment="2309 new findelem+repeat step">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vasiliy/Default/Preferences" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vasiliy/First Run" beforeDir="false" afterPath="$PROJECT_DIR$/load_crm-config.cnf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vasiliy/Local State" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/vk_msg_js.py" beforeDir="false" afterPath="$PROJECT_DIR$/vk_msg_js.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -202,14 +205,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1723613633798</updated>
-    </task>
-    <task id="LOCAL-00055" summary="30-08-2024">
-      <option name="closed" value="true" />
-      <created>1724997008424</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1724997008424</updated>
     </task>
     <task id="LOCAL-00056" summary="03-09-24">
       <option name="closed" value="true" />
@@ -595,7 +590,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727083166999</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="2309 new findelem+repeat step">
+      <option name="closed" value="true" />
+      <created>1727087511392</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1727087511392</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -622,7 +625,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0609f" />
     <MESSAGE value="090924" />
     <MESSAGE value="090924+" />
     <MESSAGE value="1009" />
@@ -647,7 +649,8 @@
     <MESSAGE value="2309" />
     <MESSAGE value="2309full action" />
     <MESSAGE value="2309 new findelem" />
-    <option name="LAST_COMMIT_MESSAGE" value="2309 new findelem" />
+    <MESSAGE value="2309 new findelem+repeat step" />
+    <option name="LAST_COMMIT_MESSAGE" value="2309 new findelem+repeat step" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -679,12 +682,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/vk_msg_js.py</url>
-          <line>280</line>
+          <line>281</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/vk_msg_js.py</url>
-          <line>199</line>
+          <line>200</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>

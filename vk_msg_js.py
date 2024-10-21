@@ -192,6 +192,7 @@ def pars_webelements_stage_byscn(vdriver,pars_config,stage,**kwargs):
     rez = {}
     rez['execute'] = True
     nexflag = False
+    aa = ''
     for stp in pars_config['scenario']:
         if not 'repeat_step' in kwargs or ('repeat_step' in kwargs and
                                            (kwargs['repeat_step']==stp['description'] or nexflag)):
@@ -214,8 +215,8 @@ def pars_webelements_stage_byscn(vdriver,pars_config,stage,**kwargs):
 
                                 return pars_webelements_stage_byscn(vdriver,pars_config,stage, repeat_step=exc['goto_step'])
                             else:
-                                return exc
-
+                                return {'goto': exc}
+    rez['last_extcute'] = aa
     return rez
 
 
