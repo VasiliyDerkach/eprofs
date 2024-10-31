@@ -50,22 +50,22 @@ if __name__=='__main__':
 
         #ftpfile = ftplib.FTP()
         #ftpfile = ftplib.FTP_TLS()
-        print('FTP запущен')
+        # print('FTP запущен')
         #ftpfile.prot_p()
         on_ftp = False
-        try:
-            ftpfile.connect(path_config['ftp_server='],22,6)
-            print('FTP соединение успешно')
-            ftpfile.login(user=path_config['ftp_login='],passwd=path_config['ftp_password='])
-            print('FTP аутификация пройдена')
-
-            ftpfile.cwd(path_config['ftp_dir='])
-            print('FTP переход в папку')
-            on_ftp = True
-        except Exception as excftp:
-            on_ftp = False
-            print('FTP нет соединения ',excftp)
-            #ftpfile.quit()
+        # try:
+        #     ftpfile.connect(path_config['ftp_server='],22,6)
+        #     print('FTP соединение успешно')
+        #     ftpfile.login(user=path_config['ftp_login='],passwd=path_config['ftp_password='])
+        #     print('FTP аутификация пройдена')
+        #
+        #     ftpfile.cwd(path_config['ftp_dir='])
+        #     print('FTP переход в папку')
+        #     on_ftp = True
+        # except Exception as excftp:
+        #     on_ftp = False
+        #     print('FTP нет соединения ',excftp)
+        #     #ftpfile.quit()
 
 
         lst_scan = os.listdir(path_config['path_scan='])
@@ -119,15 +119,15 @@ if __name__=='__main__':
                                 cnx.commit()
                             except:
                                 cnx.rollback()
-                            if on_ftp:
-                                with open(path_config['path_scan=']+uu_id,'rb') as gfile_n:
-                                    ftpfile.storbinary('STOR ' +uu_id,gfile_n)
-                                shutil.move(path_config['path_scan=']+uu_id,path_config['path_after_end=']+uu_id)
-                            shutil.move(txtfile_name_path,path_config['path_after_end=']+txtfile_name)
-                            if not on_ftp and  path_config['ftp_bat='] and path_config['ftp_bat=']!='None' :
-                                os.startfile(path_config['ftp_bat='])
-                                print(f'Запущен файл {path_config['ftp_bat=']}')
-                                shutil.move(path_config['path_scan=']+uu_id,path_config['path_after_end=']+uu_id)
+                            # if on_ftp:
+                            #     with open(path_config['path_scan=']+uu_id,'rb') as gfile_n:
+                            #         ftpfile.storbinary('STOR ' +uu_id,gfile_n)
+                            #     shutil.move(path_config['path_scan=']+uu_id,path_config['path_after_end=']+uu_id)
+                            # shutil.move(txtfile_name_path,path_config['path_after_end=']+txtfile_name)
+                            # if not on_ftp and  path_config['ftp_bat='] and path_config['ftp_bat=']!='None' :
+                            #     os.startfile(path_config['ftp_bat='])
+                            #     print(f'Запущен файл {path_config['ftp_bat=']}')
+                            #     shutil.move(path_config['path_scan=']+uu_id,path_config['path_after_end=']+uu_id)
 
                         else:
                             nid += 1
